@@ -1,0 +1,66 @@
+@import '@material/theme/mdc-theme';
+
+$mdc-badge-font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif !default;
+$mdc-badge-font-size: 12px !default;
+$mdc-badge-color: $mdc-theme-on-primary !default;
+$mdc-badge-color-inverse: $mdc-theme-primary !default;
+$mdc-badge-background: $mdc-theme-primary !default;
+$mdc-badge-background-inverse: transparent !default;
+$mdc-badge-size : 22px !default;
+$mdc-badge-padding: 2px !default;
+$mdc-badge-overlap: 12px !default;
+
+.mdc-badge {
+    position : relative;
+    white-space: nowrap;
+    margin-right: ($mdc-badge-size + $mdc-badge-padding);
+
+    &:not([data-badge]) {
+        margin-right: auto;
+    }
+
+    &[data-badge]:after {
+        content: attr(data-badge);
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+
+        position: absolute;
+        top: -($mdc-badge-size / 2);
+        right: -($mdc-badge-size + $mdc-badge-padding);
+
+        font-family: $mdc-badge-font-family;
+        font-weight: 600;
+        font-size: $mdc-badge-font-size;
+        width: $mdc-badge-size;
+        height: $mdc-badge-size;
+        border-radius : 50%;
+
+        background: $mdc-badge-background;
+        color: $mdc-badge-color;
+
+        .mdc-button & {
+            top: -10px;
+            right: -5px;
+        }
+    }
+
+    &.mdc-badge--no-background {
+        &[data-badge]:after {
+            color: $mdc-badge-color-inverse;
+            background: $mdc-badge-background-inverse;
+        }
+    }
+
+    &.mdc-badge--overlap {
+        margin-right: ($mdc-badge-size - $mdc-badge-overlap);
+
+        &:after {
+            right: -($mdc-badge-size - $mdc-badge-overlap);
+        }
+    }
+}

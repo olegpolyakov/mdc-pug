@@ -1,0 +1,84 @@
+@import '@material/theme/variables';
+@import '@material/theme/color-palette';
+
+$mdc-spinner-size: 48px !default;
+$mdc-spinner-stroke-width: 6 !default;
+$mdc-spinner-stroke-color: $mdc-theme-primary !default;
+
+$mdc-spinner-stroke-color-1: $material-color-blue-400 !default;
+$mdc-spinner-stroke-color-2: $material-color-red-500 !default;
+$mdc-spinner-stroke-color-3: $material-color-yellow-600 !default;
+$mdc-spinner-stroke-color-4: $material-color-green-500 !default;
+
+$mdc-spinner-rotate-animation: mdc-spinner-rotate 1.4s linear infinite !default;
+$mdc-spinner-dash-animation: mdc-spinner-dash 1.4s ease-in-out infinite !default;
+$mdc-spinner-color-animation: mdc-spinner-colors 5.6s ease-in-out infinite !default;
+
+.mdc-spinner {
+    width: $mdc-spinner-size;
+    height: $mdc-spinner-size;
+    animation: $mdc-spinner-rotate-animation;
+
+    .mdc-spinner__circle {
+        fill: none;
+        stroke: $mdc-spinner-stroke-color;
+        stroke-width: $mdc-spinner-stroke-width;
+        stroke-dasharray: 187;
+        stroke-dashoffset: 0;
+        stroke-linecap: square;
+        transform-origin: center;
+        animation: $mdc-spinner-dash-animation;
+    }
+
+    &--colorful &__circle {
+        animation: $mdc-spinner-dash-animation, $mdc-spinner-color-animation;
+    }
+}
+
+@keyframes mdc-spinner-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(270deg);
+    }
+}
+
+@keyframes mdc-spinner-dash {
+    0% {
+        stroke-dashoffset: 187;
+    }
+
+    50% {
+        stroke-dashoffset: 46.75;
+        transform: rotate(135deg);
+    }
+
+    100% {
+        stroke-dashoffset: 187;
+        transform: rotate(450deg);
+    }
+}
+
+@keyframes mdc-spinner-colors {
+    0% {
+        stroke: $mdc-spinner-stroke-color-1;
+    }
+
+    25% {
+        stroke: $mdc-spinner-stroke-color-2;
+    }
+
+    50% {
+        stroke: $mdc-spinner-stroke-color-3;
+    }
+
+    75% {
+        stroke: $mdc-spinner-stroke-color-4;
+    }
+    
+    100% {
+        stroke: $mdc-spinner-stroke-color-1;
+    }
+}

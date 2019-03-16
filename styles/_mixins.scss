@@ -1,0 +1,24 @@
+$transition-curve-fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1) !default;
+$transition-curve-linear-out-slow-in: cubic-bezier(0, 0, 0.2, 1) !default;
+$transition-curve-fast-out-linear-in: cubic-bezier(0.4, 0, 1, 1) !default;
+$transition-curve-default: $transition-curve-fast-out-slow-in !default;
+
+@mixin material-transition-fast-out-slow-in($duration:0.2s) {
+    transition-duration: $duration;
+    transition-timing-function: $transition-curve-fast-out-slow-in;
+}
+  
+@mixin material-transition-linear-out-slow-in($duration:0.2s) {
+    transition-duration: $duration;
+    transition-timing-function: $transition-curve-linear-out-slow-in;
+}
+  
+@mixin material-transition-fast-out-linear-in($duration:0.2s) {
+    transition-duration: $duration;
+    transition-timing-function: $transition-curve-fast-out-linear-in;
+}
+  
+@mixin material-transition-default($duration:0.2s) {
+    transition-duration: $duration;
+    transition-timing-function: $transition-curve-default;
+}

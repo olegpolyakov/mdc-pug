@@ -1,0 +1,56 @@
+@import '@material/theme/mixins';
+@import '@material/typography/mixins';
+@import '@material/card/mdc-card';
+
+.mdc-card {
+    .mdc-card__header {
+        display: flex;
+        align-items: center;
+        padding: 16px;
+        border-radius: 2px 2px 0 0;
+
+        .mdc-card__header__graphic {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            border-radius: 100%;
+            margin-right: 16px;
+            line-height: 40px;
+        }
+
+        .mdc-card__header__text {
+            overflow: hidden;
+            margin-right: auto;
+        }
+
+        .mdc-card__header__primary-text {
+            @include mdc-typography(headline6);
+            @include mdc-theme-prop(color, text-primary-on-light);
+            @include mdc-typography-overflow-ellipsis;
+            margin: 0;
+        }
+    
+        .mdc-card__header__secondary-text {
+            @include mdc-typography(body2);
+            @include mdc-theme-prop(color, text-secondary-on-light);
+            margin: 0;
+        }
+    }
+
+    .mdc-card__section {
+        @include mdc-typography(body2);
+        @include mdc-theme-prop(color, text-primary-on-light);
+
+        &.mdc-card__section--primary {
+            padding: 16px;
+        }
+    
+        &.mdc-card__section--secondary {
+            padding: 8px 16px;
+            
+            .mdc-card__header + & {
+                padding-top: 0;
+            }
+        }
+    }
+}

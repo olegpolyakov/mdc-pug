@@ -1,0 +1,68 @@
+@import './breakpoints';
+@import '@material/theme/mixins';
+@import '@material/typography/mixins';
+
+.mdc-banner {
+    @include mdc-theme-prop(background-color, surface);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+    .mdc-banner__inner {
+        width: 100%;
+        max-width: 1024px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        padding: 8px 16px;
+        box-sizing: border-box;
+
+        @media #{$lt-md} {
+            flex-wrap: wrap;
+        }
+    }
+
+    .mdc-banner__text {
+        @include mdc-typography(subtitle1);
+        flex: 1;
+        margin: 0;
+    }
+
+    .mdc-banner__action {
+        margin-left: auto;
+
+        @media #{$lt-md} {
+            margin-top: 12px;
+        }
+    }
+
+    &.mdc-banner--with-icon {
+        @media #{$gt-md} {
+            display: flex;
+            align-items: center;
+        }
+
+        .mdc-banner__icon {
+            @include mdc-theme-prop(color, text-secondary-on-light);
+
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border-radius: 100%;
+            margin-right: 24px;
+            font-size: 32px;
+        }
+    }
+
+    &.mdc-banner--sticky {
+        position: sticky;
+        top: 64px;
+        z-index: 1;
+    }
+
+    &.mdc-banner--fixed {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
+}

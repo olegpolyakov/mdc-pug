@@ -1,0 +1,39 @@
+@import '@material/typography/mdc-typography';
+
+.mdc-typography--display-block {
+    display: block;
+}
+
+.mdc-typography--display-inline {
+    display: inline;
+}
+
+.mdc-typography--display-inline-block {
+    display: inline-block;
+}
+
+.mdc-typography--align-left {
+    text-align: left;
+}
+
+.mdc-typography--align-right {
+    text-align: right;
+}
+
+.mdc-typography--align-center {
+    text-align: center;
+}
+
+.mdc-typography--align-justify {
+    text-align: justify;
+}
+
+.mdc-typography--no-margin {
+    margin: 0;
+}
+
+.mdc-typography--overflow-ellipsis {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
