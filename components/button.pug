@@ -1,0 +1,25 @@
+mixin mdc-button(label)
+    #{attributes.element || 'button'}.mdc-button(
+        class={
+            'mdc-button--raised': attributes.raised,
+            'mdc-button--unelevated': attributes.unelevated,
+            'mdc-button--outlined': attributes.outlined,
+            'mdc-button--dense': attributes.dense
+        }
+        data-mdc-auto-init=attributes.ripple && 'MDCRipple'
+    )&attributes(Object.assign({}, attributes, {element: undefined, raised: undefined, outlined: undefined, dense: undefined, ripple: undefined, icon: undefined}))
+        if attributes.icon
+            +mdc-button__icon(attributes.icon)
+
+        span.mdc-button__label= label
+
+        block
+
+mixin mdc-button__icon(icon)
+    i.mdc-button__icon(
+        class={
+            'material-icons': icon
+        }
+    )&attributes(Object.assign({}, attributes, {icon: undefined}))
+        = icon
+        block

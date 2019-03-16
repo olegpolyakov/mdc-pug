@@ -1,0 +1,12 @@
+mixin mdc-fab(icon, label)
+    #{attributes.element || 'button'}.mdc-fab(
+        class={
+            'mdc-fab--fixed': attributes.fixed,
+            'mdc-fab--mini': attributes.mini,
+            'mdc-fab--extended': label || attributes.extended
+        }
+    )&attributes(Object.assign({}, attributes, {element: undefined, fixed: undefined, mini: undefined, extended: undefined}))
+        if icon
+            span.mdc-fab__icon.material-icons= icon
+        if label
+            span.mdc-fab__label= label

@@ -1,0 +1,20 @@
+mixin mdc-checkbox(name)
+    div.mdc-checkbox(
+        class={
+            'mdc-checkbox--disabled': attributes.disabled
+        }
+        data-mdc-auto-init='MDCCheckbox'
+    )
+        input.mdc-checkbox__native-control(
+            type='checkbox'
+            name=name
+        )&attributes(Object.assign({}, attributes))
+
+        div.mdc-checkbox__background
+            svg.mdc-checkbox__checkmark(viewBox='0 0 24 24')
+                path.mdc-checkbox__checkmark-path(
+                    fill='none'
+                    stroke='white'
+                    d='M1.73,12.91 8.1,19.28 22.79,4.59'
+                )
+            div.mdc-checkbox__mixedmark

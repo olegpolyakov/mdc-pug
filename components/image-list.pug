@@ -1,0 +1,21 @@
+mixin mdc-image-list
+    #{attributes.element || 'ul'}.mdc-image-list
+        ul.mdc-grid-list__tiles
+            block
+
+mixin mdc-image-list__item(src, text)
+    #{attributes.element || 'li'}.mdc-image-list__item(
+        class={
+            'mdc-image-list--masonry': attributes.masonry,
+            'mdc-image-list--with-text-protection': attributes.textProtection
+        }
+    )&attributes(Object.assign({}, attributes, {element: undefined, masonry: undefined, textProtection: undefined}))
+        if masonry
+            div.mdc-image-list__image-aspect-container
+                img.mdc-image-list__image(src=src)
+        else
+            img.mdc-image-list__image(src=src)
+            
+        if text
+            div.mdc-image-list__supporting
+                span.mdc-image-list__label= text

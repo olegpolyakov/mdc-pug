@@ -1,0 +1,12 @@
+mixin mdc-tab-indicator
+    div.mdc-tab-indicator(
+        class={
+            'mdc-tab-indicator--active': attributes.active,
+            'mdc-tab-indicator--fade': attributes.fade
+        }
+        data-mdc-auto-init=attributes.init && 'MDCTabIndicator'
+    )
+        if attributes.icon
+            div.mdc-tab-indicator__content.mdc-tab-indicator__content--icon.material-icons(aria-hidden='true')= attributes.icon
+        else
+            div.mdc-tab-indicator__content.mdc-tab-indicator__content--underline

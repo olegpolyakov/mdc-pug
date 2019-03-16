@@ -1,0 +1,19 @@
+mixin mdc-linear-progress(value)
+    div.mdc-linear-progress(
+        class={
+            'mdc-linear-progress--indeterminate': attributes.indeterminate,
+            'mdc-linear-progress--reversed': attributes.reversed,
+            'mdc-linear-progress--closed': attributes.closed
+        }
+        role='progressbar'
+        data-mdc-auto-init='MDCLinearProgress'
+    )&attributes(Object.assign({}, attributes, {indeterminate: undefined, reversed: undefined, closed: undefined}))
+        div.mdc-linear-progress__buffering-dots
+
+        div.mdc-linear-progress__buffer
+
+        div.mdc-linear-progress__bar.mdc-linear-progress__primary-bar(style=`transform: scaleX(${value * 0.01});`)
+            span.mdc-linear-progress__bar-inner
+
+        div.mdc-linear-progress__bar.mdc-linear-progress__secondary-bar
+            span.mdc-linear-progress__bar-inner

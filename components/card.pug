@@ -1,0 +1,84 @@
+mixin mdc-card(title, subtitle)
+    #{attributes.element || 'div'}.mdc-card(
+        class={
+            'mdc-card--outlined': attributes.outlined
+        }
+    )&attributes(Object.assign({}, attributes, {element: undefined, outlined: undefined}))
+        block
+
+mixin mdc-card__primary-action
+    #{attributes.element || 'div'}.mdc-card__primary-action(
+        tabindex='0'
+        data-mdc-auto-init=attributes.ripple && 'MDCRipple'
+    )&attributes(Object.assign({}, attributes, { element: undefined, ripple: undefined }))
+        block
+
+mixin mdc-card__header(title, subtitle)
+    #{attributes.element || 'div'}.mdc-card__header&attributes(Object.assign({}, attributes, {element: undefined, image: undefined, icon: undefined}))
+        if attributes.image || attributes.icon
+            +mdc-card__header__graphic()(src=attributes.image icon=attributes.icon)
+
+        if title
+            +mdc-card__header__text(title, subtitle)
+
+        block
+
+mixin mdc-card__header__text(primary, secondary)
+    div.mdc-card__header__text&attributes(attributes)
+        h2.mdc-card__header__primary-text= primary
+        
+        if secondary
+            h3.mdc-card__header__secondary-text= secondary
+
+        block
+
+mixin mdc-card__header__graphic
+    div.mdc-card__header__graphic&attributes(attributes)
+        block
+
+mixin mdc-card__section
+    #{attributes.element || 'div'}.mdc-card__section(
+        class={
+            'mdc-card__section--primary': attributes.primary,
+            'mdc-card__section--secondary': attributes.secondary
+        }
+    )&attributes(Object.assign({}, attributes, {element: undefined, primary: undefined, secondary: undefined}))= content
+        block
+
+mixin mdc-card__media(src)
+    div.mdc-card__media(
+        class={
+            'mdc-card__media--square': attributes.square,
+            'mdc-card__media--16-9': attributes.wide
+        }
+        style=src && `background-image: url(${src})`
+    )&attributes(Object.assign({}, attributes, {square: undefined, wide: undefined}))
+        block
+
+mixin mdc-card__media-content
+    div.mdc-card__media-content&attributes(attributes)
+        block
+
+mixin mdc-card__actions
+    #{attributes.element || 'div'}.mdc-card__actions(
+        class={
+            'mdc-card__actions--full-bleed': attributes.fullBleed
+        }
+    )&attributes(Object.assign({}, attributes, {element: undefined, fullBleed: undefined}))
+        block
+
+mixin mdc-card__action-buttons
+    div.mdc-card__action-buttons&attributes(attributes)
+        block
+
+mixin mdc-card__action-icons
+    div.mdc-card__action-icons&attributes(attributes)
+        block
+
+mixin mdc-card__button(label)
+    +mdc-button(label).mdc-card__action.mdc-card__action--button&attributes(attributes)
+        block
+
+mixin mdc-card__icon(icon)
+    +mdc-icon-button(icon).mdc-card__action.mdc-card__action--icon&attributes(attributes)
+        block

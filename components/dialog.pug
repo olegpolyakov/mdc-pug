@@ -1,0 +1,36 @@
+mixin mdc-dialog(title)
+    #{attributes.element || 'div'}.mdc-dialog(
+        class={
+            'mdc-dialog--open': attributes.open
+        }
+        role='alertdialog'
+        aria-modal='true'
+        data-mdc-auto-init='MDCDialog'
+    )&attributes(Object.assign({}, attributes, {element: undefined, open: undefined}))
+        div.mdc-dialog__container
+            div.mdc-dialog__surface
+                block
+            
+        div.mdc-dialog__scrim
+
+mixin mdc-dialog__title(title)
+    #{attributes.element || 'h2'}.mdc-dialog__title&attributes(Object.assign({}, attributes, {element: undefined}))
+        = title
+        block
+
+mixin mdc-dialog__content
+    #{attributes.element || 'div'}.mdc-dialog__content&attributes(Object.assign({}, attributes, {element: undefined}))
+        block
+
+mixin mdc-dialog__actions
+    #{attributes.element || 'div'}.mdc-dialog__actions&attributes(Object.assign({}, attributes, {element: undefined}))
+        block
+
+mixin mdc-dialog__button(label)
+    +mdc-button(label)(
+        class={
+            'mdc-dialog__button--default': attributes.default
+        }
+        data-mdc-dialog-action=attributes.action
+    ).mdc-dialog__button&attributes(Object.assign({}, attributes, {default: undefined, action: undefined}))
+        block

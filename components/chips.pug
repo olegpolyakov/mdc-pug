@@ -1,0 +1,25 @@
+mixin mdc-chip-set
+    div.mdc-chip-set(
+        class={
+            'mdc-chip-set--choice': attributes.choice,
+            'mdc-chip-set--filter': attributes.filter,
+            'mdc-chip-set--input': attributes.input
+        }
+        data-mdc-auto-init='MDCChipSet'
+    )&attributes(Object.assign({}, attributes, {choice: undefined, filter: undefined, input: undefined}))
+        block
+
+mixin mdc-chip(text)
+    #{attributes.element || 'div'}.mdc-chip(
+        class={
+            'mdc-chip--selected': attributes.selected
+        }
+    )&attributes(Object.assign({}, attributes, {element: undefined, selected: undefined, leadingIcon: undefined, trailingIcon: undefined}))
+        if attributes.leadingIcon
+            i.mdc-chip__icon.mdc-chip__icon--leading.material-icons= attributes.leadingIcon
+
+        span.mdc-chip__text= text
+            block
+
+        if attributes.trailingIcon
+            i.mdc-chip__icon.mdc-chip__icon--trailing.material-icons(tabindex='0' role='button')= attributes.trailingIcon

@@ -1,0 +1,9 @@
+mixin mdc-badge(value)
+    #{attributes.element || 'span'}.mdc-badge(
+        class={
+            'mdc-badge--overlap': attributes.overlap,
+            'mdc-badge--no-background': attributes.noBackground
+        }
+        data-badge=value
+    )&attributes(Object.assign({}, attributes, {element: undefined, overlap: undefined, noBackground: undefined}))
+        block

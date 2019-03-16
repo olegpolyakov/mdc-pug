@@ -1,0 +1,9 @@
+mixin mdc-icon(icon)
+    i.mdc-icon.material-icons(
+        class={
+            [`md-${attributes.size}`]: attributes.size, 
+            'md-dark': attributes.dark,
+            'md-light': attributes.light,
+            'md-inactive': attributes.disabled
+        }
+    )&attributes(Object.assign({}, attributes, {size: undefined, dark: undefined, light: undefined, disabled: undefined}))= icon

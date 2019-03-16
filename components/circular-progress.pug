@@ -1,0 +1,7 @@
+mixin mdc-circular-progress(progress = 0)
+    - var angle = progress * 289.067 / 100;
+    - var diff = 289.067 - angle;
+    
+    svg.mdc-circular-progress(width='100%' height='100%' viewBox='0 0 100 100')
+        path.mdc-circular-progress__background(fill='none' stroke-width='8' d='M50,4 a46,46 0 0,1 0,92 a46,46 0 0,1 0,-92')
+        path.mdc-circular-progress__foreground(fill='none' stroke-width='8' d='M50,4 a46,46 0 0,1 0,92 a46,46 0 0,1 0,-92' style=`stroke-dasharray: 289.067, 289.067; stroke-dashoffset: ${diff};`)

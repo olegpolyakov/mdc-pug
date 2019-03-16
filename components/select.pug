@@ -1,0 +1,50 @@
+mixin mdc-select(name, value)
+    div.mdc-select(
+        class=attributes.class
+        class={
+            'mdc-select--outlined': attributes.outlined,
+            'mdc-select--disabled': attributes.disabled,
+            'mdc-select--with-leading-icon': attributes.icon
+        }
+        data-mdc-auto-init='MDCSelect'
+    )
+        if attributes.icon
+            i.mdc-select__icon=attributes.icon
+
+        input(
+            type='hidden'
+            name=name
+            value=value
+        )&attributes({}, attributes, {class: undefined, outlined: undefined, label: undefined, icon: undefined})
+
+        i.mdc-select__dropdown-icon
+
+        div.mdc-select__selected-text
+
+        div.mdc-select__menu.mdc-menu.mdc-menu-surface
+            ul.mdc-list
+                block
+
+        unless attributes.outlined
+            +mdc-floating-label(attributes.label)
+
+        if attributes.outlined
+            +mdc-notched-outline
+                if attributes.label
+                    +mdc-floating-label(attributes.label)
+        else
+            +mdc-line-ripple
+
+mixin mdc-select-option(value, title)
+    li.mdc-list-item(
+        class={
+            'mdc-list-item--selected': attributes.selected
+        }
+        data-value=value
+        role='option'
+        tabindex=(attributes.disabled ? '0' : '-1')
+        aria-disabled=(attributes.disabled && 'true')
+        aria-selected=attributes.selected
+    )&attributes({}, attributes, {selected: undefined})
+        =title
+        block

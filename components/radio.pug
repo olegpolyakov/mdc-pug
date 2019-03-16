@@ -1,0 +1,17 @@
+mixin mdc-radio(name, value)
+    div.mdc-radio(
+        class=attributes.class
+        class={
+            'mdc-radio--disabled': attributes.disabled
+        }
+        data-mdc-auto-init='MDCRadio'
+    )
+        input.mdc-radio__native-control(
+            type='radio'
+            name=name
+            value=value
+        )&attributes(Object.assign({}, attributes, {class: undefined}))
+
+        div.mdc-radio__background
+            div.mdc-radio__outer-circle
+            div.mdc-radio__inner-circle

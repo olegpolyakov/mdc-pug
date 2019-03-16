@@ -1,0 +1,13 @@
+mixin mdc-typography(content)
+    #{attributes.element || 'p'}.mdc-typography(
+        class=`mdc-typography--${attributes.style || 'body1'}`
+        class={
+            [`mdc-theme--text-${attributes.color}-on-${attributes.theme || 'light'}`]: attributes.color,
+            [`mdc-typography--align-${attributes.align}`]: attributes.align,
+            [`mdc-typography--display-${attributes.display}`]: attributes.display,
+            'mdc-typography--no-margin': attributes.noMargin,
+            'mdc-typography--overflow-ellipsis': attributes.overflowEllipsis
+        }
+    )&attributes(Object.assign({}, attributes, {element: undefined, style: undefined, color: undefined, align: undefined, display: undefined, noMargin: undefined, overflowEllipsis: undefined}))
+        = content
+        block

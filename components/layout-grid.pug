@@ -1,0 +1,28 @@
+mixin mdc-layout-grid
+    div.mdc-layout-grid(
+        class={
+            [`mdc-layout-grid--align-align-${align}`]: attributes.align,
+            'mdc-layout-grid--align-align-left': attributes.alignLeft,
+            'mdc-layout-grid--align-align-right': attributes.alignRight,
+            'mdc-layout-grid--fixed-column-width': attributes.fixedColumnWidth
+        }
+    )&attributes(Object.assign({}, attributes, {align: undefined, alignLeft: undefined, alignRight: undefined, fixedColumnWidth: undefined}))
+        div.mdc-layout-grid__inner
+            block
+
+mixin mdc-layout-grid__inner
+    div.mdc-layout-grid__inner
+        block
+
+mixin mdc-layout-grid__cell(span=12)
+    div.mdc-layout-grid__cell(
+        class={
+            [`mdc-layout-grid__cell--span-${span}`]: span,
+            [`mdc-layout-grid__cell--span-${attributes.phone}-phone`]: attributes.phone,
+            [`mdc-layout-grid__cell--span-${attributes.tablet}-tablet`]: attributes.tablet,
+            [`mdc-layout-grid__cell--span-${attributes.desktop}-desktop`]: attributes.desktop,
+            [`mdc-layout-grid__cell--order-${attributes.order}`]: attributes.order,
+            [`mdc-layout-grid__cell--align-${attributes.align}`]: attributes.align
+        }
+    )&attributes(Object.assign({}, attributes, {phone: undefined, tablet: undefined, desktop: undefined, order: undefined, align: undefined}))
+        block

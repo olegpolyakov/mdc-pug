@@ -1,0 +1,17 @@
+mixin mdc-switch(name)
+    div.mdc-switch(
+        class={
+            'mdc-switch--checked': attributes.checked,
+            'mdc-switch--disabled': attributes.disabled
+        }
+        data-mdc-auto-init='MDCSwitch'
+    )
+        div.mdc-switch__track
+
+        div.mdc-switch__thumb-underlay
+            div.mdc-switch__thumb
+                input.mdc-switch__native-control(
+                    type='checkbox'
+                    name=name
+                    role='switch'
+                )&attributes(attributes)

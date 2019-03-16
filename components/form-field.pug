@@ -1,0 +1,10 @@
+mixin mdc-form-field(label)
+    div.mdc-form-field(
+        class={
+            'mdc-form-field--align-end': attributes.alignEnd
+        }
+        data-mdc-auto-init='MDCFormField'
+    )&attributes(Object.assign({}, attributes, {alignEnd: undefined}))
+        block
+
+        label.mdc-form-field__label=label

@@ -1,0 +1,12 @@
+mixin mdc-layout
+    #{attributes.element || 'div'}.mdc-layout(
+        class={
+            'mdc-layout--row': attributes.row,
+            'mdc-layout--column': attributes.column,
+            [`mdc-layout--direction--${attributes.direction}`]: attributes.direction,
+            [`mdc-layout--align-items--${attributes.alignItems}`]: alignItems,
+            [`mdc-layout--align-self--${attributes.alignSelf}`]: attributes.alignSelf,
+            [`mdc-layout--justify-content--${attributes.justifyContent}`]: attributes.justifyContent
+        }
+    )&attributes(Object.assign({}, attributes, {element: undefined, row: undefined, column: undefined, direction: undefined, alignItems: undefined, alignSelf: undefined, justifyContent: undefined}))
+        block

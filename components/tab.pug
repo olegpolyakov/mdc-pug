@@ -1,0 +1,20 @@
+mixin mdc-tab(text)
+    #{attributes.element || 'button'}.mdc-tab(
+        class={
+            'mdc-tab--active': attributes.active,
+            'mdc-tab--stacked': attributes.stacked,
+            'mdc-tab--min-width': attributes.minWidth
+        }
+        role='tab'
+        aria-selected=(attributes.active ? 'true' : 'false')
+        tabindex=(attributes.active ? undefined : '-1')
+    )&attributes({}, attributes, {element: undefined, icon: undefined, active: undefined, stacked: undefined, minWidth: undefined, fade: undefined, init: undefined})
+        div.mdc-tab__content
+            if attributes.icon
+                i.mdc-tab__icon.material-icons(aria-hidden='true')= attributes.icon
+            if text
+                span.mdc-tab__text-label= text
+
+        +mdc-tab-indicator()(active=attributes.active fade=attributes.fade)
+
+        span.mdc-tab__ripple

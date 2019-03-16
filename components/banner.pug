@@ -1,0 +1,18 @@
+mixin mdc-banner(text)
+    div.mdc-banner(
+        class={
+            'mdc-banner--with-icon': attributes.icon,
+            'mdc-banner--info': attributes.info,
+            'mdc-banner--error': attributes.error,
+            'mdc-banner--success': attributes.success
+        }
+    )&attributes(Object.assign({}, attributes, {icon: undefined, info: undefined, error: undefined, success: undefined}))
+        div.mdc-banner__inner
+            if attributes.icon
+                i.mdc-banner__icon.material-icons= attributes.icon
+                
+            p.mdc-banner__text= text
+
+            if block
+                div.mdc-banner__actions
+                    block

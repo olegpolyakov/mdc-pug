@@ -1,0 +1,25 @@
+mixin mdc-drawer
+    #{attributes.element || 'aside'}.mdc-drawer(
+        class={
+            'mdc-drawer--dismissible': attributes.dismissible,
+            'mdc-drawer--modal': attributes.modal
+        }
+        data-mdc-auto-init='MDCDrawer'
+    )&attributes(Object.assign({}, attributes, {element: undefined, dismissible: undefined, modal: undefined}))
+        div.mdc-drawer__content
+            block
+    
+    div.mdc-drawer-scrim
+
+mixin mdc-drawer__header(title, subtitle)
+    header.mdc-drawer__header&attributes(attributes)
+        block
+        
+        if title
+            h3.mdc-drawer__title= title
+        if subtitle
+            h6.mdc-drawer__subtitle= subtitle
+
+mixin mdc-drawer__content
+    section.mdc-drawer__content&attributes(attributes)
+        block

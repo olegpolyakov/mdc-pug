@@ -1,0 +1,35 @@
+mixin mdc-top-app-bar
+    #{attributes.element || 'header'}.mdc-top-app-bar(
+        class={
+            'mdc-top-app-bar--fixed': attributes.fixed,
+            'mdc-top-app-bar--prominent': attributes.prominent,
+            'mdc-top-app-bar--dense': attributes.dense,
+            'mdc-top-app-bar--short': attributes.short,
+            'mdc-top-app-bar--short-collapsed': attributes.shortCollapsed
+        }
+        data-mdc-auto-init='MDCTopAppBar'
+    )&attributes(Object.assign({}, attributes, {element: undefined, fixed: undefined, prominent: undefined, dense: undefined, short: undefined, shortCollapsed: undefined}))
+        block
+
+mixin mdc-top-app-bar__section
+    #{attributes.element || 'section'}.mdc-top-app-bar__section(
+        class={
+            'mdc-top-app-bar__section--align-start': attributes.alignStart,
+            'mdc-top-app-bar__section--align-end': attributes.alignEnd
+        }
+    )&attributes(Object.assign({}, attributes, {element: undefined, alignStart: undefined, alignEnd: undefined}))
+        block
+
+mixin mdc-top-app-bar__row
+    div.mdc-top-app-bar__row&attributes(attributes)
+        block
+
+mixin mdc-top-app-bar__title(title)
+    #{attributes.element || 'span'}.mdc-top-app-bar__title&attributes(attributes)= title
+        block
+
+mixin mdc-top-app-bar__navigation-icon(icon = 'menu')
+    #{attributes.element || 'button'}.mdc-top-app-bar__navigation-icon.material-icons&attributes(Object.assign({}, attributes, {element: undefined}))= icon
+
+mixin mdc-top-app-bar__action-item(icon)
+    #{attributes.element || 'a'}.mdc-top-app-bar__action-item.material-icons&attributes(Object.assign({}, attributes, {element: undefined}))= icon

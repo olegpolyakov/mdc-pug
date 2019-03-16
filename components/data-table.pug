@@ -1,0 +1,24 @@
+mixin mdc-data-table
+    table.mdc-data-table&attributes(attributes)
+        block
+
+mixin mdc-data-table__head
+    thead.mdc-data-table__head&attributes(attributes)
+        block
+
+mixin mdc-data-table__body
+    tbody.mdc-data-table__body&attributes(attributes)
+        block
+
+mixin mdc-data-table__row
+    tr.mdc-data-table__row&attributes(attributes)
+        block
+
+mixin mdc-data-table__cell
+    #{attributes.element || 'td'}.mdc-data-table__cell(
+        class={
+            'mdc-data-table__cell--numeric': attributes.numeric,
+            'mdc-data-table__cell-actions': attributes.actions
+        }
+    )&attributes(Object.assign({}, attributes, {element: undefined, numeric: undefined, actions: undefined}))
+        block

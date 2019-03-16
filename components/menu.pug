@@ -1,0 +1,15 @@
+mixin mdc-menu
+    div.mdc-menu.mdc-menu-surface(
+        tabindex='-1'
+        data-mdc-auto-init='MDCMenu'
+    )&attributes(Object.assign({}, attributes))
+        +mdc-list()(role='menu' aria-hidden='true' aria-orientation='vertical')
+            block
+
+mixin mdc-menu-item(text)
+    +mdc-list-item(text)(role='menuitem')&attributes(attributes)
+        block
+
+mixin mdc-menu-anchor
+    div.mdc-menu-surface--anchor&attributes(attributes)
+        block

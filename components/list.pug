@@ -1,0 +1,58 @@
+mixin mdc-list
+    #{attributes.element || 'ul'}.mdc-list(
+        class={
+            'mdc-list--dense': attributes.dense,
+            'mdc-list--two-line': attributes.twoLine,
+            'mdc-list--avatar-list': attributes.avatarList,
+            'mdc-list--non-interactive': attributes.nonInteractive
+        }
+    )&attributes(Object.assign({}, attributes, {element: undefined, dense: undefined, twoLine: undefined, avatarList: undefined, nonInteractive: undefined}))
+        block
+
+mixin mdc-list-item
+    #{attributes.element || 'li'}.mdc-list-item(
+        class={
+            'mdc-list-item--activated': attributes.activated,
+            'mdc-list-item--selected': attributes.selected,
+            'mdc-list-item--disabled': attributes.disabled
+        }
+        data-mdc-auto-init=attributes.ripple && 'MDCRipple'
+    )&attributes(Object.assign({}, attributes, {element: undefined, activated: undefined, selected: undefined, disabled: undefined}))
+        block
+            
+
+mixin mdc-list-item__graphic
+    #{attributes.element || 'span'}.mdc-list-item__graphic&attributes(Object.assign({}, attributes, {element: undefined}))
+        block
+
+mixin mdc-list-item__text(primary, secondary)
+    #{attributes.element || 'span'}.mdc-list-item__text&attributes(Object.assign({}, attributes, {element: undefined}))
+        if primary && secondary
+            span.mdc-list-item__primary-text= primary
+            span.mdc-list-item__secondary-text= secondary
+        else
+            =primary
+            block
+
+mixin mdc-list-item__meta(text)
+    #{attributes.element || 'span'}.mdc-list-item__meta&attributes(Object.assign({}, attributes, {element: undefined}))
+        =text
+        block
+
+mixin mdc-list-divider
+    #{attributes.element || 'hr'}.mdc-list-divider(
+        class={
+            'mdc-list-divider--inset': attributes.inset,
+            'mdc-list-divider--padded': attributes.added
+        }
+        role=(attributes.element !== 'hr' && 'separator')
+    )&attributes(Object.assign({}, attributes, {element: undefined, inset: undefined, padded: undefined}))
+
+mixin mdc-list-group
+    div.mdc-list-group
+        block
+
+mixin mdc-list-group__subheader(text)
+    #{attributes.element || 'h3'}.mdc-list-group__subheader&attributes(Object.assign({}, attributes, {element: undefined}))
+        =text
+        block
