@@ -7,19 +7,20 @@ mixin mdc-button(label)
             'mdc-button--dense': attributes.dense
         }
         data-mdc-auto-init=attributes.ripple && 'MDCRipple'
-    )&attributes(Object.assign({}, attributes, {element: undefined, raised: undefined, outlined: undefined, dense: undefined, ripple: undefined, icon: undefined}))
+    )&attributes(Object.assign({}, attributes, {element: undefined, raised: undefined, unelevated: undefined, outlined: undefined, dense: undefined, icon: undefined, ripple: undefined}))
         if attributes.icon
             +mdc-button__icon(attributes.icon)
-
-        span.mdc-button__label= label
-
+        if label
+            +mdc-button__label(label)
         block
 
 mixin mdc-button__icon(icon)
-    i.mdc-button__icon(
-        class={
-            'material-icons': icon
-        }
-    )&attributes(Object.assign({}, attributes, {icon: undefined}))
-        = icon
+    if icon
+        +mdc-icon(icon).mdc-button__icon&attributes(Object.assign({}, attributes))
+    else
+        span.mdc-button__icon&attributes(Object.assign({}, attributes))
+            block
+
+mixin mdc-button__label(label)
+    span.mdc-button__label&attributes(Object.assign({}, attributes))= label
         block
