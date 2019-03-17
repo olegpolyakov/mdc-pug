@@ -1,16 +1,21 @@
 mixin mdc-snackbar(label)
     div.mdc-snackbar(
-        id=attributes.id
-        class=attributes.class
         class={
-            [`mdc-snackbar--${attributes.type}`]: attributes.type,
+            'mdc-snackbar--open': attributes.open,
             'mdc-snackbar--stacked': attributes.stacked,
             'mdc-snackbar--leading': attributes.leading
         }
         data-mdc-auto-init='MDCSnackbar'
-    )
+    )&attributes({}, attributes, {open: undefined, stacked: undefined, leading: undefined})
         div.mdc-snackbar__surface
             div.mdc-snackbar__label(role='status' aria-live='polite')= label
 
-            div.mdc-snackbar__actions
-                i.material-icons.mdc-icon-button.mdc-snackbar__dismiss clear
+            if block
+                div.mdc-snackbar__actions
+                    block
+
+mixin mdc-snackbar__action(label)
+    +mdc-button(label).mdc-snackbar__action&attributes({}, attributes)
+
+mixin mdc-snackbar__dismiss(icon = 'close')
+    +mdc-icon(icon).mdc-snackbar__dismiss&attributes({}, attributes)
