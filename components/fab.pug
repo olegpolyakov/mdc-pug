@@ -5,8 +5,21 @@ mixin mdc-fab(icon, label)
             'mdc-fab--mini': attributes.mini,
             'mdc-fab--extended': label || attributes.extended
         }
+        data-mdc-auto-init=attributes.ripple && 'MDCRipple'
     )&attributes(Object.assign({}, attributes, {element: undefined, fixed: undefined, mini: undefined, extended: undefined}))
         if icon
-            span.mdc-fab__icon.material-icons= icon
+            +mdc-fab__icon(icon)
         if label
-            span.mdc-fab__label= label
+            +mdc-fab__label(label)
+        block
+
+mixin mdc-fab__icon(icon)
+    if icon
+        +mdc-icon(icon).mdc-fab__icon&attributes(Object.assign({}, attributes))
+    else
+        span.mdc-fab__icon&attributes(Object.assign({}, attributes))
+            block
+
+mixin mdc-fab__label(label)
+    span.mdc-fab__label&attributes(Object.assign({}, attributes))= label
+        block
