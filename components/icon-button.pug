@@ -10,9 +10,16 @@ mixin mdc-icon-button(icon)
         block
 
 mixin mdc-icon-button__icon(icon)
-    +mdc-icon(icon)(
-        element=attributes.element
-        class={
-            'mdc-icon-button__icon--on': attributes.on
-        }
-    ).mdc-icon-button__icon
+    if icon
+        +mdc-icon(icon)(
+            class={
+                'mdc-icon-button__icon--on': attributes.on
+            }
+        ).mdc-icon-button__icon&attributes(Object.assign({}, attributes, {on: undefined}))
+    else
+        span.mdc-icon-button__icon(
+            class={
+                'mdc-icon-button__icon--on': attributes.on
+            }
+        )&attributes(Object.assign({}, attributes, {on: undefined}))
+            block
