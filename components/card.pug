@@ -10,17 +10,11 @@ mixin mdc-card__primary-action
     #{attributes.element || 'div'}.mdc-card__primary-action(
         tabindex='0'
         data-mdc-auto-init=attributes.ripple && 'MDCRipple'
-    )&attributes(Object.assign({}, attributes, { element: undefined, ripple: undefined }))
+    )&attributes(Object.assign({}, attributes, {element: undefined, ripple: undefined}))
         block
 
-mixin mdc-card__header(title, subtitle)
-    #{attributes.element || 'div'}.mdc-card__header&attributes(Object.assign({}, attributes, {element: undefined, image: undefined, icon: undefined}))
-        if attributes.image || attributes.icon
-            +mdc-card__header__graphic()(src=attributes.image icon=attributes.icon)
-
-        if title
-            +mdc-card__header__text(title, subtitle)
-
+mixin mdc-card__header
+    #{attributes.element || 'div'}.mdc-card__header&attributes(Object.assign({}, attributes, {element: undefined}))
         block
 
 mixin mdc-card__header__text(primary, secondary)
@@ -28,7 +22,7 @@ mixin mdc-card__header__text(primary, secondary)
         h2.mdc-card__header__primary-text= primary
         
         if secondary
-            h3.mdc-card__header__secondary-text= secondary
+            p.mdc-card__header__secondary-text= secondary
 
         block
 
