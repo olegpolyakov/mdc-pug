@@ -17,7 +17,7 @@ mixin mdc-list-item
             'mdc-list-item--disabled': attributes.disabled
         }
         data-mdc-auto-init=attributes.ripple && 'MDCRipple'
-    )&attributes(Object.assign({}, attributes, {element: undefined, activated: undefined, selected: undefined, disabled: undefined}))
+    )&attributes(Object.assign({}, attributes, {element: undefined, activated: undefined, selected: undefined, disabled: undefined, ripple: undefined}))
         block
             
 
@@ -35,8 +35,7 @@ mixin mdc-list-item__text(primary, secondary)
             block
 
 mixin mdc-list-item__meta(text)
-    #{attributes.element || 'span'}.mdc-list-item__meta&attributes(Object.assign({}, attributes, {element: undefined}))
-        =text
+    #{attributes.element || 'span'}.mdc-list-item__meta&attributes(Object.assign({}, attributes, {element: undefined}))=text
         block
 
 mixin mdc-list-divider
@@ -53,6 +52,5 @@ mixin mdc-list-group
         block
 
 mixin mdc-list-group__subheader(text)
-    #{attributes.element || 'h3'}.mdc-list-group__subheader&attributes(Object.assign({}, attributes, {element: undefined}))
-        =text
+    #{attributes.element || 'h3'}.mdc-list-group__subheader&attributes(Object.assign({}, attributes, {element: undefined}))=text
         block
