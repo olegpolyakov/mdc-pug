@@ -26,7 +26,7 @@
         margin: 0;
     }
 
-    .mdc-banner__action {
+    .mdc-banner__actions {
         margin-left: auto;
 
         @media #{$lt-md} {
@@ -51,18 +51,5 @@
             margin-right: 24px;
             font-size: 32px;
         }
-    }
-
-    &.mdc-banner--sticky {
-        position: sticky;
-        top: 64px;
-        z-index: 1;
-    }
-
-    &.mdc-banner--fixed {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
     }
 }
