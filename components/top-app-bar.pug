@@ -28,7 +28,7 @@ mixin mdc-top-app-bar__title(title)
     #{attributes.element || 'span'}.mdc-top-app-bar__title&attributes(attributes)= title
         block
 
-mixin mdc-top-app-bar__navigation-icon(icon = 'menu')
+mixin mdc-top-app-bar__navigation-icon(icon)
     #{attributes.element || 'button'}.mdc-top-app-bar__navigation-icon.material-icons&attributes(Object.assign({}, attributes, {element: undefined}))= icon
 
 mixin mdc-top-app-bar__action-item(icon)
