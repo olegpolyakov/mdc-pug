@@ -1,6 +1,6 @@
 {
   "name": "mdc-pug",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "",
   "main": "index.pug",
   "scripts": {
@@ -18,5 +18,11 @@
     "name": "Oleg Polyakov",
     "email": "olegpolyakov@outlook.com"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "gulp-pug": "^4.0.1",
+    "gulp-sass": "^4.0.2",
+    "material-components-web": "^1.0.1"
+  }
 }
