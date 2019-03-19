@@ -1,15 +1,17 @@
 mixin mdc-drawer
     #{attributes.element || 'aside'}.mdc-drawer(
         class={
+            'mdc-drawer--open': attributes.open,
             'mdc-drawer--dismissible': attributes.dismissible,
             'mdc-drawer--modal': attributes.modal
         }
-        data-mdc-auto-init='MDCDrawer'
-    )&attributes(Object.assign({}, attributes, {element: undefined, dismissible: undefined, modal: undefined}))
+        data-mdc-auto-init=(attributes.dismissible || attributes.modal) && 'MDCDrawer'
+    )&attributes(Object.assign({}, attributes, {element: undefined, dismissible: undefined, modal: undefined, open: undefined}))
         div.mdc-drawer__content
             block
     
-    div.mdc-drawer-scrim
+    if attributes.modal
+        div.mdc-drawer-scrim
 
 mixin mdc-drawer__header(title, subtitle)
     header.mdc-drawer__header&attributes(attributes)
