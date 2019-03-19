@@ -1,0 +1,17 @@
+$mdc-theme-primary: #a86454;
+
+@import '../../index';
+
+body {
+    margin: 0;
+}
+
+.app-drawer {
+    position: fixed;
+    top: 64px;
+}
+
+.app-content {
+    margin-left: 256px;
+    padding: 2rem;
+}

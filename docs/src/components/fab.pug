@@ -1,0 +1,26 @@
+extends ../index
+
+prepend head
+    - const TITLE = 'FAB'
+    - const ID = 'fab'
+
+block main
+    +mdc-typography('Floating Action Button')(style='headline3')
+    +mdc-typography('Floating action buttons represents the primary action in an application. Only one floating action button is recommended per screen to represent the most common action.')(style='body1')
+
+    section
+        +mdc-fab('star')
+
+    section
+        +mdc-fab('star')(mini)
+
+    section
+        +mdc-fab('add', 'Create')
+
+    section
+        +mdc-fab()(extended)
+            +mdc-fab__label('Create')
+            +mdc-fab__icon('add')
+
+    section
+        +mdc-fab(null, 'Create')

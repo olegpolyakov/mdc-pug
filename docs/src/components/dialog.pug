@@ -1,0 +1,23 @@
+extends ../index
+
+prepend head
+    - const TITLE = 'Dialog'
+    - const ID = 'dialog'
+
+block main
+    +mdc-typography('Dialog')(style='headline3')
+    +mdc-typography('Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.')(style='body1')
+
+    +mdc-button('Open Dialog')(onclick='dialog.open()')
+
+    +mdc-dialog#dialog
+        +mdc-dialog__title('Get this party started?')
+        +mdc-dialog__content
+            +mdc-typography('Turn up the jams and have a good time.')
+        +mdc-dialog__actions
+            +mdc-dialog__button('Decline')(action='close')
+            +mdc-dialog__button('Accept')(default action='accept')
+
+append scripts
+    script.
+        var dialog = document.querySelector('#dialog').MDCDialog;

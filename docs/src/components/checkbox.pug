@@ -1,0 +1,12 @@
+extends ../index
+
+prepend head
+    - const TITLE = 'Checkbox'
+    - const ID = 'checkbox'
+
+block main
+    +mdc-typography('Checkbox')(style='headline3')
+    +mdc-typography('Checkboxes allow the user to select multiple options from a set.')(style='body1')
+
+    section
+        +mdc-checkbox
