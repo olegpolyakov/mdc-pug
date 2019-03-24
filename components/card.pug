@@ -30,6 +30,10 @@ mixin mdc-card__header__graphic
     div.mdc-card__header__graphic&attributes(attributes)
         block
 
+mixin mdc-card__header__action
+    div.mdc-card__header__action&attributes(attributes)
+        block
+
 mixin mdc-card__section
     #{attributes.element || 'div'}.mdc-card__section(
         class={
