@@ -7,8 +7,7 @@ mixin mdc-drawer
         }
         data-mdc-auto-init=(attributes.dismissible || attributes.modal) && 'MDCDrawer'
     )&attributes(Object.assign({}, attributes, {element: undefined, dismissible: undefined, modal: undefined, open: undefined}))
-        div.mdc-drawer__content
-            block
+        block
     
     if attributes.modal
         div.mdc-drawer-scrim
