@@ -1,14 +1,8 @@
 {
   "name": "mdc-pug",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "",
   "main": "index.pug",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "peerDependencies": {
-    "material-components-web": "^1.0.1"
-  },
   "keywords": [
     "pug",
     "mdc",
@@ -19,10 +13,18 @@
     "email": "olegpolyakov@outlook.com"
   },
   "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "material-components-web": "^1.0.1"
+  },
+  "peerDependencies": {
+    "pug": "^2.0.3"
+  },
   "devDependencies": {
     "gulp": "^4.0.0",
     "gulp-pug": "^4.0.1",
-    "gulp-sass": "^4.0.2",
-    "material-components-web": "^1.0.1"
+    "gulp-sass": "^4.0.2"
   }
 }
