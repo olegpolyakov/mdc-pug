@@ -41,6 +41,6 @@ mixin mdc-text-field-helper-text(text)
                 'mdc-text-field-helper-text--persistent': attributes.persistent, 'mdc-text-field-helper-text--validation-msg': attributes.validationMsg
             }
             data-mdc-auto-init='MDCTextFieldHelperText'
-        )&attributes(Object.assing({}, attributes, {persistent: undefined, validationMsg: undefined}))
+        )&attributes(Object.assign({}, attributes, {persistent: undefined, validationMsg: undefined}))
             = text
             block
