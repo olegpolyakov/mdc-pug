@@ -14,6 +14,7 @@ mixin mdc-tab(text)
                 i.mdc-tab__icon.material-icons(aria-hidden='true')= attributes.icon
             if text
                 span.mdc-tab__text-label= text
+            block
 
         +mdc-tab-indicator()(active=attributes.active fade=attributes.fade)
 
