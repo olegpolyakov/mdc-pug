@@ -11,8 +11,11 @@ mixin mdc-switch(name)
 
         div.mdc-switch__thumb-underlay
             div.mdc-switch__thumb
-                input.mdc-switch__native-control(
-                    type='checkbox'
-                    name=name
-                    role='switch'
-                )&attributes(attributes)
+            
+            input.mdc-switch__native-control(
+                type='checkbox'
+                name=name
+                role='switch'
+                aria-checked=attributes.checked ? 'true' : 'false'
+                aria-checked=attributes.disabled && 'false'
+            )&attributes(Object.assign({}, attributes, {class: undefined}))
