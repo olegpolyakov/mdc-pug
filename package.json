@@ -1,12 +1,14 @@
 {
   "name": "mdc-pug",
-  "version": "0.2.6",
+  "version": "0.3.0",
   "description": "",
   "main": "index.pug",
   "keywords": [
     "pug",
     "mdc",
-    "material"
+    "material",
+    "material-design",
+    "material-components"
   ],
   "author": {
     "name": "Oleg Polyakov",
@@ -17,13 +19,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "material-components-web": "^1.0.1"
-  },
-  "peerDependencies": {
-    "pug": "^2.0.3"
+    "material-components-web": "^5.0.0",
+    "pug": "^2.0.4"
   },
   "devDependencies": {
-    "gulp": "^4.0.0",
+    "gulp": "^4.0.2",
     "gulp-pug": "^4.0.1",
     "gulp-sass": "^4.0.2"
   }
