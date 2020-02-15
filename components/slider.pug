@@ -1,22 +1,24 @@
-mixin mdc-slider(value)
+mixin mdc-slider(value = 0)
     div.mdc-slider(
+         class={
+            'mdc-slider--discrete': attributes.discrete,
+            'mdc-slider--display-markers': attributes.markers
+        }
+        tabindex='0'
         role='slider'
-        aria-valuenow=value || '0'
+        aria-valuenow=value
         aria-valuemin=attributes.min || '0'
         aria-valuemax=attributes.max || '100'
         aria-label=attributes.label
         aria-disabled=attributes.disabled && 'true'
         data-step=attributes.step || '0'
-        tabindex='0'
-        class={
-            'mdc-slider mdc-slider--discrete': attributes.discrete,
-            'mdc-slider--display-markers': attributes.discrete && attributes.displayMarkers
-        }
         data-mdc-auto-init='MDCSlider'
-    )
+    )&attributes(Object.assign({}, attributes, {min: undefined, max: undefined, step: undefined, label: undefined, discrete: undefined, disabled: undefined}))
         div.mdc-slider__track-container
             div.mdc-slider__track
-            div.mdc-slider__track-marker-container
+
+            if attributes.markers
+                div.mdc-slider__track-marker-container
         
         div.mdc-slider__thumb-container
             if attributes.discrete
