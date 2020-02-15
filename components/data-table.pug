@@ -1,24 +1,48 @@
 mixin mdc-data-table
-    table.mdc-data-table&attributes(attributes)
+    div.mdc-data-table
+        table.mdc-data-table__table&attributes(attributes)
+            block
+
+mixin mdc-data-table__header
+    thead.mdc-data-table__header&attributes(attributes)
         block
 
-mixin mdc-data-table__head
-    thead.mdc-data-table__head&attributes(attributes)
+mixin mdc-data-table__header-row
+    tr.mdc-data-table__header-row&attributes(attributes)
         block
 
-mixin mdc-data-table__body
-    tbody.mdc-data-table__body&attributes(attributes)
+mixin mdc-data-table__header-cell
+    td.mdc-data-table__header-cell(
+        class={
+            'mdc-data-table__header-cell--numeric': attributes.numeric,
+            'mdc-data-table__header-cell--checkbox': attributes.checkbox
+        }
+    )&attributes(Object.assing({}, attributes, {numeric: undefined, checkbox: undefined}))
+        block
+
+mixin mdc-data-table__content
+    tbody.mdc-data-table__content&attributes(attributes)
         block
 
 mixin mdc-data-table__row
-    tr.mdc-data-table__row&attributes(attributes)
+    tr.mdc-data-table__row(
+        class={
+            'mdc-data-table__row--selected': attributes.selected
+        }
+    )&attributes(Object.assing({}, attributes, {selected: undefined}))
         block
 
 mixin mdc-data-table__cell
-    #{attributes.element || 'td'}.mdc-data-table__cell(
+    td.mdc-data-table__cell(
         class={
             'mdc-data-table__cell--numeric': attributes.numeric,
-            'mdc-data-table__cell-actions': attributes.actions
+            'mdc-data-table__cell--checkbox': attributes.checkbox,
         }
-    )&attributes(Object.assign({}, attributes, {element: undefined, numeric: undefined, actions: undefined}))
+    )&attributes(Object.assign({}, attributes, {numeric: undefined, checkbox: undefined}))
         block
+
+mixin mdc-data-table__header-row-checkbox(name)
+    +mdc-checkbox(name).mdc-data-table__header-row-checkbox&attributes(attributes)
+
+mixin mdc-data-table__row-checkbox(name)
+    +mdc-checkbox(name).mdc-data-table__row-checkbox&attributes(attributes)
