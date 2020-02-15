@@ -3,12 +3,12 @@ mixin mdc-banner(text)
         class={
             'mdc-banner--with-icon': attributes.icon,
         }
-    )&attributes(Object.assign({}, attributes, {icon: undefined}))
+    )&attributes(Object.assign({}, attributes, {text: undefined, icon: undefined}))
         div.mdc-banner__inner
             if attributes.icon
                 i.mdc-banner__icon.material-icons= attributes.icon
-                
-            p.mdc-banner__text= text
+            
+            p.mdc-banner__text= text || attributes.text
 
             if block
                 div.mdc-banner__actions
