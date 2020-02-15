@@ -1,4 +1,4 @@
-mixin mdc-card(title, subtitle)
+mixin mdc-card
     #{attributes.element || 'div'}.mdc-card(
         class={
             'mdc-card--outlined': attributes.outlined
@@ -19,19 +19,30 @@ mixin mdc-card__header
 
 mixin mdc-card__header__text(primary, secondary)
     div.mdc-card__header__text&attributes(attributes)
-        h2.mdc-card__header__primary-text= primary
+        if primary
+            +mdc-card__header__primary-text(primary)
         
         if secondary
-            p.mdc-card__header__secondary-text= secondary
+            +mdc-card__header__secondary-text(secondary)
 
+        block
+
+mixin mdc-card__header__primary-text(text)
+    #{attributes.element || 'h2'}.mdc-card__header__primary-text&attributes(Object.assign({}, attributes, {element: undefined}))
+        = text
+        block
+
+mixin mdc-card__header__secondary-text(text)
+    #{attributes.element || 'p'}.mdc-card__header__secondary-text&attributes(Object.assign({}, attributes, {element: undefined}))
+        = text
         block
 
 mixin mdc-card__header__graphic
     div.mdc-card__header__graphic&attributes(attributes)
         block
 
-mixin mdc-card__header__action
-    div.mdc-card__header__action&attributes(attributes)
+mixin mdc-card__header__actions
+    div.mdc-card__header__actions&attributes(attributes)
         block
 
 mixin mdc-card__section
@@ -40,7 +51,7 @@ mixin mdc-card__section
             'mdc-card__section--primary': attributes.primary,
             'mdc-card__section--secondary': attributes.secondary
         }
-    )&attributes(Object.assign({}, attributes, {element: undefined, primary: undefined, secondary: undefined}))= content
+    )&attributes(Object.assign({}, attributes, {element: undefined, primary: undefined, secondary: undefined}))
         block
 
 mixin mdc-card__media(src)
