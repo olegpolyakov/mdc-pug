@@ -14,12 +14,22 @@ mixin mdc-chip(text)
         class={
             'mdc-chip--selected': attributes.selected
         }
-    )&attributes(Object.assign({}, attributes, {element: undefined, selected: undefined, leadingIcon: undefined, trailingIcon: undefined}))
-        if attributes.leadingIcon
-            i.mdc-chip__icon.mdc-chip__icon--leading.material-icons= attributes.leadingIcon
+    )&attributes(Object.assign({}, attributes, {element: undefined, leadingIcon: undefined, trailingIcon: undefined, selected: undefined}))
+        div.mdc-chip__ripple
 
-        span.mdc-chip__text= text
-            block
+        if attributes.leadingIcon
+            i.mdc-chip__icon.mdc-chip__icon--leading.material-icons(
+                class={'mdc-chip__icon--leading-hidden': attributes.selected}
+            )= attributes.leadingIcon
+
+            if attributes.selected
+                span.mdc-chip__checkmark
+                    svg.mdc-chip__checkmark-svg(viewBox="-2 -3 30 30")
+                        path.mdc-chip__checkmark-path(fill="none" stroke="black" d="M1.73,12.91 8.1,19.28 22.79,4.59")
+
+        span.mdc-chip__primary-action(role='button' tabindex='0')
+            span.mdc-chip__text= text
+                block
 
         if attributes.trailingIcon
-            i.mdc-chip__icon.mdc-chip__icon--trailing.material-icons(tabindex='0' role='button')= attributes.trailingIcon
+            i.mdc-chip__icon.mdc-chip__icon--trailing.material-icons(role='button' tabindex='0')= attributes.trailingIcon
