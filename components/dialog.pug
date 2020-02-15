@@ -1,4 +1,4 @@
-mixin mdc-dialog(title)
+mixin mdc-dialog
     #{attributes.element || 'div'}.mdc-dialog(
         class={
             'mdc-dialog--open': attributes.open
@@ -14,8 +14,7 @@ mixin mdc-dialog(title)
         div.mdc-dialog__scrim
 
 mixin mdc-dialog__title(title)
-    #{attributes.element || 'h2'}.mdc-dialog__title&attributes(Object.assign({}, attributes, {element: undefined}))
-        = title
+    #{attributes.element || 'h2'}.mdc-dialog__title&attributes(Object.assign({}, attributes, {element: undefined}))= title
         block
 
 mixin mdc-dialog__content
@@ -28,9 +27,7 @@ mixin mdc-dialog__actions
 
 mixin mdc-dialog__button(label)
     +mdc-button(label)(
-        class={
-            'mdc-dialog__button--default': attributes.default
-        }
         data-mdc-dialog-action=attributes.action
-    ).mdc-dialog__button&attributes(Object.assign({}, attributes, {default: undefined, action: undefined}))
+        data-mdc-dialog-button-default=attributes.default
+    ).mdc-dialog__button&attributes(Object.assign({}, attributes, {action: undefined, default: undefined}))
         block
