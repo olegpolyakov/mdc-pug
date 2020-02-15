@@ -15,7 +15,7 @@ mixin mdc-snackbar(label)
                     block
 
 mixin mdc-snackbar__action(label)
-    +mdc-button(label).mdc-snackbar__action&attributes({}, attributes)
+    +mdc-button(label).mdc-snackbar__action&attributes(attributes)
 
 mixin mdc-snackbar__dismiss(icon = 'close')
-    +mdc-icon-button(icon).mdc-snackbar__dismiss&attributes({}, attributes)
+    +mdc-icon-button(icon).mdc-snackbar__dismiss&attributes(attributes)
