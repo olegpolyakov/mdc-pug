@@ -4,47 +4,55 @@ mixin mdc-select(name, value)
         class={
             'mdc-select--outlined': attributes.outlined,
             'mdc-select--disabled': attributes.disabled,
-            'mdc-select--with-leading-icon': attributes.icon
+            'mdc-select--required': attributes.required,
+            'mdc-select--with-leading-icon': attributes.icon,
+            'mdc-select--no-label': !attributes.label
         }
         data-mdc-auto-init='MDCSelect'
     )
-        if attributes.icon
-            i.material-icons.mdc-select__icon=attributes.icon
-
         input(
             type='hidden'
             name=name
             value=value
-        )&attributes({}, attributes, {class: undefined, outlined: undefined, label: undefined, icon: undefined})
+        )&attributes({}, attributes, {class: undefined, outlined: undefined, label: undefined, icon: undefined, selectedText: undefined, 'aria-controls': undefined, 'aria-describedby': undefined})
 
-        i.mdc-select__dropdown-icon
+        div.mdc-select__anchor
+            i.mdc-select__dropdown-icon
 
-        div.mdc-select__selected-text
+            div.mdc-select__selected-text(
+                aria-disabled=attributes.disabled && 'true'
+                aria-controls=attributes['aria-controls']
+                aria-describedby=attributes['aria-describedby']
+            )= attributes.selectedText
+
+            if attributes.icon
+                i.material-icons.mdc-select__icon= attributes.icon
+
+            unless attributes.outlined
+                +mdc-floating-label(attributes.label)(floatAbove=Boolean(selectedText))
+            
+            if attributes.outlined
+                +mdc-notched-outline
+                    if attributes.label
+                        +mdc-floating-label(attributes.label)(floatAbove=Boolean(selectedText))
+            else
+                +mdc-line-ripple
 
         div.mdc-select__menu.mdc-menu.mdc-menu-surface
             ul.mdc-list
                 block
 
-        unless attributes.outlined
-            +mdc-floating-label(attributes.label)
-
-        if attributes.outlined
-            +mdc-notched-outline
-                if attributes.label
-                    +mdc-floating-label(attributes.label)
-        else
-            +mdc-line-ripple
-
 mixin mdc-select-option(value, title)
-    li.mdc-list-item(
-        class={
-            'mdc-list-item--selected': attributes.selected
-        }
+    +mdc-list-item(title)(
         data-value=value
-        role='option'
-        tabindex=(attributes.disabled ? '0' : '-1')
         aria-disabled=(attributes.disabled && 'true')
-        aria-selected=attributes.selected
-    )&attributes({}, attributes, {selected: undefined})
-        =title
-        block
+        aria-selected=(attributes.selected && 'true')
+    )&attributes(attributes)
+
+mixin mdc-select-helper-text
+    #{attributes.element || 'p'}.mdc-select-helper-text(
+        class={
+            'mdc-select-helper-text--persistent': attributes.persistent,
+            'mdc-select-helper-text--validation-msg': attributes.validation
+        }
+    )&attributes(attributes)
