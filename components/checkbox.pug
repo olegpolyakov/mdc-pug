@@ -1,5 +1,6 @@
 mixin mdc-checkbox(name)
     div.mdc-checkbox(
+        class=attributes.class
         class={
             'mdc-checkbox--disabled': attributes.disabled
         }
@@ -8,7 +9,7 @@ mixin mdc-checkbox(name)
         input.mdc-checkbox__native-control(
             type='checkbox'
             name=name
-        )&attributes(Object.assign({}, attributes))
+        )&attributes(Object.assign({}, attributes, {class: undefined}))
 
         div.mdc-checkbox__background
             svg.mdc-checkbox__checkmark(viewBox='0 0 24 24')
@@ -18,3 +19,5 @@ mixin mdc-checkbox(name)
                     d='M1.73,12.91 8.1,19.28 22.79,4.59'
                 )
             div.mdc-checkbox__mixedmark
+        
+        div.mdc-checkbox__ripple
