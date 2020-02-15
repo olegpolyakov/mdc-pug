@@ -1,9 +1,11 @@
 mixin mdc-icon(icon)
-    i.mdc-icon.material-icons(
+    #{attributes.element || 'i'}.mdc-icon(
         class={
-            [`md-${attributes.size}`]: attributes.size, 
-            'md-dark': attributes.dark,
-            'md-light': attributes.light,
-            'md-inactive': attributes.disabled
+            'material-icons': icon,
+            [`mdc-icon--${attributes.size}`]: attributes.size, 
+            'mdc-icon--dark': attributes.dark,
+            'mdc-icon--light': attributes.light,
+            'mdc-icon--inactive': attributes.disabled
         }
-    )&attributes(Object.assign({}, attributes, {size: undefined, dark: undefined, light: undefined, disabled: undefined}))= icon
+    )&attributes(Object.assign({}, attributes, {element: undefined, size: undefined, dark: undefined, light: undefined, disabled: undefined}))= icon
+        block
