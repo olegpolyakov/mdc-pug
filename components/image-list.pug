@@ -8,21 +8,21 @@ mixin mdc-image-list
         ul.mdc-grid-list__tiles&attributes(Object.assign({}, attributes, {element: undefined, masonry: undefined, textProtection: undefined}))
             block
 
-mixin mdc-image-list__item(src, text)
-    #{attributes.element || 'li'}.mdc-image-list__item()&attributes(Object.assign({}, attributes, {element: undefined}))
-        +mdc-image-list__image(src)
+mixin mdc-image-list__item(src, label)
+    #{attributes.element || 'li'}.mdc-image-list__item&attributes(Object.assign({}, attributes, {element: undefined}))
+        if src
+            +mdc-image-list__image(src)
             
-        if text
-            +mdc-image-list__label(text)
+        if label
+            +mdc-image-list__label(label)
+
+mixin mdc-image-list__image-aspect-container
+    div.mdc-image-list__image-aspect-container&attributes(attributes)
+        block
 
 mixin mdc-image-list__image(src)
-    if attributes.aspectContainer
-        div.mdc-image-list__image-aspect-container
-            img.mdc-image-list__image(src=src)&attributes(Object.assign({}, attributes, {aspectContainer: undefined}))
-    else
-        img.mdc-image-list__image(src=src)&attributes(Object.assign({}, attributes, {aspectContainer: undefined}))
-
+    img.mdc-image-list__image(src=src)&attributes(attributes)
 
 mixin mdc-image-list__label(label)
     div.mdc-image-list__supporting
-        span.mdc-image-list__label&attributes(Object.assign({}, attributes))= label
+        span.mdc-image-list__label&attributes(attributes)= label
