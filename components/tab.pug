@@ -8,14 +8,20 @@ mixin mdc-tab(text)
         role='tab'
         aria-selected=(attributes.active ? 'true' : 'false')
         tabindex=(attributes.active ? undefined : '-1')
-    )&attributes({}, attributes, {element: undefined, icon: undefined, active: undefined, stacked: undefined, minWidth: undefined, fade: undefined, init: undefined})
-        div.mdc-tab__content
+    )&attributes(Object.assign({}, attributes, {element: undefined, icon: undefined, active: undefined, stacked: undefined, minWidth: undefined, fade: undefined, indicatorIcon: undefined}))
+        span.mdc-tab__content
             if attributes.icon
-                i.mdc-tab__icon.material-icons(aria-hidden='true')= attributes.icon
+                +mdc-icon(attributes.icon)(aria-hidden='true').mdc-tab__icon
+
             if text
                 span.mdc-tab__text-label= text
+
             block
 
-        +mdc-tab-indicator()(active=attributes.active fade=attributes.fade)
+        +mdc-tab-indicator()(
+            active=attributes.active
+            fade=attributes.fade
+            icon=attributes.indicatorIcon
+        )
 
         span.mdc-tab__ripple
