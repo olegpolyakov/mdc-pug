@@ -17,7 +17,7 @@ mixin mdc-text-field(name, value)
         div.mdc-text-field__ripple
 
         if attributes.leadingIcon
-            +mdc-icon(attributes.leadingIcon).mdc-text-field__icon
+            +mdc-icon(attributes.leadingIcon).mdc-text-field__icon.mdc-text-field__icon--leading
 
         #{attributes.textarea ? 'textarea' : 'input'}.mdc-text-field__input(
             name=name
@@ -25,7 +25,7 @@ mixin mdc-text-field(name, value)
         )&attributes(Object.assign({}, attributes, {class: undefined, textarea: undefined, label: undefined, fullwidth: undefined, outlined: undefined, leadingIcon: undefined, trailingIcon: undefined, focused: undefined, endAligned: undefined}))
 
         if attributes.trailingIcon
-            +mdc-icon(attributes.trailingIcon)(tabindex='0' role='button').mdc-text-field__icon
+            +mdc-icon(attributes.trailingIcon)(tabindex='0' role='button').mdc-text-field__icon.mdc-text-field__icon--trailing
 
         if attributes.label && !attributes.fullwidth && !attributes.outlined
             +mdc-floating-label(attributes.label)(floatAbove=Boolean(value))
