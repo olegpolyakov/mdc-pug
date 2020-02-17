@@ -6,6 +6,6 @@ mixin mdc-tab-indicator
         }
     )&attributes(attributes)
         if attributes.icon
-            +mdc-icon(attributes.icon)(aria-hidden='true').mdc-tab-indicator__content--icon
+            +mdc-icon(attributes.icon)(aria-hidden='true').mdc-tab-indicator__content.mdc-tab-indicator__content--icon
         else
-            span.mdc-tab-indicator__content--underline
+            span.mdc-tab-indicator__content.mdc-tab-indicator__content--underline
