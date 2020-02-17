@@ -17,7 +17,7 @@ mixin mdc-data-table__header-cell
             'mdc-data-table__header-cell--numeric': attributes.numeric,
             'mdc-data-table__header-cell--checkbox': attributes.checkbox
         }
-    )&attributes(Object.assing({}, attributes, {numeric: undefined, checkbox: undefined}))
+    )&attributes(Object.assign({}, attributes, {numeric: undefined, checkbox: undefined}))
         block
 
 mixin mdc-data-table__content
@@ -29,7 +29,7 @@ mixin mdc-data-table__row
         class={
             'mdc-data-table__row--selected': attributes.selected
         }
-    )&attributes(Object.assing({}, attributes, {selected: undefined}))
+    )&attributes(Object.assign({}, attributes, {selected: undefined}))
         block
 
 mixin mdc-data-table__cell
