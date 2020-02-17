@@ -16,6 +16,5 @@ mixin mdc-switch(name)
                 type='checkbox'
                 name=name
                 role='switch'
-                aria-checked=attributes.checked ? 'true' : 'false'
-                aria-checked=attributes.disabled && 'false'
+                aria-checked=(attributes.checked && !attributes.disabled) ? 'true' : 'false'
             )&attributes(Object.assign({}, attributes, {class: undefined}))
