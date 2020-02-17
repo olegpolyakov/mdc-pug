@@ -6,7 +6,7 @@ mixin mdc-snackbar(label)
             'mdc-snackbar--leading': attributes.leading
         }
         data-mdc-auto-init='MDCSnackbar'
-    )&attributes({}, attributes, {open: undefined, stacked: undefined, leading: undefined})
+    )&attributes(Object.assign({}, attributes, {open: undefined, stacked: undefined, leading: undefined}))
         div.mdc-snackbar__surface
             div.mdc-snackbar__label(role='status' aria-live='polite')= label
 
