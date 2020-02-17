@@ -1,9 +1,9 @@
-@import './breakpoints';
-@import '@material/theme/mixins';
-@import '@material/typography/mixins';
+@use '@material/theme' as theme;
+@use '@material/typography' as typography;
+@use './breakpoints';
 
 .mdc-banner {
-    @include mdc-theme-prop(background-color, surface);
+    @include theme.prop(background-color, surface);
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 
     .mdc-banner__inner {
@@ -16,14 +16,14 @@
         padding: 8px 16px;
         box-sizing: border-box;
 
-        @media #{$lt-md} {
+        @media #{breakpoints.$lt-md} {
             flex-wrap: wrap;
         }
     }
 
     .mdc-banner__text {
-        @include mdc-typography(subtitle1);
-        @include mdc-theme-prop(color, text-primary-on-light);
+        @include typography.typography(subtitle1);
+        @include theme.prop(color, text-primary-on-light);
         margin: 0;
     }
 
@@ -32,19 +32,19 @@
         display: flex;
         align-content: center;
 
-        @media #{$lt-md} {
+        @media #{breakpoints.$lt-md} {
             margin-top: 12px;
         }
     }
 
     &.mdc-banner--with-icon {
-        @media #{$gt-md} {
+        @media #{breakpoints.$gt-md} {
             display: flex;
             align-items: center;
         }
 
         .mdc-banner__icon {
-            @include mdc-theme-prop(color, text-secondary-on-light);
+            @include theme.prop(color, text-secondary-on-light);
 
             width: 40px;
             height: 40px;

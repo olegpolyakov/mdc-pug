@@ -1,10 +1,10 @@
-@import '@material/theme/mdc-theme';
+@use '@material/theme';
 
 $mdc-badge-font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif !default;
 $mdc-badge-font-size: 12px !default;
-$mdc-badge-color: $mdc-theme-on-primary !default;
-$mdc-badge-color-inverse: $mdc-theme-primary !default;
-$mdc-badge-background: $mdc-theme-primary !default;
+$mdc-badge-color: theme.$on-primary !default;
+$mdc-badge-color-inverse: theme.$primary !default;
+$mdc-badge-background: theme.$primary !default;
 $mdc-badge-background-inverse: transparent !default;
 $mdc-badge-size : 22px !default;
 $mdc-badge-padding: 2px !default;

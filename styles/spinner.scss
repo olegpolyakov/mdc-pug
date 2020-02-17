@@ -1,14 +1,13 @@
-@import '@material/theme/variables';
-@import '@material/theme/color-palette';
+@use '@material/theme';
 
 $mdc-spinner-size: 48px !default;
 $mdc-spinner-stroke-width: 6 !default;
-$mdc-spinner-stroke-color: $mdc-theme-primary !default;
+$mdc-spinner-stroke-color: theme.$primary !default;
 
-$mdc-spinner-stroke-color-1: $material-color-blue-400 !default;
-$mdc-spinner-stroke-color-2: $material-color-red-500 !default;
-$mdc-spinner-stroke-color-3: $material-color-yellow-600 !default;
-$mdc-spinner-stroke-color-4: $material-color-green-500 !default;
+$mdc-spinner-stroke-color-1: theme.$blue-400 !default;
+$mdc-spinner-stroke-color-2: theme.$red-500 !default;
+$mdc-spinner-stroke-color-3: theme.$yellow-600 !default;
+$mdc-spinner-stroke-color-4: theme.$green-500 !default;
 
 $mdc-spinner-rotate-animation: mdc-spinner-rotate 1.4s linear infinite !default;
 $mdc-spinner-dash-animation: mdc-spinner-dash 1.4s ease-in-out infinite !default;

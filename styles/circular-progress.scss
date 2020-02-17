@@ -1,4 +1,4 @@
-@import '@material/theme/mixins';
+@use '@material/theme';
 
 .mdc-circular-progress {
     width: 100%;
@@ -8,7 +8,7 @@
     margin-right: 32px;
 
     &__foreground {
-        stroke: mdc-theme-prop-value(primary);;
+        stroke: theme.prop-value(primary);
     }
 
     &__background {

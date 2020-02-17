@@ -1,6 +1,6 @@
-@import '@material/theme/mixins';
-@import '@material/typography/mixins';
-@import '@material/card/mdc-card';
+@use '@material/theme' as theme;
+@use '@material/typography' as typography;
+@use '@material/card/mdc-card';
 
 .mdc-card {
     .mdc-card__header {
@@ -24,22 +24,22 @@
         }
 
         .mdc-card__header__primary-text {
-            @include mdc-typography(headline6);
-            @include mdc-theme-prop(color, text-primary-on-light);
-            @include mdc-typography-overflow-ellipsis;
+            @include typography.typography(headline6);
+            @include typography.overflow-ellipsis;
+            @include theme.prop(color, text-primary-on-light);
             margin: 0;
         }
     
         .mdc-card__header__secondary-text {
-            @include mdc-typography(body2);
-            @include mdc-theme-prop(color, text-secondary-on-light);
+            @include typography.typography(body2);
+            @include theme.prop(color, text-secondary-on-light);
             margin: 0;
         }
     }
 
     .mdc-card__section {
-        @include mdc-typography(body2);
-        @include mdc-theme-prop(color, text-primary-on-light);
+        @include typography.typography(body2);
+        @include theme.prop(color, text-primary-on-light);
 
         &.mdc-card__section--primary {
             padding: 16px;
