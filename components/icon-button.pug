@@ -4,8 +4,7 @@ mixin mdc-icon-button(onIcon, offIcon)
             'material-icons': onIcon && !offIcon,
             'mdc-icon-button--on': attributes.on
         }
-        data-mdc-auto-init=(onIcon && offIcon) && 'MDCIconButtonToggle'
-        data-mdc-auto-init=attributes.ripple && 'MDCRipple'
+        data-mdc-auto-init=(onIcon && offIcon) ? 'MDCIconButtonToggle' : (attributes.ripple && 'MDCRipple')
     )&attributes(Object.assign({}, attributes, {element: undefined, on: undefined, ripple: undefined}))
         unless offIcon
             =onIcon
