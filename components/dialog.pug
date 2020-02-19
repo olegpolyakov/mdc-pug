@@ -29,5 +29,6 @@ mixin mdc-dialog__button(label)
     +mdc-button(label)(
         data-mdc-dialog-action=attributes.action
         data-mdc-dialog-button-default=attributes.default
+        data-mdc-dialog-initial-focus=attributes.focused
     ).mdc-dialog__button&attributes(Object.assign({}, attributes, {action: undefined, default: undefined}))
         block
