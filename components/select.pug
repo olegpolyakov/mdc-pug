@@ -29,12 +29,12 @@ mixin mdc-select(name, value)
                 i.material-icons.mdc-select__icon= attributes.icon
 
             unless attributes.outlined
-                +mdc-floating-label(attributes.label)(floatAbove=Boolean(selectedText))
+                +mdc-floating-label(attributes.label)(floatAbove=Boolean(attributes.selectedText))
             
             if attributes.outlined
                 +mdc-notched-outline
                     if attributes.label
-                        +mdc-floating-label(attributes.label)(floatAbove=Boolean(selectedText))
+                        +mdc-floating-label(attributes.label)(floatAbove=Boolean(attributes.selectedText))
             else
                 +mdc-line-ripple
 
