@@ -1,7 +1,7 @@
-mixin mdc-typography(content, style)
+mixin mdc-typography(content, style = 'body1')
     #{attributes.element || 'p'}.mdc-typography(
+        class=`mdc-typography--${attributes.style || style}`
         class={
-            [`mdc-typography--${style || attributes.style}`]: style || attributes.style,
             [`mdc-theme--text-${attributes.color}-on-${attributes.theme || 'light'}`]: attributes.color,
             [`mdc-typography--align-${attributes.align}`]: attributes.align,
             [`mdc-typography--display-${attributes.display}`]: attributes.display,
