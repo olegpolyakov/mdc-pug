@@ -19,13 +19,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "material-components-web": "^5.0.0",
-    "pug": "^2.0.4"
+    "material-components-web": "^7.0.0",
+    "pug": "^3.0.0"
   },
   "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-pug": "^4.0.1",
-    "gulp-sass": "^4.0.2",
-    "sass": "^1.25.0"
+    "gulp-sass": "^4.1.0",
+    "sass": "^1.26.10"
   }
 }
