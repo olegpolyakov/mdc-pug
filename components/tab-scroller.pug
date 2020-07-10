@@ -3,7 +3,7 @@ mixin mdc-tab-scroller
         class={
             [`mdc-tab-scroller--align-${attributes.align}`]: attributes.align
         }
-    )&attributes(attributes)
+    )&attributes(Object.assign({}, attributes, { align: undefined }))
         div.mdc-tab-scroller__scroll-area
             div.mdc-tab-scroller__scroll-content
                 block

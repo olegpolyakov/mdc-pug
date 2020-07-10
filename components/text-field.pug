@@ -2,32 +2,44 @@ mixin mdc-text-field(name, value)
     label.mdc-text-field(
         class=attributes.class
         class={
-            'mdc-text-field--textarea': attributes.textarea,
-            'mdc-text-field--fullwidth': attributes.fullwidth,
+            'mdc-text-field--filled': attributes.filled,
             'mdc-text-field--outlined': attributes.outlined,
+            'mdc-text-field--textarea': attributes.textarea,
             'mdc-text-field--disabled': attributes.disabled,
             'mdc-text-field--focused': attributes.focused,
             'mdc-text-field--with-leading-icon': attributes.leadingIcon,
             'mdc-text-field--with-trailing-icon': attributes.trailingIcon,
             'mdc-text-field--no-label': !attributes.label,
-            'mdc-text-field--end-aligned': attributes.endAligned
+            'mdc-text-field--label-floating': value || attributes.value,
+            'mdc-text-field--end-aligned': attributes.endAligned,
+            'mdc-text-field--with-internal-counter': attributes.withInternalCounter
         }
         data-mdc-auto-init='MDCTextField'
     )
-        div.mdc-text-field__ripple
+        unless attributes.outlined
+            span.mdc-text-field__ripple
+
+        if attributes.prefix
+            span.mdc-text-field__affix.mdc-text-field__affix--prefix= attributes.prefix
 
         if attributes.leadingIcon
-            +mdc-icon(attributes.leadingIcon).mdc-text-field__icon.mdc-text-field__icon--leading
+            +mdc-icon(attributes.leadingIcon)(role='button' tabindex='0').mdc-text-field__icon.mdc-text-field__icon--leading
 
         #{attributes.textarea ? 'textarea' : 'input'}.mdc-text-field__input(
             name=name
             value=value
-        )&attributes(Object.assign({}, attributes, {class: undefined, textarea: undefined, label: undefined, fullwidth: undefined, outlined: undefined, leadingIcon: undefined, trailingIcon: undefined, focused: undefined, endAligned: undefined}))
+        )&attributes(Object.assign({}, attributes, { class: undefined, label: undefined, leadingIcon: undefined, trailingIcon: undefined, outlined: undefined, filled: undefined, textarea: undefined, focused: undefined, endAligned: undefined }))
+
+        if attributes.withInternalCounter && attributes.maxlength
+            span.mdc-text-field-character-counter=`0 / ${attributes.maxlength}`
+
+        if attributes.suffix
+            span.mdc-text-field__affix.mdc-text-field__affix--suffix= attributes.suffix
 
         if attributes.trailingIcon
-            +mdc-icon(attributes.trailingIcon)(tabindex='0' role='button').mdc-text-field__icon.mdc-text-field__icon--trailing
+            +mdc-icon(attributes.trailingIcon)(role='button' tabindex='0').mdc-text-field__icon.mdc-text-field__icon--trailing
 
-        if attributes.label && !attributes.fullwidth && !attributes.outlined
+        if attributes.label && !attributes.outlined
             +mdc-floating-label(attributes.label)(floatAbove=Boolean(value))
 
         if attributes.outlined
@@ -42,15 +54,17 @@ mixin mdc-text-field-helper-line
         block
 
 mixin mdc-text-field-helper-text(text)
-    div.mdc-text-field-helper-text(
-        class={
-            'mdc-text-field-helper-text--persistent': attributes.persistent,
-            'mdc-text-field-helper-text--validation-msg': attributes.validation
-        }
-        aria-hidden='true'
-    )&attributes(Object.assign({}, attributes, {persistent: undefined, validation: undefined}))
-        = text
-        block
+    div.mdc-text-field-helper-line
+        div.mdc-text-field-helper-text(
+            class={
+                'mdc-text-field-helper-text--persistent': attributes.persistent,
+                'mdc-text-field-helper-text--validation-msg': attributes.validation
+            }
+            aria-hidden='true'
+        )&attributes(Object.assign({}, attributes, { persistent: undefined, validation: undefined }))
+            = text
+            block
 
 mixin mdc-text-field-character-counter
-    div.mdc-text-field-character-counter
+    div.mdc-text-field-helper-line
+        div.mdc-text-field-character-counter

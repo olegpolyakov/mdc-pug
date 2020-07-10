@@ -6,7 +6,7 @@ mixin mdc-fab(icon, label)
             'mdc-fab--extended': label || attributes.extended
         }
         data-mdc-auto-init=attributes.ripple && 'MDCRipple'
-    )&attributes(Object.assign({}, attributes, {element: undefined, fixed: undefined, mini: undefined, extended: undefined, ripple: undefined}))
+    )&attributes(Object.assign({}, attributes, { element: undefined, fixed: undefined, mini: undefined, extended: undefined, ripple: undefined }))
         div.mdc-fab__ripple
 
         if icon

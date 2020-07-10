@@ -8,7 +8,7 @@ mixin mdc-top-app-bar
             'mdc-top-app-bar--short-collapsed': attributes.shortCollapsed
         }
         data-mdc-auto-init='MDCTopAppBar'
-    )&attributes(Object.assign({}, attributes, {element: undefined, fixed: undefined, prominent: undefined, dense: undefined, short: undefined, shortCollapsed: undefined}))
+    )&attributes(Object.assign({}, attributes, { element: undefined, fixed: undefined, prominent: undefined, dense: undefined, short: undefined, shortCollapsed: undefined }))
         block
 
 mixin mdc-top-app-bar__row
@@ -18,10 +18,9 @@ mixin mdc-top-app-bar__row
 mixin mdc-top-app-bar__section
     #{attributes.element || 'section'}.mdc-top-app-bar__section(
         class={
-            'mdc-top-app-bar__section--align-start': attributes.alignStart,
-            'mdc-top-app-bar__section--align-end': attributes.alignEnd
+            [`mdc-top-app-bar__section--align-${attributes.align}`]: attributes.align
         }
-    )&attributes(Object.assign({}, attributes, {element: undefined, alignStart: undefined, alignEnd: undefined}))
+    )&attributes(Object.assign({}, attributes, { element: undefined, align: undefined }))
         block
 
 mixin mdc-top-app-bar__title(title)

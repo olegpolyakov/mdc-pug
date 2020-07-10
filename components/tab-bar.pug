@@ -1,6 +1,6 @@
 mixin mdc-tab-bar
     #{attributes.element || 'div'}.mdc-tab-bar(
         data-mdc-auto-init='MDCTabBar' 
-    )&attributes(Object.assign({}, attributes, {element: undefined, align: undefined}))
+    )&attributes(Object.assign({}, attributes, { element: undefined, align: undefined }))
         +mdc-tab-scroller()(align=attributes.align)
             block

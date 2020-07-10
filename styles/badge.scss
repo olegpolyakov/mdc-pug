@@ -6,61 +6,63 @@ $mdc-badge-color: theme.$on-primary !default;
 $mdc-badge-color-inverse: theme.$primary !default;
 $mdc-badge-background: theme.$primary !default;
 $mdc-badge-background-inverse: transparent !default;
-$mdc-badge-size : 22px !default;
-$mdc-badge-padding: 2px !default;
-$mdc-badge-overlap: 12px !default;
+$mdc-badge-size : 20px !default;
+$mdc-badge-padding: 6px !default;
 
 .mdc-badge {
     position : relative;
+    display: inline-flex;
+    flex-shrink: 0;
+    vertical-align: middle;
     white-space: nowrap;
-    margin-right: ($mdc-badge-size + $mdc-badge-padding);
+    margin-right: $mdc-badge-size;
 
-    &:not([data-badge]) {
-        margin-right: auto;
-    }
-
-    &[data-badge]:after {
+    &[data-badge]::after {
         content: attr(data-badge);
 
+        position: absolute;
+        
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
         align-content: center;
         align-items: center;
-
-        position: absolute;
-        top: -($mdc-badge-size / 2);
-        right: -($mdc-badge-size + $mdc-badge-padding);
-
+        
         font-family: $mdc-badge-font-family;
         font-weight: 600;
         font-size: $mdc-badge-font-size;
-        width: $mdc-badge-size;
+        box-sizing: border-box;
+        min-width: $mdc-badge-size;
         height: $mdc-badge-size;
-        border-radius : 50%;
+        padding: 0 $mdc-badge-padding;
+        line-height: 1;
+        border-radius: 10px;
+
+        top: 0;
+        right: 0;
+        transform: scale(1) translate(50%, -50%);
+        transform-origin: 100% 0%;
 
         background: $mdc-badge-background;
         color: $mdc-badge-color;
+        z-index: 1;
+        
+        transform: scale(1) translate(50%, -50%);
+        transform-origin: 100% 0%;
+    }
 
-        .mdc-button & {
-            top: -10px;
-            right: -5px;
+    &.mdc-badge--inset {
+        &::after {
+            top: 14%;
+            right: 14%;
         }
     }
 
     &.mdc-badge--no-background {
-        &[data-badge]:after {
+        &::after {
             color: $mdc-badge-color-inverse;
             background: $mdc-badge-background-inverse;
-        }
-    }
-
-    &.mdc-badge--overlap {
-        margin-right: ($mdc-badge-size - $mdc-badge-overlap);
-
-        &:after {
-            right: -($mdc-badge-size - $mdc-badge-overlap);
         }
     }
 }

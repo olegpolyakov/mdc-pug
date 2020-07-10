@@ -1,0 +1,9 @@
+mixin mdc-ripple(name, value)
+    #{attributes.element || 'div'}.mdc-ripple-surface(
+        class={
+            'mdc-ripple-surface--primary': attributes.primary,
+            'mdc-ripple-surface--accent': attributes.accent
+        }
+        data-mdc-auto-init='MDCRipple'
+    )&attributes(Object.assign({}, attributes, { element: undefined, primary: undefined, accent: undefined }))
+        block

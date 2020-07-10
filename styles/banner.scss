@@ -1,58 +1,73 @@
-@use '@material/theme' as theme;
-@use '@material/typography' as typography;
-@use './breakpoints';
+@use '@material/button';
+@use '@material/theme';
+@use '@material/typography';
 
 .mdc-banner {
     @include theme.prop(background-color, surface);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    @include theme.prop(color, on-surface);
+    border-bottom: 1px solid rgba(0, 0, 0, .12);
 
-    .mdc-banner__inner {
-        width: 100%;
-        max-width: 1024px;
-        margin: auto;
+    & &__inner {
         display: flex;
+        justify-content: flex-start;
         align-items: center;
-        justify-content: center;
-        padding: 8px 16px;
+        min-height: 54px;
+        padding: 0 16px;
         box-sizing: border-box;
-
-        @media #{breakpoints.$lt-md} {
-            flex-wrap: wrap;
-        }
+        flex-wrap: wrap;
     }
 
-    .mdc-banner__text {
-        @include typography.typography(subtitle1);
-        @include theme.prop(color, text-primary-on-light);
-        margin: 0;
-    }
-
-    .mdc-banner__actions {
-        margin-left: auto;
+    & &__content {
         display: flex;
-        align-content: center;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin: 8px 0;
 
-        @media #{breakpoints.$lt-md} {
-            margin-top: 12px;
+        &:only-child {
+            margin: auto;
         }
     }
 
-    &.mdc-banner--with-icon {
-        @media #{breakpoints.$gt-md} {
-            display: flex;
-            align-items: center;
-        }
+    & &__actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        margin: 8px 0 8px auto;
+        padding-left: 28px;
+    }
 
-        .mdc-banner__icon {
-            @include theme.prop(color, text-secondary-on-light);
+    & &__icon {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        margin-right: 16px;
+        flex-shrink: 0;
+        text-align: center;
+        border-radius: 50%;
+        @include theme.prop(color, text-icon-on-light);
 
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
-            text-align: center;
-            border-radius: 100%;
-            margin-right: 24px;
-            font-size: 32px;
+        + .mdc-banner__text {
+            margin-top: 10px;
         }
+    }
+
+    & &__text {
+        @include typography.base;
+
+        a {
+            color: inherit;
+            text-decoration: underline;
+        }
+    }
+
+    & &__action {
+        margin-left: 8px;
+    }
+}
+
+@mixin max-width($width) {
+    .mdc-banner .mdc-banner__inner {
+        max-width: $width;
+        margin: auto;
     }
 }

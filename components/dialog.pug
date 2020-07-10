@@ -6,7 +6,7 @@ mixin mdc-dialog
         role='alertdialog'
         aria-modal='true'
         data-mdc-auto-init='MDCDialog'
-    )&attributes(Object.assign({}, attributes, {element: undefined, open: undefined}))
+    )&attributes(Object.assign({}, attributes, { element: undefined, open: undefined }))
         div.mdc-dialog__container
             div.mdc-dialog__surface
                 block
@@ -14,15 +14,15 @@ mixin mdc-dialog
         div.mdc-dialog__scrim
 
 mixin mdc-dialog__title(title)
-    #{attributes.element || 'h2'}.mdc-dialog__title&attributes(Object.assign({}, attributes, {element: undefined}))= title
+    #{attributes.element || 'h2'}.mdc-dialog__title&attributes(Object.assign({}, attributes, { element: undefined }))= title
         block
 
 mixin mdc-dialog__content
-    #{attributes.element || 'div'}.mdc-dialog__content&attributes(Object.assign({}, attributes, {element: undefined}))
+    #{attributes.element || 'div'}.mdc-dialog__content&attributes(Object.assign({}, attributes, { element: undefined }))
         block
 
 mixin mdc-dialog__actions
-    #{attributes.element || 'div'}.mdc-dialog__actions&attributes(Object.assign({}, attributes, {element: undefined}))
+    #{attributes.element || 'div'}.mdc-dialog__actions&attributes(Object.assign({}, attributes, { element: undefined }))
         block
 
 mixin mdc-dialog__button(label)
@@ -30,5 +30,5 @@ mixin mdc-dialog__button(label)
         data-mdc-dialog-action=attributes.action
         data-mdc-dialog-button-default=attributes.default
         data-mdc-dialog-initial-focus=attributes.focused
-    ).mdc-dialog__button&attributes(Object.assign({}, attributes, {action: undefined, default: undefined}))
+    ).mdc-dialog__button&attributes(Object.assign({}, attributes, { action: undefined, default: undefined, focused }))
         block

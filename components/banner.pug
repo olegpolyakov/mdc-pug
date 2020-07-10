@@ -1,14 +1,15 @@
 mixin mdc-banner(text)
     div.mdc-banner(
         class={
-            'mdc-banner--with-icon': attributes.icon,
+            'mdc-banner--persistent': attributes.persistent,
         }
-    )&attributes(Object.assign({}, attributes, {text: undefined, icon: undefined}))
+    )&attributes(Object.assign({}, attributes, { text: undefined, icon: undefined, persistent: undefined }))
         div.mdc-banner__inner
-            if attributes.icon
-                i.mdc-banner__icon.material-icons= attributes.icon
+            div.mdc-banner__content
+                if attributes.icon
+                    i.mdc-banner__icon.material-icons= attributes.icon
             
-            p.mdc-banner__text= text || attributes.text
+                span.mdc-banner__text= text || attributes.text
 
             if block
                 div.mdc-banner__actions

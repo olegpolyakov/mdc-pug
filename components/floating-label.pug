@@ -1,7 +1,8 @@
 mixin mdc-floating-label(label)
     #{attributes.element || 'span'}.mdc-floating-label(
         class={
-            'mdc-floating-label--float-above': attributes.floatAbove
+            'mdc-floating-label--float-above': attributes.floatAbove,
+            'mdc-floating-label--required': attributes.required
         }
-    )&attributes(Object.assign({}, attributes, {element: undefined, floatAbove: undefined}))= label
+    )&attributes(Object.assign({}, attributes, { element: undefined, floatAbove: undefined, required: undefined }))= label
         block

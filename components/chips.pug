@@ -6,15 +6,16 @@ mixin mdc-chip-set
             'mdc-chip-set--input': attributes.input
         }
         data-mdc-auto-init='MDCChipSet'
-    )&attributes(Object.assign({}, attributes, {choice: undefined, filter: undefined, input: undefined}))
+    )&attributes(Object.assign({}, attributes, { choice: undefined, filter: undefined, input: undefined }))
         block
 
 mixin mdc-chip(text)
     #{attributes.element || 'div'}.mdc-chip(
         class={
-            'mdc-chip--selected': attributes.selected
+            'mdc-chip--selected': attributes.selected,
+            'mdc-chip--outlined': attributes.outlined
         }
-    )&attributes(Object.assign({}, attributes, {element: undefined, leadingIcon: undefined, trailingIcon: undefined, selected: undefined}))
+    )&attributes(Object.assign({}, attributes, { element: undefined, leadingIcon: undefined, trailingIcon: undefined, selected: undefined, outlined: undefined }))
         div.mdc-chip__ripple
 
         if attributes.leadingIcon

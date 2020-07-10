@@ -2,9 +2,11 @@ mixin mdc-select(name, value)
     div.mdc-select(
         class=attributes.class
         class={
+            'mdc-select--filled': attributes.filled,
             'mdc-select--outlined': attributes.outlined,
             'mdc-select--disabled': attributes.disabled,
             'mdc-select--required': attributes.required,
+            'mdc-select--fullwidth': attributes.fullwidth,
             'mdc-select--with-leading-icon': attributes.icon,
             'mdc-select--no-label': !attributes.label
         }
@@ -14,31 +16,43 @@ mixin mdc-select(name, value)
             type='hidden'
             name=name
             value=value
-        )&attributes({}, attributes, {class: undefined, outlined: undefined, label: undefined, icon: undefined, selectedText: undefined, 'aria-controls': undefined, 'aria-describedby': undefined})
+        )&attributes({}, attributes, { class: undefined, label: undefined, selectedText: undefined, icon: undefined, filled: undefined, outlined: undefined, fullwidth: undefined })
 
-        div.mdc-select__anchor
-            i.mdc-select__dropdown-icon
-
-            div.mdc-select__selected-text(
-                aria-disabled=attributes.disabled && 'true'
-                aria-controls=attributes['aria-controls']
-                aria-describedby=attributes['aria-describedby']
-            )= attributes.selectedText
+        div.mdc-select__anchor(
+            aria-required=attributes.required && 'true'
+            aria-disabled=attributes.disabled && 'true'
+        )
+            unless attributes.outlined
+                span.mdc-select__ripple
 
             if attributes.icon
                 i.material-icons.mdc-select__icon= attributes.icon
 
-            unless attributes.outlined
-                +mdc-floating-label(attributes.label)(floatAbove=Boolean(attributes.selectedText))
-            
+            div.mdc-select__selected-text= attributes.selectedText
+
+            span.mdc-select__dropdown-icon
+                svg.mdc-select__dropdown-icon-graphic(viewBox='7 10 10 5')
+                    polygon.mdc-select__dropdown-icon-inactive(
+                        stoke='none'
+                        fill-rule='evenodd'
+                        points='7 10 12 15 17 10'
+                    )
+                    polygon.mdc-select__dropdown-icon-active(
+                        stoke='none'
+                        fill-rule='evenodd'
+                        points='7 15 12 10 17 15'
+                    )
+
             if attributes.outlined
                 +mdc-notched-outline
                     if attributes.label
                         +mdc-floating-label(attributes.label)(floatAbove=Boolean(attributes.selectedText))
             else
+                if attributes.label
+                    +mdc-floating-label(attributes.label)(floatAbove=Boolean(attributes.selectedText))
                 +mdc-line-ripple
 
-        div.mdc-select__menu.mdc-menu.mdc-menu-surface
+        div.mdc-select__menu.mdc-menu.mdc-menu-surface.mdc-menu-surface--fullwidth
             ul.mdc-list
                 block
 
@@ -49,10 +63,12 @@ mixin mdc-select-option(value, title)
         aria-selected=(attributes.selected && 'true')
     )&attributes(attributes)
 
-mixin mdc-select-helper-text
+mixin mdc-select-helper-text(text)
     #{attributes.element || 'p'}.mdc-select-helper-text(
         class={
-            'mdc-select-helper-text--persistent': attributes.persistent,
-            'mdc-select-helper-text--validation-msg': attributes.validation
+            'mdc-select-helper-text--validation-msg': attributes.validation,
+            'mdc-select-helper-text--validation-msg-persistent': attributes.persistent
         }
-    )&attributes(attributes)
+        aria-hidden='true'
+    )&attributes({}, attributes, { element: undefined, validation: undefined, persistent: undefined })= text
+        block

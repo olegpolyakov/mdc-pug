@@ -6,14 +6,17 @@ mixin mdc-button(label)
             'mdc-button--outlined': attributes.outlined
         }
         data-mdc-auto-init=attributes.ripple && 'MDCRipple'
-    )&attributes(Object.assign({}, attributes, {element: undefined, raised: undefined, unelevated: undefined, outlined: undefined, icon: undefined, ripple: undefined}))
+    )&attributes(Object.assign({}, attributes, { element: undefined, icon: undefined, leadingIcon: undefined, trailingIcon: undefined, raised: undefined, unelevated: undefined, outlined: undefined, ripple: undefined }))
         div.mdc-button__ripple
         
-        if attributes.icon
-            +mdc-button__icon(attributes.icon)
+        if attributes.icon || attributes.leadingIcon
+            +mdc-button__icon(attributes.icon)(aria-hidden='true')
         
         if label
             +mdc-button__label(label)
+
+        if attributes.trailingIcon
+            +mdc-button__icon(attributes.trailingIcon)(aria-hidden='true')
         
         block
 

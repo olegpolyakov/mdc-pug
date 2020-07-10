@@ -1,10 +1,10 @@
 mixin mdc-form-field(label)
-    #{attributes.element || 'div'}.mdc-form-field(
+    #{attributes.element || 'label'}.mdc-form-field(
         class={
             'mdc-form-field--align-end': attributes.alignEnd
         }
         data-mdc-auto-init='MDCFormField'
-    )&attributes(Object.assign({}, attributes, {element: undefined, alignEnd: undefined, for: undefined}))
+    )&attributes(Object.assign({}, attributes, { element: undefined, alignEnd: undefined, for: undefined }))
         block
 
-        label(for=attributes.for).mdc-form-field__label= label
+        span(for=attributes.for).mdc-form-field__label= label

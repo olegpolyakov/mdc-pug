@@ -4,8 +4,8 @@ mixin mdc-slider(value = 0)
             'mdc-slider--discrete': attributes.discrete,
             'mdc-slider--display-markers': attributes.markers
         }
-        tabindex='0'
         role='slider'
+        tabindex='0'
         aria-valuenow=value
         aria-valuemin=attributes.min || '0'
         aria-valuemax=attributes.max || '100'
@@ -13,7 +13,7 @@ mixin mdc-slider(value = 0)
         aria-disabled=attributes.disabled && 'true'
         data-step=attributes.step || '0'
         data-mdc-auto-init='MDCSlider'
-    )&attributes(Object.assign({}, attributes, {min: undefined, max: undefined, step: undefined, label: undefined, discrete: undefined, disabled: undefined}))
+    )&attributes(Object.assign({}, attributes, { min: undefined, max: undefined, step: undefined, label: undefined, discrete: undefined, markers: undefined, disabled: undefined }))
         div.mdc-slider__track-container
             div.mdc-slider__track
 

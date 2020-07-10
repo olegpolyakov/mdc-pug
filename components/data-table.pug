@@ -1,7 +1,13 @@
 mixin mdc-data-table
-    div.mdc-data-table
-        table.mdc-data-table__table&attributes(attributes)
-            block
+    div.mdc-data-table(
+        class={
+            'mdc-data-table--sticky-header': attributes.stickyHeader
+        }
+        data-mdc-auto-init='MDCDataTable'
+    )
+        div.mdc-data-table__table-container
+            table.mdc-data-table__table&attributes(Object.assign({}, attributes, { stickyHeader: undefined }))
+                block
 
 mixin mdc-data-table__header
     thead.mdc-data-table__header&attributes(attributes)
@@ -15,10 +21,22 @@ mixin mdc-data-table__header-cell
     td.mdc-data-table__header-cell(
         class={
             'mdc-data-table__header-cell--numeric': attributes.numeric,
-            'mdc-data-table__header-cell--checkbox': attributes.checkbox
+            'mdc-data-table__header-cell--checkbox': attributes.checkbox,
+            'mdc-data-table__header-cell--with-sort': attributes.withSort
         }
-    )&attributes(Object.assign({}, attributes, {numeric: undefined, checkbox: undefined}))
-        block
+        role='columnheader'
+        scope='col'
+    )&attributes(Object.assign({}, attributes, { numeric: undefined, checkbox: undefined, withSort: undefined }))
+        if attributes.withSort
+            div.mdc-data-table__header-cell-wrapper
+                div.mdc-data-table__header-cell-label
+                    block
+
+                button.mdc-icon-button.material-icons.mdc-data-table__sort-icon-button arrow_upward
+
+                div.mdc-data-table__sort-status-label(aria-hidden='true')
+        else
+            block
 
 mixin mdc-data-table__content
     tbody.mdc-data-table__content&attributes(attributes)
@@ -29,16 +47,16 @@ mixin mdc-data-table__row
         class={
             'mdc-data-table__row--selected': attributes.selected
         }
-    )&attributes(Object.assign({}, attributes, {selected: undefined}))
+    )&attributes(Object.assign({}, attributes, { selected: undefined }))
         block
 
 mixin mdc-data-table__cell
-    td.mdc-data-table__cell(
+    #{attributes.element || 'td'}.mdc-data-table__cell(
         class={
             'mdc-data-table__cell--numeric': attributes.numeric,
             'mdc-data-table__cell--checkbox': attributes.checkbox,
         }
-    )&attributes(Object.assign({}, attributes, {numeric: undefined, checkbox: undefined}))
+    )&attributes(Object.assign({}, attributes, { element: undefined, numeric: undefined, checkbox: undefined }))
         block
 
 mixin mdc-data-table__header-row-checkbox(name)

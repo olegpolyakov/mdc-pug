@@ -4,7 +4,7 @@ mixin mdc-tab-indicator
             'mdc-tab-indicator--active': attributes.active,
             'mdc-tab-indicator--fade': attributes.fade
         }
-    )&attributes(attributes)
+    )&attributes(Object.assign({}, attributes, { icon: undefined, active: undefined, fade: undefined }))
         if attributes.icon
             +mdc-icon(attributes.icon)(aria-hidden='true').mdc-tab-indicator__content.mdc-tab-indicator__content--icon
         else

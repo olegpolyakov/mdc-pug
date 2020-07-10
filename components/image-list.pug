@@ -2,14 +2,13 @@ mixin mdc-image-list
     #{attributes.element || 'ul'}.mdc-image-list(
         class={
             'mdc-image-list--masonry': attributes.masonry,
-            'mdc-image-list--with-text-protection': attributes.textProtection
+            'mdc-image-list--with-text-protection': attributes.withTextProtection
         }
-    )
-        ul.mdc-grid-list__tiles&attributes(Object.assign({}, attributes, {element: undefined, masonry: undefined, textProtection: undefined}))
+    )&attributes(Object.assign({}, attributes, { element: undefined, masonry: undefined, withTextProtection: undefined }))
             block
 
 mixin mdc-image-list__item(src, label)
-    #{attributes.element || 'li'}.mdc-image-list__item&attributes(Object.assign({}, attributes, {element: undefined}))
+    #{attributes.element || 'li'}.mdc-image-list__item&attributes(Object.assign({}, attributes, { element: undefined }))
         if src
             +mdc-image-list__image(src)
             

@@ -1,4 +1,6 @@
-mixin mdc-linear-progress(value)
+mixin mdc-linear-progress(progress, buffer)
+    - const value = progress > 1 ? (progress / 100) : Number(progress);
+
     div.mdc-linear-progress(
         class={
             'mdc-linear-progress--indeterminate': attributes.indeterminate,
@@ -6,13 +8,16 @@ mixin mdc-linear-progress(value)
             'mdc-linear-progress--closed': attributes.closed
         }
         role='progressbar'
+        aria-valuemin='0'
+        aria-valuemax='1'
+        aria-valuenow=value
         data-mdc-auto-init='MDCLinearProgress'
-    )&attributes(Object.assign({}, attributes, {indeterminate: undefined, reversed: undefined, closed: undefined}))
-        div.mdc-linear-progress__buffering-dots
+    )&attributes(Object.assign({}, attributes, { indeterminate: undefined, reversed: undefined, closed: undefined }))
+        div.mdc-linear-progress__buffer(style=buffer && `transform: scaleX(${indeterminate ? 1 : buffer})`)
+            div.mdc-linear-progress__buffer-bar
+            div.mdc-linear-progress__buffer-dots
 
-        div.mdc-linear-progress__buffer
-
-        div.mdc-linear-progress__bar.mdc-linear-progress__primary-bar(style=`transform: scaleX(${value * 0.01});`)
+        div.mdc-linear-progress__bar.mdc-linear-progress__primary-bar(style=`transform: scaleX(${value});`)
             span.mdc-linear-progress__bar-inner
 
         div.mdc-linear-progress__bar.mdc-linear-progress__secondary-bar

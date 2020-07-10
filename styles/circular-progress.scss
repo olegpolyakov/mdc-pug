@@ -1,17 +1,1 @@
-@use '@material/theme';
-
-.mdc-circular-progress {
-    width: 100%;
-    height: 100%;
-    max-width: 48px;
-    max-height: 48px;
-    margin-right: 32px;
-
-    &__foreground {
-        stroke: theme.prop-value(primary);
-    }
-
-    &__background {
-        stroke: #d4d9dd;
-    }
-}
+@use '@material/circular-progress/mdc-circular-progress';

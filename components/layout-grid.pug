@@ -6,7 +6,7 @@ mixin mdc-layout-grid
             'mdc-layout-grid--align-right': attributes.alignRight,
             'mdc-layout-grid--fixed-column-width': attributes.fixedColumnWidth
         }
-    )&attributes(Object.assign({}, attributes, {element: undefined, align: undefined, alignLeft: undefined, alignRight: undefined, fixedColumnWidth: undefined}))
+    )&attributes(Object.assign({}, attributes, { element: undefined, align: undefined, alignLeft: undefined, alignRight: undefined, fixedColumnWidth: undefined }))
         div.mdc-layout-grid__inner
             block
 
@@ -20,8 +20,12 @@ mixin mdc-layout-grid__cell(span=12)
             [`mdc-layout-grid__cell--order-${attributes.order}`]: attributes.order,
             [`mdc-layout-grid__cell--align-${attributes.align}`]: attributes.align
         }
-    )&attributes(Object.assign({}, attributes, {element: undefined, phone: undefined, tablet: undefined, desktop: undefined, order: undefined, align: undefined}))
-        block
+    )&attributes(Object.assign({}, attributes, { element: undefined, grid: undefined, phone: undefined, tablet: undefined, desktop: undefined, order: undefined, align: undefined }))
+        if attributes.grid
+            div.mdc-layout-grid__inner
+                block
+        else
+            block
 
 mixin mdc-layout-grid__inner
     div.mdc-layout-grid__inner&attributes(attributes)
