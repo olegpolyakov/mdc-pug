@@ -28,10 +28,10 @@ You can include the whole library in your layout file:
 
 *layout.pug*
 ```pug
-include path-to-node_modules/mdc-pug
+include path-to-node_modules/mdc-pug/index
 
 doctype html
-html(lang="en")
+html
     head
 
 body
