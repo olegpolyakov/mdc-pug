@@ -1,20 +1,8 @@
 {
   "name": "mdc-pug",
-  "version": "0.4.5",
-  "description": "",
+  "version": "1.0.0",
+  "description": "Material Components Web implemented in Pug",
   "main": "index.pug",
-  "keywords": [
-    "pug",
-    "mdc",
-    "material",
-    "material-design",
-    "material-components"
-  ],
-  "author": {
-    "name": "Oleg Polyakov",
-    "email": "olegpolyakov@outlook.com"
-  },
-  "license": "MIT",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -27,5 +15,17 @@
     "gulp-pug": "^4.0.1",
     "gulp-sass": "^4.1.0",
     "sass": "^1.26.10"
-  }
+  },
+  "author": {
+    "name": "Oleg Polyakov",
+    "email": "olegpolyakov@outlook.com"
+  },
+  "license": "MIT",
+  "keywords": [
+    "mdc",
+    "pug",
+    "material",
+    "material-design",
+    "material-components"
+  ]
 }
