@@ -1,6 +1,6 @@
 # MDC Pug
 
-[Material Components for the web](https://github.com/material-components/material-components-web) implemented in Pug.
+[Material Components Web](https://github.com/material-components/material-components-web) implemented in Pug.
 
 ## Setup
 
