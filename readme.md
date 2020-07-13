@@ -33,9 +33,17 @@ include path-to-node_modules/mdc-pug/index
 doctype html
 html
     head
+        link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500')
+        link(rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons')
 
-body
+body.mdc-typography
     block body
+
+    // Required Material Web JavaScript library
+    script(src='https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js')
+    // Initialize all the components
+    script.
+        mdc.autoInit();
 ```
 
 All of the components will be available as mixins in other pug files that extend the `layout`:
@@ -55,9 +63,19 @@ Alternitavely you can include only the components you need:
 include path-to-node_modules/mdc-pug/mixins/button
 include path-to-node_modules/mdc-pug/mixins/typography
 
-block body
-    +mdc-typography('Hello World')
-    +mdc-button('Click Me')
+doctype html
+html
+    head
+        link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500')
+        link(rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons')
+
+    body.mdc-typography
+        +mdc-typography('Hello World')
+        +mdc-button('Click Me')
+
+    script(src='https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js')
+    script.
+        mdc.autoInit();
 ```
 
 ### Sass
