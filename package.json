@@ -1,6 +1,6 @@
 {
   "name": "mdc-pug",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Material Components Web implemented in Pug",
   "main": "index.pug",
   "scripts": {
