@@ -23,7 +23,7 @@ mixin mdc-text-field(name, value)
             span.mdc-text-field__affix.mdc-text-field__affix--prefix= attributes.prefix
 
         if attributes.leadingIcon
-            +mdc-icon(attributes.leadingIcon)(role='button' tabindex='0').mdc-text-field__icon.mdc-text-field__icon--leading
+            +mdc-icon(attributes.leadingIcon).mdc-text-field__icon.mdc-text-field__icon--leading
 
         #{attributes.textarea ? 'textarea' : 'input'}.mdc-text-field__input(
             name=name
