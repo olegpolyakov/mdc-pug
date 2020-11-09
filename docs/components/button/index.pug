@@ -1,0 +1,48 @@
+extends ../../index
+
+prepend head
+    - const ID = 'button'
+    - const TITLE = 'Button'
+    - const DESC = 'Buttons communicate an action a user can take. They are typically placed throughout your UI, in places like dialogs, forms, cards, and toolbars.'
+    - const DOCS_URL = 'https://github.com/material-components/material-components-web/tree/master/packages/mdc-button'
+    - const IMAGE_URL = 'https://github.com/material-components/material-components-web/raw/master/packages/mdc-button/images/buttons_types.png'
+    
+    style.
+        .mdc-button + .mdc-button {
+            margin-left: 8px
+        }
+
+block main
+    +page
+        +page-header(TITLE, DESC, DOCS_URL, IMAGE_URL)
+
+        +page-content
+            +page-section('Text Button')
+                :code
+                    +mdc-button('Button')
+
+            +page-section('Raised Button')
+                :code
+                    +mdc-button('Button')(raised)
+
+            +page-section('Unelevated Button')
+                :code
+                    +mdc-button('Button')(unelevated)
+
+            +page-section('Outlined Button')
+                :code
+                    +mdc-button('Button')(outlined)
+
+            +page-section('Buttons with an Icon')
+                :code
+                    +mdc-button('Button')(icon='star')
+                    +mdc-button('Button')(raised icon='star')
+                    +mdc-button('Button')(unelevated icon='star')
+                    +mdc-button('Button')(outlined icon='star')
+
+            +page-section('Buttons with a Trailing Icon')
+                :code
+                    +mdc-button('Button')(trailingIcon='star')
+                    +mdc-button('Button')(raised trailingIcon='star')
+                    +mdc-button('Button')(unelevated trailingIcon='star')
+                    +mdc-button('Button')(outlined trailingIcon='star')

@@ -1,0 +1,19 @@
+extends ../../index
+
+prepend head
+    - const ID = 'card'
+    - const TITLE = 'Card'
+    - const DESC = 'Cards contain content and actions about a single subject.'
+
+block main
+    +page
+        +page-header(TITLE, DESC)
+
+        +page-content
+            section
+                +mdc-card
+                    +mdc-card__primary-action()(ripple)
+                        +mdc-card__header('Our Changing Planet', 'by Kurt Wagner')
+
+                        +mdc-card__section()(secondary)
+                            +mdc-typography('Visit ten places on our planet that are undergoing the biggest changes today.', 'body2')(style='body2')

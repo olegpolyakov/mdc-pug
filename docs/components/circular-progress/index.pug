@@ -1,0 +1,21 @@
+extends ../../index
+
+prepend head
+    - const ID = 'circular-progress'
+    - const TITLE = 'Circular Progress'
+    - const DESC = ''
+
+block main
+    +page
+        +page-header(TITLE)
+
+        +page-content
+            section
+                +mdc-circular-progress(42)
+                +mdc-circular-progress(42)(size='medium')
+                +mdc-circular-progress(42)(size='small')
+
+            section
+                +mdc-circular-progress()(indeterminate)
+                +mdc-circular-progress()(size='medium' indeterminate)
+                +mdc-circular-progress()(size='small' indeterminate)

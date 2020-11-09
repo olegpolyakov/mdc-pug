@@ -1,0 +1,28 @@
+extends ../../index
+
+prepend head
+    - const ID = 'fab'
+    - const TITLE = 'FAB'
+    - const DESC = 'Floating action buttons represents the primary action in an application. Only one floating action button is recommended per screen to represent the most common action.'
+
+block main
+    +page
+        +page-header(TITLE, DESC)
+
+        +page-content
+            +page-section('Basic')
+                +mdc-fab('star')(ripple)
+
+            +page-section('Mini')
+                +mdc-fab('star')(mini ripple)
+
+            +page-section('Icon with label')
+                +mdc-fab('add', 'Create')(ripple)
+
+            +page-section('Label with icon')
+                +mdc-fab()(extended ripple)
+                    +mdc-fab__label('Create')
+                    +mdc-fab__icon('add')
+
+            +page-section('Just label')
+                +mdc-fab(null, 'Create')(ripple)

@@ -1,0 +1,49 @@
+extends ../../index
+
+prepend head
+    - const ID = 'select'
+    - const TITLE = 'Select'
+    - const DESC = 'Selects allow users to select from a single-option menu.';
+
+block main
+    +page
+        +page-header(TITLE, DESC)
+
+        +page-content
+            +page-section('Filled')
+                +mdc-select()(name='fruit' value='apple' label='Fruit' filled)
+                    +mdc-select-option('Apple')(value='apple' selected)
+                    +mdc-select-option('Banana')(value='banana')
+                    +mdc-select-option('Orange')(value='orange')
+
+            +page-section('Outlined')
+                +mdc-select()(label='Fruit' outlined)
+                    +mdc-select-option('Apple')(value='apple')
+                    +mdc-select-option('Banana')(value='banana')
+                    +mdc-select-option('Orange')(value='orange')
+
+            +page-section('Disabled')
+                +mdc-select()(label='Fruit' disabled outlined)
+                    +mdc-select-option('Apple')(value='apple')
+                    +mdc-select-option('Banana')(value='banana')
+                    +mdc-select-option('Orange')(value='orange')
+
+            +page-section('Required')
+                +mdc-select()(label='Fruit' required outlined)
+                    +mdc-select-option('Apple')(value='apple')
+                    +mdc-select-option('Banana')(value='banana')
+                    +mdc-select-option('Orange')(value='orange')
+                +mdc-select-helper-text('This is important')(validation)
+
+            +page-section('Helper Text')
+                +mdc-select()(label='Fruit' required outlined)
+                    +mdc-select-option('Apple')(value='apple')
+                    +mdc-select-option('Banana')(value='banana')
+                    +mdc-select-option('Orange')(value='orange')
+                +mdc-select-helper-text('This is important')
+
+            +page-section('Icon')
+                +mdc-select()(label='Fruit' icon='email' outlined)
+                    +mdc-select-option('Apple')(value='apple')
+                    +mdc-select-option('Banana')(value='banana')
+                    +mdc-select-option('Orange')(value='orange')

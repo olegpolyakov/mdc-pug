@@ -1,0 +1,30 @@
+extends ../../index
+
+prepend head
+    - const ID = 'data-table'
+    - const TITLE = 'Data Table'
+    - const DESC = 'Data tables display information in a way that’s easy to scan, so that users can look for patterns and insights.'
+
+block main
+    +page
+        +page-header(TITLE, DESC)
+
+        +page-content
+            section
+                +mdc-data-table
+                    +mdc-data-table__header
+                        +mdc-data-table__header-row
+                            +mdc-data-table__header-cell()(checkbox)
+                                +mdc-data-table__header-row-checkbox
+
+                            for col in ['Header A', 'Header B', 'Header C', 'Header D']
+                                +mdc-data-table__header-cell= col
+
+                    +mdc-data-table__content
+                        for row in [['Cell A1', 'Cell B1', 'Cell C1', 1], ['Cell A2', 'Cell B2', 'Cell C2', 2], ['Cell A3', 'Cell B3', 'Cell C3', 3], ['Cell A4', 'Cell B4', 'Cell C4', 4]]
+                            +mdc-data-table__row
+                                +mdc-data-table__cell()(checkbox)
+                                    +mdc-data-table__row-checkbox
+
+                                for col in row
+                                    +mdc-data-table__cell= col

@@ -1,0 +1,17 @@
+extends ../../index
+
+prepend head
+    - const ID = 'tooltip'
+    - const TITLE = 'Tooltip'
+    - const DESC = 'Tooltips display informative text when users hover over, focus on, or tap an element.'
+
+block main
+    +page
+        +page-header(TITLE, DESC)
+
+        +page-content
+            +page-section
+                +mdc-icon-button('favorite')(aria-describedby='favorite-tooltip')
+
+append body
+    +mdc-tooltip('Mark as favorite')(id='favorite-tooltip')

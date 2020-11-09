@@ -1,0 +1,64 @@
+extends ../../index
+
+prepend head
+    - const ID = 'tabs'
+    - const TITLE = 'Tabs'
+    - const DESC = 'Tabs make it easy to explore and switch between different views.';
+
+block main
+    +page
+        +page-header(TITLE, DESC)
+
+        +page-content
+            +page-section('Basic')
+                +mdc-tab-bar
+                    +mdc-tab('Recent')(active)
+                    +mdc-tab('Nearby')
+                    +mdc-tab('Favorites')
+
+            +page-section('Tabs with Icons')
+                +mdc-tab-bar
+                    +mdc-tab('Recent')(icon='access_time' active)
+                    +mdc-tab('Nearby')(icon='near_me')
+                    +mdc-tab('Favorites')(icon='favorite')
+            
+            +page-section('Tabs with Stacked Icons')
+                +mdc-tab-bar
+                    +mdc-tab('Recent')(icon='access_time' stacked active)
+                    +mdc-tab('Nearby')(icon='near_me' stacked)
+                    +mdc-tab('Favorites')(icon='favorite' stacked)
+
+            +page-section('Min Width')
+                +mdc-tab-bar
+                    +mdc-tab('Recent')(minWidth active)
+                    +mdc-tab('Nearby')(minWidth)
+                    +mdc-tab('Favorites')(minWidth)
+
+            +page-section('Tab with Indicator Spanning Only Content')
+                +mdc-tab-bar
+                    +mdc-tab('Recent')(icon='access_time' indicatorMinWidth active)
+                    +mdc-tab('Nearby')(icon='near_me' indicatorMinWidth)
+                    +mdc-tab('Favorites')(icon='favorite' indicatorMinWidth)
+
+            +page-section('Fading Indicator')
+                +mdc-tab-bar
+                    +mdc-tab('Recent')(fade active)
+                    +mdc-tab('Nearby')(fade)
+                    +mdc-tab('Favorites')(fade)
+
+            +page-section('Sliding Icon Indicator')
+                +mdc-tab-bar
+                    +mdc-tab()(indicatorIcon='access_time' active)
+                    +mdc-tab()(indicatorIcon='near_me')
+                    +mdc-tab()(indicatorIcon='favorite')
+
+            +page-section('Fading Icon Indicator')
+                +mdc-tab-bar
+                    +mdc-tab()(indicatorIcon='access_time' fade active)
+                    +mdc-tab()(indicatorIcon='near_me' fade)
+                    +mdc-tab()(indicatorIcon='favorite' fade)
+
+            +page-section('Scrolling Tabs')
+                +mdc-tab-bar
+                    for n, i in Array(15).fill(1)
+                        +mdc-tab(`Tab ${n + i}`)(active=(i === 0))

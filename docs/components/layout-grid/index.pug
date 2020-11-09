@@ -1,0 +1,13 @@
+extends ../../index
+
+prepend head
+    - const ID = 'layout-grid'
+    - const TITLE = 'Layout Grid'
+    - const DESC = 'Material design’s responsive UI is based on a 12-column grid layout.';
+
+block main
+    +page
+        +page-header(TITLE, DESC)
+
+        +page-content
+            

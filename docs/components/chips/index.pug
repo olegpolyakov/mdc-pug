@@ -1,0 +1,25 @@
+extends ../../index
+
+prepend head
+    - const ID = 'chips'
+    - const TITLE = 'Chips'
+    - const DESC = 'Chips'
+
+block main
+    +page
+        +page-header(TITLE, DESC)
+
+        +page-content
+            section
+                +mdc-chip-set
+                    +mdc-chip('One')
+                    +mdc-chip('Two')
+                    +mdc-chip('Three')
+                    +mdc-chip('Four')
+
+            section
+                +mdc-chip-set
+                    +mdc-chip('One')(outlined)
+                    +mdc-chip('Two')(outlined)
+                    +mdc-chip('Three')(outlined)
+                    +mdc-chip('Four')(outlined)
