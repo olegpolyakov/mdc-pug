@@ -1,16 +1,35 @@
 mixin mdc-banner(text)
     div.mdc-banner(
         class={
-            'mdc-banner--persistent': attributes.persistent,
+            'mdc-banner--open': attributes.open,
+            'mdc-banner--centered': attributes.centered,
+            'mdc-banner--fixed': attributes.fixed,
+            'mdc-banner--mobile-stacked': attributes.mobileStacked
         }
-    )&attributes(Object.assign({}, attributes, { text: undefined, icon: undefined, persistent: undefined }))
-        div.mdc-banner__inner
-            div.mdc-banner__content
-                if attributes.icon
-                    i.mdc-banner__icon.material-icons= attributes.icon
-            
-                span.mdc-banner__text= text || attributes.text
-
-            if block
-                div.mdc-banner__actions
+        style=attributes.open && `height: ${attributes.icon ? 72 : 52}px`
+        role='banner'
+        data-mdc-auto-init='MDCBanner'
+    )&attributes(Object.assign({}, attributes, { text: undefined, icon: undefined, open: undefined, centered: undefined, fixed: undefined }))
+        if attributes.fixed
+            div.mdc-banner__fixed
+                +mdc-banner__content(text)&attributes(attributes)
                     block
+        else
+            +mdc-banner__content(text)&attributes(attributes)
+                block
+
+mixin mdc-banner__content(text)
+    div.mdc-banner__content(role='status' aria-live='assertive')
+        div.mdc-banner__graphic-text-wrapper
+            if attributes.icon
+                div.mdc-banner__graphic(role='img' alt='')
+                    i.mdc-banner__icon.material-icons= attributes.icon
+        
+            div.mdc-banner__text= text || attributes.text
+
+    if block
+        div.mdc-banner__actions
+            block
+
+mixin mdc-banner__action(label)
+    +mdc-button(label)(class={'mdc-banner__primary-action': attributes.primary, 'mdc-banner__secondary-action': attributes.secondary})&attributes(Object.assign({}, attributes, { primary: undefined, secondary: undefined }))

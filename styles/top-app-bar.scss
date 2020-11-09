@@ -1,1 +1,6 @@
+@forward '@material/top-app-bar' as top-app-bar-*;
 @use '@material/top-app-bar/mdc-top-app-bar';
+
+.mdc-top-app-bar__section--align-center {
+    justify-content: center;
+}

@@ -1,3 +1,4 @@
+@forward '@material/card' as card-*;
 @use '@material/theme';
 @use '@material/typography';
 @use '@material/icon-button';
@@ -11,7 +12,7 @@
         border-radius: 2px 2px 0 0;
     
         .mdc-card__header__graphic {
-            @include theme.prop(color, text-secondary-on-light);
+            @include theme.property(color, text-secondary-on-light);
             margin-right: 16px;
         }
     
@@ -26,7 +27,7 @@
     
         .mdc-card__title {
             @include typography.typography(headline6);
-            @include theme.prop(color, text-primary-on-light);
+            @include theme.property(color, text-primary-on-light);
             
             margin: 0;
     
@@ -37,7 +38,7 @@
     
         .mdc-card__subtitle {
             @include typography.typography(body2);
-            @include theme.prop(color, text-secondary-on-light);
+            @include theme.property(color, text-secondary-on-light);
             margin: 0;
         }
     

@@ -25,8 +25,14 @@ mixin mdc-list-item(primary, secondary)
     )&attributes(Object.assign({}, attributes, { element: undefined, graphic: undefined, meta: undefined, activated: undefined, selected: undefined, disabled: undefined, ripple: undefined }))
         span.mdc-list-item__ripple
 
+        if attributes.graphic
+            +mdc-list-item__graphic(attributes.graphic)
+
         if primary || secondary
             +mdc-list-item__text(primary, secondary)
+
+        if attributes.meta
+            +mdc-list-item__meta(attributes.meta)
 
         block
 

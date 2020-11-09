@@ -5,11 +5,11 @@ mixin mdc-button(label)
             'mdc-button--unelevated': attributes.unelevated,
             'mdc-button--outlined': attributes.outlined
         }
-        data-mdc-auto-init=attributes.ripple && 'MDCRipple'
-    )&attributes(Object.assign({}, attributes, { element: undefined, icon: undefined, leadingIcon: undefined, trailingIcon: undefined, raised: undefined, unelevated: undefined, outlined: undefined, ripple: undefined }))
+        data-mdc-auto-init='MDCRipple'
+    )&attributes(Object.assign({}, attributes, { element: undefined, icon: undefined, trailingIcon: undefined, raised: undefined, unelevated: undefined, outlined: undefined }))
         div.mdc-button__ripple
         
-        if attributes.icon || attributes.leadingIcon
+        if attributes.icon
             +mdc-button__icon(attributes.icon)(aria-hidden='true')
         
         if label

@@ -1,0 +1,20 @@
+mixin mdc-segmented-button(label)
+    #{attributes.element || 'div'}.mdc-segmented-button(
+        class={
+            'mdc-segmented-button--single-select': attributes.singleSelect
+        }
+        data-mdc-auto-init='MDCSegmentedButton'
+    )&attributes(Object.assign({}, attributes, { element: undefined, singleSelect: undefined }))
+        block
+
+mixin mdc-segmented-button__segment
+    #{attributes.element || 'button'}.mdc-segmented-button__segment(
+        class={
+            'mdc-segmented-button__segment--selected': attributes.selected
+        }
+    )&attributes(Object.assign({}, attributes, { element: undefined, selected: undefined }))
+        div.mdc-segmented-button__ripple
+        if attributes.icon
+            i.material-icons.mdc-segmented-button__icon= attributes.icon
+        if attributes.label
+            div.mdc-segmented-button__label= attributes.label

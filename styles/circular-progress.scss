@@ -1,1 +1,19 @@
+@forward '@material/circular-progress' as circular-progress-*;
 @use '@material/circular-progress/mdc-circular-progress';
+
+.mdc-circular-progress {
+    &--large {
+        width: 48px;
+        height: 48px;
+    }
+
+    &--medium {
+        width: 36px;
+        height: 36px;
+    }
+
+    &--small {
+        width: 24px;
+        height: 24px;
+    }
+}

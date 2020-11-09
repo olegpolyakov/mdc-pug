@@ -1,1 +1,2 @@
-@use '@material/slider/mdc-slider';
+@forward '@material/slider' as slider-*;
+@use '@material/slider/styles';

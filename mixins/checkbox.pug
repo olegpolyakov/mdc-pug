@@ -1,4 +1,4 @@
-mixin mdc-checkbox(name)
+mixin mdc-checkbox
     div.mdc-checkbox(
         class=attributes.class
         class={
@@ -9,7 +9,6 @@ mixin mdc-checkbox(name)
     )
         input.mdc-checkbox__native-control(
             type='checkbox'
-            name=name
             data-indeterminate=attributes.indeterminate && 'true'
         )&attributes(Object.assign({}, attributes, { class: undefined, selected: undefined, indeterminate: undefined }))
 

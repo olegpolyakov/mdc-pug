@@ -1,31 +1,41 @@
-mixin mdc-slider(value = 0)
+mixin mdc-slider(value, value2)
     div.mdc-slider(
          class={
             'mdc-slider--discrete': attributes.discrete,
-            'mdc-slider--display-markers': attributes.markers
+            'mdc-slider--tick-marks': attributes.tickMarks,
+            'mdc-slider--disabled': attributes.disabled
         }
-        role='slider'
-        tabindex='0'
-        aria-valuenow=value
-        aria-valuemin=attributes.min || '0'
-        aria-valuemax=attributes.max || '100'
-        aria-label=attributes.label
-        aria-disabled=attributes.disabled && 'true'
         data-step=attributes.step || '0'
         data-mdc-auto-init='MDCSlider'
-    )&attributes(Object.assign({}, attributes, { min: undefined, max: undefined, step: undefined, label: undefined, discrete: undefined, markers: undefined, disabled: undefined }))
-        div.mdc-slider__track-container
-            div.mdc-slider__track
+    )&attributes(Object.assign({}, attributes, { min: undefined, max: undefined, step: undefined, label: undefined, discrete: undefined, tickMarks: undefined, disabled: undefined }))
+        div.mdc-slider__track
+            div.mdc-slider__track--inactive
+            div.mdc-slider__track--active
+                div.mdc-slider__track--active_fill
 
-            if attributes.markers
-                div.mdc-slider__track-marker-container
-        
-        div.mdc-slider__thumb-container
-            if attributes.discrete
-                div.mdc-slider__pin
-                    span.mdc-slider__pin-value-marker
+            if attributes.tickMarks
+                div.mdc-slider__tick-marks
+                    for tickValue in Array.from(new Array((attributes.max || 100) / attributes.step + 1))
+                        div(class={'mdc-slider__tick-mark--active': tickValue <= value, 'mdc-slider__tick-mark--inactive': tickValue > value})
 
-            svg.mdc-slider__thumb(width='21' height='21')
-                circle(cx='10.5' cy='10.5' r='7.875')
+        +mdc-slider__thumb(value)&attributes(attributes)
 
-            div.mdc-slider__focus-ring
+        if value2
+            +mdc-slider__thumb(value2)&attributes(attributes)
+
+mixin mdc-slider__thumb(value = 0)
+    div.mdc-slider__thumb(
+        role='slider'
+        tabindex=attributes.disabled ? '-1' : '0'
+        aria-label=attributes.label
+        aria-valuemin=attributes.min || '0'
+        aria-valuemax=attributes.max || '100'
+        aria-valuenow=value
+        aria-disabled=attributes.disabled && 'true'
+    )
+        if attributes.discrete
+            div.mdc-slider__value-indicator-container
+                div.mdc-slider__value-indicator
+                    div.mdc-slider__value-indicator-text= value
+
+        div.mdc-slider__thumb-knob

@@ -4,22 +4,22 @@ mixin mdc-circular-progress(progress = 0)
 
     case attributes.size
         when 'large'
-            - props = { viewBox: 48, radius: 18, strokeDasharray: 113.097, indeterminateStrokeDashoffset: 56.549 }
+            - props = { viewBox: 48, radius: 18, strokeWidth: 4, gapPatchStrokeWidth: 3.2, strokeDasharray: 113.097, indeterminateStrokeDashoffset: 56.549 }
         when 'medium'
-            - props = { viewBox: 32, radius: 12.5, strokeDasharray: 78.54, indeterminateStrokeDashoffset: 39.27 }
+            - props = { viewBox: 32, radius: 12.5, strokeWidth: 3, gapPatchStrokeWidth: 2.4, strokeDasharray: 78.54, indeterminateStrokeDashoffset: 39.27 }
         when 'small'
-            - props = { viewBox: 24, radius: 8.75, strokeDasharray: 54.978, indeterminateStrokeDashoffset: 27.489 }
+            - props = { viewBox: 24, radius: 8.75, strokeWidth: 2.5, gapPatchStrokeWidth: 2, strokeDasharray: 54.978, indeterminateStrokeDashoffset: 27.489 }
         default
-            - props = { viewBox: 48, radius: 18, strokeDasharray: 113.097, indeterminateStrokeDashoffset: 56.549 }
+            - props = { viewBox: 48, radius: 18, strokeWidth: 4, gapPatchStrokeWidth: 3.2, strokeDasharray: 113.097, indeterminateStrokeDashoffset: 56.549 }
     
-    - const { viewBox, radius, strokeDasharray, indeterminateStrokeDashoffset } = props;
+    - const { viewBox, radius, strokeWidth, gapPatchStrokeWidth, strokeDasharray, indeterminateStrokeDashoffset } = props;
     - const cx = viewBox / 2, cy = viewBox / 2;
     - const strokeDashoffset = (2 * Math.PI * radius) * (1 - progress);
     - const layers = attributes.colorful ? [1, 2, 3, 4] : [0];
     
     div.mdc-circular-progress(
         class={
-            'mdc-circular-progress--large': attributes.size === 'large',
+            'mdc-circular-progress--large': attributes.size === 'large' || !attributes.size,
             'mdc-circular-progress--medium': attributes.size === 'medium',
             'mdc-circular-progress--small': attributes.size === 'small',
             'mdc-circular-progress--indeterminate': attributes.indeterminate,
@@ -28,57 +28,67 @@ mixin mdc-circular-progress(progress = 0)
         role='progressbar'
         aria-valuemin='0'
         aria-valuemax='1'
+        data-mdc-auto-init='MDCCircularProgress'
     )&attributes(Object.assign({}, attributes, { size: undefined, indeterminate: undefined, closed: undefined, colorful: undefined }))
-        unless attributes.indeterminate
-            div.mdc-circular-progress__determinate-container
-                svg.mdc-circular-progress__determinate-circle-graphic(
-                    viewBox=`0 0 ${viewBox} ${viewBox}`
-                    xmlns='http://www.w3.org/2000/svg'
+        div.mdc-circular-progress__determinate-container
+            svg.mdc-circular-progress__determinate-circle-graphic(
+                viewBox=`0 0 ${viewBox} ${viewBox}`
+                xmlns='http://www.w3.org/2000/svg'
+            )
+                circle.mdc-circular-progress__determinate-track(
+                    cx=cx
+                    cy=cy
+                    r=radius
+                    stroke-width=strokeWidth
                 )
-                    circle.mdc-circular-progress__determinate-circle(
-                        cx=cx
-                        cy=cy
-                        r=radius
-                        stroke-dasharray=strokeDasharray
-                        stroke-dashoffset=strokeDashoffset
-                    )
-        else
-            div.mdc-circular-progress__indeterminate-container
-                for n in layers
-                    div.mdc-circular-progress__spinner-layer(class={[`mdc-circular-progress__color-${n}`]: n })
-                        div.mdc-circular-progress__circle-clipper.mdc-circular-progress__circle-left
-                            svg.mdc-circular-progress__indeterminate-circle-graphic(
-                                viewBox=`0 0 ${viewBox} ${viewBox}`
-                                xmlns='http://www.w3.org/2000/svg'
+                circle.mdc-circular-progress__determinate-circle(
+                    cx=cx
+                    cy=cy
+                    r=radius
+                    stroke-width=strokeWidth
+                    stroke-dasharray=strokeDasharray
+                    stroke-dashoffset=strokeDashoffset
+                )
+        
+        div.mdc-circular-progress__indeterminate-container
+            for n in layers
+                div.mdc-circular-progress__spinner-layer(class={[`mdc-circular-progress__color-${n}`]: n })
+                    div.mdc-circular-progress__circle-clipper.mdc-circular-progress__circle-left
+                        svg.mdc-circular-progress__indeterminate-circle-graphic(
+                            viewBox=`0 0 ${viewBox} ${viewBox}`
+                            xmlns='http://www.w3.org/2000/svg'
+                        )
+                            circle(
+                                cx=cx
+                                cy=cy
+                                r=radius
+                                stroke-width=strokeWidth
+                                stroke-dasharray=strokeDasharray
+                                stroke-dashoffset=indeterminateStrokeDashoffset
                             )
-                                circle(
-                                    cx=cx
-                                    cy=cy
-                                    r=radius
-                                    stroke-dasharray=strokeDasharray
-                                    stroke-dashoffset=indeterminateStrokeDashoffset
-                                )
-                        div.mdc-circular-progress__gap-patch
-                            svg.mdc-circular-progress__indeterminate-circle-graphic(
-                                viewBox=`0 0 ${viewBox} ${viewBox}`
-                                xmlns='http://www.w3.org/2000/svg'
+                    div.mdc-circular-progress__gap-patch
+                        svg.mdc-circular-progress__indeterminate-circle-graphic(
+                            viewBox=`0 0 ${viewBox} ${viewBox}`
+                            xmlns='http://www.w3.org/2000/svg'
+                        )
+                            circle(
+                                cx=cx
+                                cy=cy
+                                r=radius
+                                stroke-width=gapPatchStrokeWidth
+                                stroke-dasharray=strokeDasharray
+                                stroke-dashoffset=indeterminateStrokeDashoffset
                             )
-                                circle(
-                                    cx=cx
-                                    cy=cy
-                                    r=radius
-                                    stroke-dasharray=strokeDasharray
-                                    stroke-dashoffset=indeterminateStrokeDashoffset
-                                )
-                        div.mdc-circular-progress__circle-clipper.mdc-circular-progress__circle-right
-                            svg.mdc-circular-progress__indeterminate-circle-graphic(
-                                viewBox=`0 0 ${viewBox} ${viewBox}`
-                                xmlns='http://www.w3.org/2000/svg'
+                    div.mdc-circular-progress__circle-clipper.mdc-circular-progress__circle-right
+                        svg.mdc-circular-progress__indeterminate-circle-graphic(
+                            viewBox=`0 0 ${viewBox} ${viewBox}`
+                            xmlns='http://www.w3.org/2000/svg'
+                        )
+                            circle(
+                                cx=cx
+                                cy=cy
+                                r=radius
+                                stroke-width=strokeWidth
+                                stroke-dasharray=strokeDasharray
+                                stroke-dashoffset=indeterminateStrokeDashoffset
                             )
-                                circle(
-                                    cx=cx
-                                    cy=cy
-                                    r=radius
-                                    stroke-dasharray=strokeDasharray
-                                    stroke-dashoffset=indeterminateStrokeDashoffset
-                                )

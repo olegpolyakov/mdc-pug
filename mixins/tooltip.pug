@@ -1,0 +1,7 @@
+mixin mdc-tooltip(text)
+    div.mdc-tooltip(
+        role='tooltip'
+        aria-hidden='true'
+        data-mdc-auto-init='MDCTooltip'
+    )&attributes(attributes)
+        div.mdc-tooltip__surface= text

@@ -1,3 +1,32 @@
+mixin mdc-tab-bar
+    #{attributes.element || 'div'}.mdc-tab-bar(
+        data-mdc-auto-init='MDCTabBar' 
+    )&attributes(Object.assign({}, attributes, { element: undefined, align: undefined }))
+        +mdc-tab-scroller()(align=attributes.align)
+            block
+
+mixin mdc-tab-scroller
+    div.mdc-tab-scroller(
+        class={
+            [`mdc-tab-scroller--align-${attributes.align}`]: attributes.align
+        }
+    )&attributes(Object.assign({}, attributes, { align: undefined }))
+        div.mdc-tab-scroller__scroll-area
+            div.mdc-tab-scroller__scroll-content
+                block
+
+mixin mdc-tab-indicator
+    span.mdc-tab-indicator(
+        class={
+            'mdc-tab-indicator--active': attributes.active,
+            'mdc-tab-indicator--fade': attributes.fade
+        }
+    )&attributes(Object.assign({}, attributes, { icon: undefined, active: undefined, fade: undefined }))
+        if attributes.icon
+            +mdc-icon(attributes.icon)(aria-hidden='true').mdc-tab-indicator__content.mdc-tab-indicator__content--icon
+        else
+            span.mdc-tab-indicator__content.mdc-tab-indicator__content--underline
+
 mixin mdc-tab(text)
     #{attributes.element || 'button'}.mdc-tab(
         class={

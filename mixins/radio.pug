@@ -1,4 +1,4 @@
-mixin mdc-radio(name, value)
+mixin mdc-radio
     div.mdc-radio(
         class=attributes.class
         class={
@@ -6,11 +6,7 @@ mixin mdc-radio(name, value)
         }
         data-mdc-auto-init='MDCRadio'
     )
-        input.mdc-radio__native-control(
-            type='radio'
-            name=name
-            value=value
-        )&attributes(Object.assign({}, attributes, { class: undefined }))
+        input.mdc-radio__native-control(type='radio')&attributes(Object.assign({}, attributes, { class: undefined }))
 
         div.mdc-radio__background
             div.mdc-radio__outer-circle

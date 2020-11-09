@@ -1,3 +1,12 @@
+mixin mdc-menu-surface
+    div.mdc-menu-surface(
+        class={
+            'mdc-menu-surface--fixed': attributes.fixed,
+            'mdc-menu-surface--fullwidth': attributes.fullwidth
+        }
+        data-mdc-auto-init='MDCMenuSurface'
+    )&attributes(Object.assign({}, attributes, { fixed: undefined, fullwidth: undefined }))
+
 mixin mdc-menu
     div.mdc-menu.mdc-menu-surface(
         class={
@@ -5,7 +14,7 @@ mixin mdc-menu
             'mdc-menu-surface--fullwidth': attributes.fullwidth
         }
         data-mdc-auto-init='MDCMenu'
-    )&attributes(Object.assign({}, attributes, { fixed: undefined }))
+    )&attributes(Object.assign({}, attributes, { fixed: undefined, fullwidth: undefined }))
         +mdc-list()(role='menu' aria-hidden='true' aria-orientation='vertical' tabindex='-1')
             block
 
@@ -18,15 +27,6 @@ mixin mdc-menu-item(text)
     )&attributes(attributes)
         block
 
-mixin mdc-menu-surface
-    div.mdc-menu-surface(
-        class={
-            'mdc-menu-surface--fixed': attributes.fixed,
-            'mdc-menu-surface--fullwidth': attributes.fullwidth
-        }
-        data-mdc-auto-init='MDCMenuSurface'
-    )&attributes(Object.assign({}, attributes, { fixed: undefined }))
-
 mixin mdc-menu-anchor
     div.mdc-menu-surface--anchor&attributes(attributes)
         block
@@ -36,5 +36,5 @@ mixin mdc-menu__selection-group
         block
 
 mixin mdc-menu__selection-group-icon
-    +mdc-list-item__graphic&attributes(attributes)
+    +mdc-list-item__graphic.mdc-menu__selection-group-icon&attributes(attributes)
         block

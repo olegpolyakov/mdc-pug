@@ -1,4 +1,4 @@
-mixin mdc-select(name, value)
+mixin mdc-select
     div.mdc-select(
         class=attributes.class
         class={
@@ -12,26 +12,30 @@ mixin mdc-select(name, value)
         }
         data-mdc-auto-init='MDCSelect'
     )
-        input(
-            type='hidden'
-            name=name
-            value=value
-        )&attributes({}, attributes, { class: undefined, label: undefined, selectedText: undefined, icon: undefined, filled: undefined, outlined: undefined, fullwidth: undefined })
+        if attributes.name
+            input(type='hidden')&attributes(Object.assign({}, attributes, { class: undefined, label: undefined, selectedText: undefined, icon: undefined, filled: undefined, outlined: undefined, fullwidth: undefined, menu: undefined, list: undefined }))
 
         div.mdc-select__anchor(
             aria-required=attributes.required && 'true'
             aria-disabled=attributes.disabled && 'true'
         )
-            unless attributes.outlined
+            if attributes.outlined
+                +mdc-notched-outline
+                    if attributes.label
+                        +mdc-floating-label(attributes.label)(floatAbove=Boolean(attributes.value))
+            else
                 span.mdc-select__ripple
+                if attributes.label
+                    +mdc-floating-label(attributes.label)(floatAbove=Boolean(attributes.value))
 
             if attributes.icon
                 i.material-icons.mdc-select__icon= attributes.icon
 
-            div.mdc-select__selected-text= attributes.selectedText
+            span.mdc-select__selected-text-container
+                span.mdc-select__selected-text= attributes.selectedText
 
             span.mdc-select__dropdown-icon
-                svg.mdc-select__dropdown-icon-graphic(viewBox='7 10 10 5')
+                svg.mdc-select__dropdown-icon-graphic(viewBox='7 10 10 5' focusable='false')
                     polygon.mdc-select__dropdown-icon-inactive(
                         stoke='none'
                         fill-rule='evenodd'
@@ -43,25 +47,19 @@ mixin mdc-select(name, value)
                         points='7 15 12 10 17 15'
                     )
 
-            if attributes.outlined
-                +mdc-notched-outline
-                    if attributes.label
-                        +mdc-floating-label(attributes.label)(floatAbove=Boolean(attributes.selectedText))
-            else
-                if attributes.label
-                    +mdc-floating-label(attributes.label)(floatAbove=Boolean(attributes.selectedText))
+            unless attributes.outlined
                 +mdc-line-ripple
 
-        div.mdc-select__menu.mdc-menu.mdc-menu-surface.mdc-menu-surface--fullwidth
-            ul.mdc-list
+        +mdc-menu()(fullwidth).mdc-select__menu&attributes(attributes.menu)
+            +mdc-list&attributes(attributes.list)
                 block
 
-mixin mdc-select-option(value, title)
-    +mdc-list-item(title)(
-        data-value=value
+mixin mdc-select-option(...args)
+    +mdc-list-item(...args)(
+        data-value=attributes.value
         aria-disabled=(attributes.disabled && 'true')
         aria-selected=(attributes.selected && 'true')
-    )&attributes(attributes)
+    )&attributes(Object.assign({}, attributes, { value: undefined }))
 
 mixin mdc-select-helper-text(text)
     #{attributes.element || 'p'}.mdc-select-helper-text(
@@ -70,5 +68,5 @@ mixin mdc-select-helper-text(text)
             'mdc-select-helper-text--validation-msg-persistent': attributes.persistent
         }
         aria-hidden='true'
-    )&attributes({}, attributes, { element: undefined, validation: undefined, persistent: undefined })= text
+    )&attributes(Object.assign({}, attributes, { element: undefined, validation: undefined, persistent: undefined }))= text
         block

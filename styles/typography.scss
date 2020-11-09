@@ -1,3 +1,4 @@
+@forward '@material/typography' as typography-*;
 @use '@material/typography/mdc-typography';
 
 .mdc-typography--display-block {

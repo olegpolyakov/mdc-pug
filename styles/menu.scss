@@ -1,2 +1,4 @@
+@forward '@material/menu-surface' as menu-surface-*;
+@forward '@material/menu' as menu-*;
 @use '@material/menu-surface/mdc-menu-surface';
 @use '@material/menu/mdc-menu';

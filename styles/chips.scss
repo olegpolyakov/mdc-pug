@@ -1,3 +1,4 @@
+@forward '@material/chips' as chips-*;
 @use '@material/chips/mdc-chips';
 
 .mdc-chip {

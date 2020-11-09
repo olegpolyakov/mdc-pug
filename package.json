@@ -1,20 +1,22 @@
 {
   "name": "mdc-pug",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "Material Components Web implemented in Pug",
   "main": "index.pug",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "sass ./index.scss ./index.css --load-path=node_modules --no-source-map",
+    "build-docs": "gulp",
+    "prepublish": "npm run build"
   },
   "dependencies": {
-    "material-components-web": "^7.0.0",
+    "material-components-web": "^8.0.0",
     "pug": "^3.0.0"
   },
   "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-pug": "^4.0.1",
     "gulp-sass": "^4.1.0",
-    "sass": "^1.26.10"
+    "sass": "^1.29.0"
   },
   "author": {
     "name": "Oleg Polyakov",

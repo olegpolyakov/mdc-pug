@@ -1,4 +1,4 @@
-mixin mdc-linear-progress(progress, buffer)
+mixin mdc-linear-progress(progress, buffer = 100)
     - const value = progress > 1 ? (progress / 100) : Number(progress);
 
     div.mdc-linear-progress(
@@ -13,11 +13,12 @@ mixin mdc-linear-progress(progress, buffer)
         aria-valuenow=value
         data-mdc-auto-init='MDCLinearProgress'
     )&attributes(Object.assign({}, attributes, { indeterminate: undefined, reversed: undefined, closed: undefined }))
-        div.mdc-linear-progress__buffer(style=buffer && `transform: scaleX(${indeterminate ? 1 : buffer})`)
-            div.mdc-linear-progress__buffer-bar
-            div.mdc-linear-progress__buffer-dots
+        if buffer
+            div.mdc-linear-progress__buffer
+                div.mdc-linear-progress__buffer-bar(style=`flex-basis: ${(buffer < 1 ? (buffer * 100) : buffer)}%`)
+                div.mdc-linear-progress__buffer-dots
 
-        div.mdc-linear-progress__bar.mdc-linear-progress__primary-bar(style=`transform: scaleX(${value});`)
+        div.mdc-linear-progress__bar.mdc-linear-progress__primary-bar(style=`transform: scaleX(${value})`)
             span.mdc-linear-progress__bar-inner
 
         div.mdc-linear-progress__bar.mdc-linear-progress__secondary-bar

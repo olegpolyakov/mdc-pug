@@ -6,8 +6,14 @@ mixin mdc-data-table
         data-mdc-auto-init='MDCDataTable'
     )
         div.mdc-data-table__table-container
-            table.mdc-data-table__table&attributes(Object.assign({}, attributes, { stickyHeader: undefined }))
+            table.mdc-data-table__table&attributes(Object.assign({}, attributes, { stickyHeader: undefined, progress: undefined, pagination: undefined }))
                 block
+        
+        if attributes.progress
+            +mdc-data-table__progress-indicator
+
+        if attributes.pagination
+            +mdc-data-table__pagination&attributes(attributes.pagination)
 
 mixin mdc-data-table__header
     thead.mdc-data-table__header&attributes(attributes)
@@ -64,3 +70,26 @@ mixin mdc-data-table__header-row-checkbox(name)
 
 mixin mdc-data-table__row-checkbox(name)
     +mdc-checkbox(name).mdc-data-table__row-checkbox&attributes(attributes)
+
+mixin mdc-data-table__progress-indicator
+    div.mdc-data-table__progress-indicator
+        div.mdc-data-table__scrim
+            +mdc-linear-progress()(indeterminate).mdc-data-table__linear-progress
+
+mixin mdc-data-table__pagination
+    div.mdc-data-table__pagination
+        div.mdc-data-table__pagination-trailing
+            div.mdc-data-table__pagination-rows-per-page
+                div.mdc-data-table__pagination-rows-per-page-label= attributes.rowsPerPageLabel || 'Rows per page'
+
+                +mdc-select()(outlined).mdc-data-table__pagination-rows-per-page-select
+                    for num in [10, 25, 50, 100]
+                        +mdc-select-option(num, num)(selected = num === attributes.rowsPerPage)
+
+            div.mdc-data-table__pagination-navigation
+                div.mdc-data-table__pagination-total= `1‑${attributes.rowsPerPage} of ${attributes.numberOfPages}`
+
+                +mdc-icon-button('first_page')(data-first-page='true' disabled).mdc-data-table__pagination-button
+                +mdc-icon-button('chevron_left')(data-prev-page='true' disabled).mdc-data-table__pagination-button
+                +mdc-icon-button('chevron_right')(data-next-page='true').mdc-data-table__pagination-button
+                +mdc-icon-button('last_page')(data-last-page='true').mdc-data-table__pagination-button

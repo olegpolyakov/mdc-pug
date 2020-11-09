@@ -6,18 +6,18 @@ mixin mdc-snackbar(label)
             'mdc-snackbar--leading': attributes.leading
         }
         data-mdc-auto-init='MDCSnackbar'
-    )&attributes(Object.assign({}, attributes, { open: undefined, stacked: undefined, leading: undefined, dismissable: undefined, actionLabel: undefined }))
-        div.mdc-snackbar__surface
-            div.mdc-snackbar__label(role='status' aria-live='polite')= label
+    )&attributes(Object.assign({}, attributes, { open: undefined, stacked: undefined, leading: undefined, dismissible: undefined, actionLabel: undefined }))
+        div.mdc-snackbar__surface(role='status' aria-relevant='additions')
+            div.mdc-snackbar__label(aria-atomic='false')= label
 
-            if block || attributes.actionLabel || attributes.dismissable
-                div.mdc-snackbar__actions
+            if block || attributes.actionLabel || attributes.dismissible
+                div.mdc-snackbar__actions(aria-atomic='true')
                     block
 
                     if attributes.actionLabel
                         +mdc-snackbar__action(attributes.actionLabel)
 
-                    if attributes.dismissable
+                    if attributes.dismissible
                         +mdc-icon-button('close').mdc-snackbar__dismiss
 
 mixin mdc-snackbar__action(label)
