@@ -27,9 +27,9 @@ mixin mdc-banner__content(text)
         
             div.mdc-banner__text= text || attributes.text
 
-    if block
-        div.mdc-banner__actions
-            block
+        if block
+            div.mdc-banner__actions
+                block
 
 mixin mdc-banner__action(label)
     +mdc-button(label)(class={'mdc-banner__primary-action': attributes.primary, 'mdc-banner__secondary-action': attributes.secondary})&attributes(Object.assign({}, attributes, { primary: undefined, secondary: undefined }))
