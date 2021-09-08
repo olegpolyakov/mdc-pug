@@ -1,4 +1,4 @@
-@forward '@material/circular-progress' as circular-progress-*;
+@forward '@material/circular-progress';
 @use '@material/circular-progress/mdc-circular-progress';
 
 .mdc-circular-progress {

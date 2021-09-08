@@ -1,7 +1,7 @@
-@forward '@material/tab-bar' as tab-bar-*;
-@forward '@material/tab-scroller' as tab-scroller-*;
-@forward '@material/tab-indicator' as tab-indicator-*;
-@forward '@material/tab' as tab-*;
+@forward '@material/tab-bar';
+@forward '@material/tab-scroller';
+@forward '@material/tab-indicator';
+@forward '@material/tab';
 @use '@material/tab-bar/mdc-tab-bar';
 @use '@material/tab-scroller/mdc-tab-scroller';
 @use '@material/tab-indicator/mdc-tab-indicator';
