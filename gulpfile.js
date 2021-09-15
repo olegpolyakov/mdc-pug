@@ -1,20 +1,30 @@
 const gulp = require('gulp');
 const pug = require('gulp-pug');
-const sass = require('gulp-sass');
+const sass = require('gulp-sass')(require('sass'));
 const { render } = require('pug');
-
-sass.compiler = require('sass');
+const marked = require('marked');
 
 function buildPug() {
-    return gulp.src('./docs/**/*.pug')
+    return gulp.src([
+        './docs/**/*.pug',
+        '!./docs/layouts/*.pug',
+        '!./docs/mixins.pug'
+    ])
         .pipe(pug({
-            basedir: './',
+            basedir: './docs/',
             filename: 'index.pug',
+            locals: {
+                markdown: marked
+            },
             filters: {
                 code: function(text) {
-                    return render(`include index.pug\n\nsection\n  ${text.trim().split('\n').join('\n  ')}\n\nsection\n    pre\n      code.language-pug\n        | ${text.trim().split('\n').join('\n        | ')}`, {
+                    return render(`include index.pug\n\nsection\n  ${text.trim().split('\n').join('\n  ')}\n\ndiv.code-block\n    pre\n      code.language-pug\n        | ${text.trim().split('\n').join('\n        | ')}`, {
                         filename: 'index.pug'
                     });
+                },
+
+                highlight: function(text, options) {
+                    return render(`div\n    pre\n      code.language-${options.lang}\n        | ${text.trim().split('\n').join('\n        | ')}`);
                 }
             }
         }))
