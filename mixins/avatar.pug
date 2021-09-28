@@ -1,9 +1,11 @@
 mixin mdc-avatar(text)
+    - text = text || attributes.text
+
     span.mdc-avatar(
         class={
             [`mdc-avatar--${attributes.size}`]: attributes.size
         }
-    )&attributes(Object.assign({}, attributes, { size: undefined, src: undefined, icon: undefined }))
+    )&attributes(Object.assign({}, attributes, { text: attributes.text, icon: undefined, src: undefined, size: undefined }))
         if attributes.src
             img.mdc-avatar__image(src=attributes.src)
         else if attributes.icon

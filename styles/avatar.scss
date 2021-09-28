@@ -1,21 +1,21 @@
 @use '@material/typography';
 
-$mdc-avatar-size: 40px;
 $mdc-avatar-size-small: 24px;
+$mdc-avatar-size-medium: 40px;
 $mdc-avatar-size-large: 64px;
 
-$mdc-avatar-icon-font-size: 24px;
 $mdc-avatar-icon-font-size-small: 16px;
+$mdc-avatar-icon-font-size-medium: 24px;
 $mdc-avatar-icon-font-size-large: 48px;
 
-$mdc-avatar-text-font-size: 20px;
 $mdc-avatar-text-font-size-small: 12px;
+$mdc-avatar-text-font-size-medium: 20px;
 $mdc-avatar-text-font-size-large: 32px;
 
 .mdc-avatar {
     display: inline-flex;
-    width: $mdc-avatar-size;
-    height: $mdc-avatar-size;
+    width: $mdc-avatar-size-medium;
+    height: $mdc-avatar-size-medium;
     justify-content: center;
     align-items: center;
     border-radius: 100%;
@@ -31,15 +31,15 @@ $mdc-avatar-text-font-size-large: 32px;
     }
 
     & &__icon {
-        font-size: $mdc-avatar-icon-font-size;
+        font-size: $mdc-avatar-icon-font-size-medium;
     }
 
     & &__text {
         width: 100%;
         height: 100%;
-        font-size: $mdc-avatar-text-font-size;
+        font-size: $mdc-avatar-text-font-size-medium;
         text-align: center;
-        line-height: $mdc-avatar-size;
+        line-height: $mdc-avatar-size-medium;
         @include typography.base;
     }
 
@@ -54,6 +54,20 @@ $mdc-avatar-text-font-size-large: 32px;
         .mdc-avatar__text {
             font-size: $mdc-avatar-text-font-size-small;
             line-height: $mdc-avatar-size-small;
+        }
+    }
+
+    &.mdc-avatar--medium {
+        width: $mdc-avatar-size-medium;
+        height: $mdc-avatar-size-medium;
+    
+        .mdc-avatar__icon {
+            font-size: $mdc-avatar-icon-font-size-medium;
+        }
+    
+        .mdc-avatar__text {
+            font-size: $mdc-avatar-text-font-size-medium;
+            line-height: $mdc-avatar-size-medium;
         }
     }
     
