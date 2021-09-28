@@ -1,36 +1,95 @@
 mixin mdc-chip-set
-    div.mdc-chip-set(
+    div.mdc-evolution-chip-set(
         class={
-            'mdc-chip-set--choice': attributes.choice,
-            'mdc-chip-set--filter': attributes.filter,
-            'mdc-chip-set--input': attributes.input
+            'mdc-evolution-chip-set--overflow': attributes.overflow
         }
+        role=attributes.filter ? 'listbox' : 'grid'
+        aria-orientation=attributes.filter && 'horizontal'
+        aria-multiselectable=attributes.multiselectable
         data-mdc-auto-init='MDCChipSet'
-    )&attributes(Object.assign({}, attributes, { choice: undefined, filter: undefined, input: undefined }))
-        block
+    )&attributes(Object.assign({}, attributes, { overflow: undefined, filter: undefined, multiselectable: undefined }))
+        span.mdc-evolution-chip-set__chips(role='presentation')
+            block
 
-mixin mdc-chip(text)
-    #{attributes.element || 'div'}.mdc-chip(
+mixin mdc-chip(label)
+    #{attributes.element || 'span'}.mdc-evolution-chip(
         class={
-            'mdc-chip--selected': attributes.selected,
-            'mdc-chip--outlined': attributes.outlined
+            'mdc-evolution-chip--selectable': attributes.filter,
+            'mdc-evolution-chip--selected': attributes.selected,
+            'mdc-evolution-chip--disabled': attributes.disabled,
+            'mdc-evolution-chip--filter': attributes.filter,
+            'mdc-evolution-chip--with-primary-graphic': attributes.leadingIcon || attributes.filter,
+            'mdc-evolution-chip--with-primary-icon': attributes.leadingIcon,
+            'mdc-evolution-chip--with-trailing-action': attributes.input,
+            'mdc-evolution-chip--with-avatar': attributes.avatar
         }
-    )&attributes(Object.assign({}, attributes, { element: undefined, leadingIcon: undefined, trailingIcon: undefined, selected: undefined, outlined: undefined }))
-        div.mdc-chip__ripple
+        data-mdc-auto-init='MDCChip'
+    )&attributes(Object.assign({}, attributes, { element: undefined, leadingIcon: undefined, trailingIcon: undefined, selected: undefined, action: undefined, filter: undefined, input: undefined }))
+        if attributes.action
+            +mdc-chip__cell()(primary)
+                +mdc-chip__action(label)(primary disabled=attributes.disabled)
+                    block
 
-        if attributes.leadingIcon
-            i.mdc-chip__icon.mdc-chip__icon--leading.material-icons(
-                class={'mdc-chip__icon--leading-hidden': attributes.selected}
-            )= attributes.leadingIcon
+        if attributes.input
+            +mdc-chip__cell()(primary)
+                +mdc-chip__action(label)(primary disabled=attributes.disabled)
+                    block
 
-            if attributes.selected
-                span.mdc-chip__checkmark
-                    svg.mdc-chip__checkmark-svg(viewBox="-2 -3 30 30")
-                        path.mdc-chip__checkmark-path(fill="none" stroke="black" d="M1.73,12.91 8.1,19.28 22.79,4.59")
-
-        span.mdc-chip__primary-action(role='button' tabindex='0')
-            span.mdc-chip__text= text
+            +mdc-chip__cell()(trailing)
+                +mdc-chip__action()(
+                    trailing
+                    trailingIcon=attributes.trailingIcon
+                    disabled=attributes.disabled
+                    deletable
+                )
+        
+        if attributes.filter
+            +mdc-chip__action(label)(
+                element='span'
+                primary
+                leadingIcon=attributes.leadingIcon
+                disabled=attributes.disabled
+                checkmark
+            )
                 block
 
-        if attributes.trailingIcon
-            i.mdc-chip__icon.mdc-chip__icon--trailing.material-icons(role='button' tabindex='-1')= attributes.trailingIcon
+mixin mdc-chip__cell
+    span.mdc-evolution-chip__cell(
+        class={
+            'mdc-evolution-chip__cell--primary': attributes.primary,
+            'mdc-evolution-chip__cell--trailing': attributes.trailing
+        }
+        role='gridcell'
+    )&attributes(Object.assign({}, attributes, { primary: undefined, trailing: undefined }))
+        block
+
+mixin mdc-chip__action(label)
+    #{attributes.element || 'button'}.mdc-evolution-chip__action(
+        type='button'
+        class={
+            'mdc-evolution-chip__action--primary': attributes.primary,
+            'mdc-evolution-chip__action--trailing': attributes.trailing
+        }
+        tabindex=attributes.primary ? "0" : "-1"
+        data-mdc-deletable=attributes.deletable && 'true'
+    )&attributes(Object.assign({}, attributes, { element: undefined, primary: undefined, trailing: undefined, leadingIcon: undefined, checkmark: undefined, trailingIcon: undefined, deletable: undefined }))
+        span.mdc-evolution-chip__ripple(class={
+            'mdc-evolution-chip__ripple--primary': attributes.primary,
+            'mdc-evolution-chip__ripple--trailing': attributes.trailing
+        })
+
+        if attributes.leadingIcon || attributes.checkmark
+            span.mdc-evolution-chip__graphic
+                if attributes.leadingIcon
+                    span.mdc-evolution-chip__icon.mdc-evolution-chip__icon--primary.material-icons= leadingIcon
+
+                if attributes.checkmark
+                    span.mdc-evolution-chip__checkmark
+                        svg.mdc-evolution-chip__checkmark-svg(viewBox="-2 -3 30 30")
+                            path.mdc-evolution-chip__checkmark-path(fill="none" stroke="black" d="M1.73,12.91 8.1,19.28 22.79,4.59")
+
+        if label
+            span.mdc-evolution-chip__text-label= label
+
+        if attributes.trailing
+            span.mdc-evolution-chip__icon.mdc-evolution-chip__icon--trailing.material-icons= attributes.trailingIcon || 'close'
