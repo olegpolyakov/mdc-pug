@@ -1,29 +1,32 @@
 mixin mdc-banner(text)
+    - text = text || attributes.text
+
     div.mdc-banner(
         class={
             'mdc-banner--open': attributes.open,
             'mdc-banner--centered': attributes.centered,
-            'mdc-banner--fixed': attributes.fixed,
             'mdc-banner--mobile-stacked': attributes.mobileStacked
         }
         style=attributes.open && `height: ${attributes.icon ? 72 : 52}px`
         role='banner'
         data-mdc-auto-init='MDCBanner'
-    )&attributes(Object.assign({}, attributes, { text: undefined, icon: undefined, open: undefined, centered: undefined, fixed: undefined }))
-        if attributes.fixed
+    )&attributes(Object.assign({}, attributes, { text: undefined, icon: undefined, open: undefined, centered: undefined, fixed: undefined, mobileStacked: undefined }))
+        if !text
+            block
+        else if attributes.fixed
             div.mdc-banner__fixed
                 +mdc-banner__content(text)&attributes(attributes)
                     if block
-                        div.mdc-banner__actions
+                        +mdc-banner__actions
                             block
         else
             +mdc-banner__content(text)&attributes(attributes)
                 if block
-                    div.mdc-banner__actions
+                    +mdc-banner__actions
                         block
 
 mixin mdc-banner__content(text)
-    div.mdc-banner__content(role='status' aria-live='assertive')
+    div.mdc-banner__content(role='alertdialog' aria-live='assertive')
         div.mdc-banner__graphic-text-wrapper
             if attributes.icon
                 div.mdc-banner__graphic(role='img' alt='')
@@ -31,6 +34,10 @@ mixin mdc-banner__content(text)
         
             div.mdc-banner__text= text || attributes.text
 
+        block
+
+mixin mdc-banner__actions
+    div.mdc-banner__actions&attributes(attributes)
         block
 
 mixin mdc-banner__action(label)
