@@ -3,14 +3,20 @@ mixin mdc-button(label)
         class={
             'mdc-button--raised': attributes.raised,
             'mdc-button--unelevated': attributes.unelevated,
-            'mdc-button--outlined': attributes.outlined
+            'mdc-button--outlined': attributes.outlined,
+            'mdc-button--icon-leading': attributes.icon || attributes.leadingIcon,
+            'mdc-button--icon-trailing': attributes.trailingIcon,
+            'mdc-button--touch': attributes.touch
         }
         data-mdc-auto-init='MDCRipple'
-    )&attributes(Object.assign({}, attributes, { element: undefined, icon: undefined, trailingIcon: undefined, raised: undefined, unelevated: undefined, outlined: undefined }))
-        div.mdc-button__ripple
+    )&attributes(Object.assign({}, attributes, { element: undefined, icon: undefined, leadingIcon: undefined, trailingIcon: undefined, raised: undefined, unelevated: undefined, outlined: undefined, touch: undefined }))
+        span.mdc-button__ripple
+
+        if attributes.touch
+            span.mdc-button__touch
         
-        if attributes.icon
-            +mdc-button__icon(attributes.icon)(aria-hidden='true')
+        if attributes.icon || attributes.leadingIcon
+            +mdc-button__icon(attributes.icon || attributes.leadingIcon)(aria-hidden='true')
         
         if label
             +mdc-button__label(label)
@@ -20,10 +26,10 @@ mixin mdc-button(label)
         
         block
 
-mixin mdc-button__icon(icon)
-    +mdc-icon(icon).mdc-button__icon&attributes(attributes)
-        block
-
 mixin mdc-button__label(label)
     span.mdc-button__label&attributes(attributes)= label
+        block
+
+mixin mdc-button__icon(icon)
+    +mdc-icon(icon).mdc-button__icon&attributes(attributes)
         block
