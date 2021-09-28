@@ -2,3 +2,5 @@
 node_modules
 docs
 gulpfile.js
+webpack.config.js
+material-components-web.js

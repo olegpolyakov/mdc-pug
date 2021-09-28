@@ -6,12 +6,12 @@ const marked = require('marked');
 
 function buildPug() {
     return gulp.src([
-        './docs/**/*.pug',
-        '!./docs/layouts/*.pug',
-        '!./docs/mixins.pug'
+        './docs/src/**/*.pug',
+        '!./docs/src/layouts/*.pug',
+        '!./docs/src/mixins.pug'
     ])
         .pipe(pug({
-            basedir: './docs/',
+            basedir: './docs/src/',
             filename: 'index.pug',
             locals: {
                 markdown: marked
@@ -32,7 +32,7 @@ function buildPug() {
 }
 
 function buildSass() {
-    return gulp.src('./docs/index.scss')
+    return gulp.src('./docs/src/index.scss')
         .pipe(sass({
             includePaths: ['./node_modules/'],
             outputStyle: 'compressed'
@@ -41,7 +41,7 @@ function buildSass() {
 }
 
 function copyJs() {
-    return gulp.src('./node_modules/material-components-web/dist/material-components-web.min.js')
+    return gulp.src('./index.js')
         .pipe(gulp.dest('./docs'));
 }
 
