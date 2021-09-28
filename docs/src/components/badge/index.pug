@@ -1,0 +1,28 @@
+extends /layouts/component-page
+
+prepend head
+    - ID = 'badge'
+    - TITLE = 'Badge'
+    - DESC = 'Badge generates a small badge to the top-right of its child(ren).'
+
+block main
+    +section('Examples')
+        +example('With text')(code)
+            :code
+                +mdc-badge(4)
+                  +mdc-typography('Text', 'body1')(element='span')
+
+        +example('With a button')(code)
+            :code
+                +mdc-badge(4)
+                  +mdc-button('Button')(outlined)
+
+        +example('With an icon')(code)
+            :code
+                +mdc-badge(4)
+                  +mdc-icon('notifications')
+
+        +example('With an icon button')(code)
+            :code
+                +mdc-badge(4)(inset)
+                  +mdc-icon-button('notifications')

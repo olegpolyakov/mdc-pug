@@ -1,0 +1,27 @@
+extends /layouts/component-page
+
+prepend head
+    - ID = 'switch'
+    - TITLE = 'Switch'
+    - DESC = 'Switches toggle the state of a single setting on or off';
+    - DOCS_URL = 'https://github.com/material-components/material-components-web/tree/master/packages/mdc-switch'
+    - IMAGE_URL = 'https://github.com/material-components/material-components-web/raw/master/packages/mdc-switch/images/switch-hero.png'
+
+block main
+    +section('Basic')
+        :code
+            +mdc-switch
+
+    +section('Selected')
+        :code
+            +mdc-switch()(selected)
+
+    +section('Disabled')
+        :code
+            +mdc-switch()(disabled)
+
+    +section('Attributes')
+        +attr-table([
+            ['selected', 'Boolean', 'If true, the switch is on. If false, the switch is off.'],
+            ['disabled', 'Boolean', 'Indicates whether or not the switch is disabled.']
+        ])

@@ -1,0 +1,13 @@
+extends /layouts/component-page
+
+prepend head
+    - ID = 'icon-button'
+    - TITLE = 'Icon Button'
+    - DESC = 'Icons are appropriate for buttons that allow a user to take actions or make a selection, such as adding or removing a star to an item.';
+
+block main
+    +section('Icon Button')
+        +mdc-icon-button('star')(ripple)
+    
+    +section('Icon Toggle Button')
+        +mdc-icon-button('star', 'star_border')

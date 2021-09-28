@@ -1,0 +1,26 @@
+extends /layouts/component-page
+
+prepend head
+    - ID = 'drawer'
+    - TITLE = 'Drawer'
+    - DESC = 'The navigation drawer slides in from the left and contains the navigation destinations for your app.'
+
+    style.
+        iframe {
+            display: block;
+            width: 100%;
+            height: 400px;
+        }
+
+block main
+    +section('Permanent')
+        +mdc-card()(outlined)
+            iframe(src='/components/drawer/permanent.html')
+
+    +section('Dismissible')
+        +mdc-card()(outlined)
+            iframe(src='/components/drawer/dismissible.html')
+
+    +section('Modal')
+        +mdc-card()(outlined)
+            iframe(src='/components/drawer/modal.html')

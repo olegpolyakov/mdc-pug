@@ -1,0 +1,23 @@
+extends /layouts/component-page
+
+prepend head
+    - ID = 'snackbar'
+    - TITLE = 'Snackbar'
+    - DESC = 'Snackbars provide brief messages about app processes at the bottom of the screen.'
+
+block main
+    +section('Baseline')
+        +mdc-button('Open')(onclick='window["baseline-snackbar"].MDCSnackbar.open()')
+        +mdc-snackbar('Can\'t send photo. Retry in 5 seconds.')(actionLabel='Retry')#baseline-snackbar
+
+    +section('Leading')
+        +mdc-button('Open')(onclick='window["leading-snackbar"].MDCSnackbar.open()')
+        +mdc-snackbar('Your photo has been archived.')(actionLabel='Undo' leading)#leading-snackbar
+
+    +section('Dismissible')
+        +mdc-button('Open')(onclick='window["dismissible-snackbar"].MDCSnackbar.open()')
+        +mdc-snackbar('This item already has the label "travel". You can add a new label.')(dismissible)#dismissible-snackbar
+
+    +section('Stacked')
+        +mdc-button('Open')(onclick='window["stacked-snackbar"].MDCSnackbar.open()')
+        +mdc-snackbar('This item already has the label "travel". You can add a new label.')(actionLabel='Add a new label' dismissible stacked)#stacked-snackbar

@@ -1,0 +1,45 @@
+extends /layouts/component-page
+
+prepend head
+    - ID = 'button'
+    - TITLE = 'Button'
+    - DESC = 'Buttons communicate an action a user can take. They are typically placed throughout your UI, in places like dialogs, forms, cards, and toolbars.'
+    - GUIDE_URL = 'https://material.io/components/buttons'
+    - DOCS_URL = 'https://github.com/material-components/material-components-web/tree/master/packages/mdc-button'
+    
+    style.
+        .mdc-button + .mdc-button {
+            margin-left: 8px
+        }
+
+block main
+    +section('Examples')
+        +example('Text Button')(code)
+            :code
+                +mdc-button('Button')
+
+        +example('Raised Button')(code)
+            :code
+                +mdc-button('Button')(raised)
+
+        +example('Unelevated Button')(code)
+            :code
+                +mdc-button('Button')(unelevated)
+
+        +example('Outlined Button')(code)
+            :code
+                +mdc-button('Button')(outlined)
+
+        +example('Buttons with an Icon')(code)
+            :code
+                +mdc-button('Button')(icon='star')
+                +mdc-button('Button')(raised icon='star')
+                +mdc-button('Button')(unelevated icon='star')
+                +mdc-button('Button')(outlined icon='star')
+
+        +example('Buttons with a Trailing Icon')(code)
+            :code
+                +mdc-button('Button')(trailingIcon='star')
+                +mdc-button('Button')(raised trailingIcon='star')
+                +mdc-button('Button')(unelevated trailingIcon='star')
+                +mdc-button('Button')(outlined trailingIcon='star')

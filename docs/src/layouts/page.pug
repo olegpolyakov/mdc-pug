@@ -1,0 +1,71 @@
+extends base
+
+block header
+    +mdc-top-app-bar()(fixed).app-header
+        +mdc-top-app-bar__row
+            +mdc-top-app-bar__section()(align='start')
+                +mdc-top-app-bar__title('MDC Pug')
+
+            +mdc-top-app-bar__section()(align='center')
+                img(src='https://cdn.rawgit.com/pugjs/pug-logo/eec436cee8fd9d1726d7839cbe99d1f694692c0c/SVG/pug-final-logo-_-colour-128.svg')
+                
+            +mdc-top-app-bar__section()(align='end')
+                +mdc-top-app-bar__action-item('code')(element='a' href='https://github.com/olegpolyakov/mdc-pug' target='_blank')
+
+block content
+    div.mdc-top-app-bar--fixed-adjust
+        +mdc-drawer.app-drawer
+            +mdc-drawer__content
+                +mdc-list()(element='nav')
+                    +mdc-list-item('Home')(element='a' href='/' activated=id === 'home')
+                    +nav-item('avatar', 'Avatar')
+                    +nav-item('badge', 'Badge')
+                    +nav-item('banner', 'Banner')
+                    +nav-item('button', 'Button')
+                    +nav-item('card', 'Card')
+                    +nav-item('checkbox', 'Checkbox')
+                    +nav-item('chips', 'Chips')
+                    +nav-item('circular-progress', 'Circular Progress')
+                    +nav-item('data-table', 'Data Table')
+                    +nav-item('dialog', 'Dialog')
+                    +nav-item('drawer', 'Drawer')
+                    +nav-item('fab', 'FAB')
+                    +nav-item('icon-button', 'Icon Button')
+                    +nav-item('image-list', 'Image List')
+                    +nav-item('layout-grid', 'Layout Grid')
+                    +nav-item('linear-progress', 'Linear Progress')
+                    +nav-item('list', 'List')
+                    +nav-item('menu', 'Menu')
+                    +nav-item('radio', 'Radio Button')
+                    +nav-item('ripple', 'Ripple')
+                    +nav-item('segmented-button', 'Segmented Button')
+                    +nav-item('select', 'Select')
+                    +nav-item('slider', 'Slider')
+                    +nav-item('snackbar', 'Snackbar')
+                    +nav-item('switch', 'Switch')
+                    +nav-item('tabs', 'Tabs')
+                    +nav-item('text-field', 'Text Field')
+                    +nav-item('tooltip', 'Tooltip')
+                    +nav-item('top-app-bar', 'Top App Bar')
+                    +nav-item('typography', 'Typography')
+
+        main.app-content
+            +page
+                block main
+
+append scripts
+    script.
+        document.querySelectorAll('.example').forEach(element => {
+            const codeButton = element.querySelector('.code-button');
+            const codeBlock = element.querySelector('.code-block');
+
+            codeButton?.addEventListener('click', function() {
+                if (codeBlock.style.display === 'block') {
+                    codeBlock.style.display = 'none';
+                    this.title = 'Показать код';
+                } else {
+                    codeBlock.style.display = 'block';
+                    this.title = 'Скрыть код';
+                }
+            });
+        });

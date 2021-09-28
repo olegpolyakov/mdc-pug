@@ -1,0 +1,36 @@
+extends /layouts/component-page
+
+prepend head
+    - ID = 'circular-progress'
+    - TITLE = 'Circular Progress'
+    - DESC = 'Circular progress indicators display progress by animating an indicator along an invisible circular track in a clockwise direction.'
+    - DOCS_URL = 'https://github.com/material-components/material-components-web/tree/master/packages/mdc-circular-progress'
+    - GUIDE_URL = 'https://material.io/components/progress-indicators#circular-progress-indicators'
+
+block main
+    +section('Examples')
+        +example('Determinate')(code)
+            :code
+                +mdc-circular-progress(42)
+
+        +example('Indeterminate')(code)
+            :code
+                +mdc-circular-progress()(indeterminate)
+
+        +example('Sizes')(code)
+            :code
+                +mdc-circular-progress(42)(size='large')
+                +mdc-circular-progress(42)(size='medium')
+                +mdc-circular-progress(42)(size='small')
+
+        +example('Four-Colored')(code)
+            :code
+                +mdc-circular-progress()(colorful indeterminate)
+
+    +section('Attributes')
+        +attr-table([
+            ['progress', 'number', 'The value of the progress. The value should be either between 0 and 1 or 0 and 100.'],
+            ['indeterminate', 'boolean', 'Toggles the component between the indeterminate and determinate state.'],
+            ['size', 'string', 'Specifies the size of the component. The expected values are `large`, `medium`, `small`.'],
+            ['colorful', 'boolean', 'Specifies whether or not the bar should be four-colored.'],
+        ])

@@ -1,0 +1,73 @@
+extends /layouts/component-page
+
+prepend head
+    - ID = 'list'
+    - TITLE = 'List'
+    - DESC = 'Lists present multiple line items vertically as a single continuous element.';
+
+block main
+    +section('Single-Line')
+        +mdc-list
+            +mdc-list-item('Line item')
+            +mdc-list-item('Line item')
+            +mdc-list-item('Line item')
+
+    +section('Two-Line')
+        +mdc-list
+            +mdc-list-item('Line item', 'Secondary text')
+            +mdc-list-item('Line item', 'Secondary text')
+            +mdc-list-item('Line item', 'Secondary text')
+
+    +section('Icon List')
+        +mdc-list
+            +mdc-list-item('Line item')(icon='wifi')
+            +mdc-list-item('Line item')(icon='bluetooth')
+            +mdc-list-item('Line item')(icon='data_usage')
+
+    +section('Avatar List')
+        +mdc-list
+            +mdc-list-item()(leadingAvatar)
+                +mdc-list-item__start
+                    +mdc-avatar()(icon='person')
+                +mdc-list-item__content('Line item')
+
+            +mdc-list-item
+                +mdc-list-item__start
+                    +mdc-avatar()(icon='person')
+                +mdc-list-item__content('Line item')
+
+            +mdc-list-item
+                +mdc-list-item__start
+                    +mdc-avatar()(icon='person')
+                +mdc-list-item__content('Line item')
+
+    +section('List Item Meta')
+        +mdc-list
+            +mdc-list-item('Line item')(meta='Meta')
+            +mdc-list-item('Line item')(meta='Meta')
+            +mdc-list-item('Line item')(meta='Meta')
+        
+        +mdc-list-divider
+
+        +mdc-list
+            +mdc-list-item
+                +mdc-list-item__content('Line item')
+                +mdc-list-item__end
+                    +mdc-icon('wifi')
+            
+            +mdc-list-item
+                +mdc-list-item__content('Line item')
+                +mdc-list-item__end
+                    +mdc-icon('bluetooth')
+            
+            +mdc-list-item
+                +mdc-list-item__content('Line item')
+                +mdc-list-item__end
+                    +mdc-icon('data_usage')
+    
+    +section('List Item States')
+        +mdc-list()(iconList)
+            +mdc-list-item('Activated')(activated)
+            +mdc-list-item('Selected')(selected)
+            +mdc-list-item('Selected')(selected)
+            +mdc-list-item('Disabled')(disabled)

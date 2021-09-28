@@ -1,0 +1,52 @@
+extends /layouts/component-page
+
+prepend head
+    - ID = 'data-table'
+    - TITLE = 'Data Table'
+    - DESC = 'Data tables display information in a way that’s easy to scan, so that users can look for patterns and insights.'
+
+block main
+    +section
+        +mdc-data-table
+            +mdc-data-table__header
+                +mdc-data-table__header-row
+                    +mdc-data-table__header-cell()(checkbox)
+                        +mdc-data-table__header-row-checkbox
+
+                        +mdc-data-table__header-cell('Header A')
+                        +mdc-data-table__header-cell('Header B')
+                        +mdc-data-table__header-cell('Header C')
+                        +mdc-data-table__header-cell('Header D')(numeric withSort)
+
+            +mdc-data-table__content
+                +mdc-data-table__row
+                    +mdc-data-table__cell()(checkbox)
+                        +mdc-data-table__row-checkbox
+                    +mdc-data-table__cell('Cell A1')
+                    +mdc-data-table__cell('Cell B1')
+                    +mdc-data-table__cell('Cell C1')
+                    +mdc-data-table__cell(1)(numeric)
+
+                +mdc-data-table__row
+                    +mdc-data-table__cell()(checkbox)
+                        +mdc-data-table__row-checkbox
+                    +mdc-data-table__cell('Cell A2')
+                    +mdc-data-table__cell('Cell B2')
+                    +mdc-data-table__cell('Cell C2')
+                    +mdc-data-table__cell(2)(numeric)
+
+                +mdc-data-table__row
+                    +mdc-data-table__cell()(checkbox)
+                        +mdc-data-table__row-checkbox
+                    +mdc-data-table__cell('Cell A3')
+                    +mdc-data-table__cell('Cell B3')
+                    +mdc-data-table__cell('Cell C3')
+                    +mdc-data-table__cell(3)(numeric)
+
+                +mdc-data-table__row
+                    +mdc-data-table__cell()(checkbox)
+                        +mdc-data-table__row-checkbox
+                    +mdc-data-table__cell('Cell A4')
+                    +mdc-data-table__cell('Cell B4')
+                    +mdc-data-table__cell('Cell C4')
+                    +mdc-data-table__cell(4)(numeric)

@@ -1,0 +1,18 @@
+extends /layouts/component-page
+
+prepend head
+    - ID = 'dialog'
+    - TITLE = 'Dialog'
+    - DESC = 'Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.'
+
+block main
+    +section
+        +mdc-button('Open Dialog')(onclick='dialog.MDCDialog.open()')
+
+        +mdc-dialog#dialog
+            +mdc-dialog__title('Get this party started?')
+            +mdc-dialog__content
+                +mdc-typography('Turn up the jams and have a good time.')
+            +mdc-dialog__actions
+                +mdc-dialog__button('Decline')(action='close')
+                +mdc-dialog__button('Accept')(unelevated default focused action='accept')

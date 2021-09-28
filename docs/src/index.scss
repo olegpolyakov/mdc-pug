@@ -1,0 +1,82 @@
+@use '../../index.scss' with (
+    $theme-primary: #a86454
+);
+@use '../../styles/theme';
+@use '@material/typography';
+
+@include theme.scrollbars();
+
+body {
+    margin: 0;
+}
+
+.app-header {
+    img {
+        height: 100%;
+    }
+}
+
+.app-drawer {
+    position: fixed;
+    top: 64px;
+    height: calc(100% - 64px);
+}
+
+.app-content {
+    margin-left: 256px;
+    padding: 2rem;
+}
+
+.page {
+    max-width: 1024px;
+    margin: auto;
+
+    .page-header {
+        img {
+            max-width: 100%;
+        }
+    }
+
+    .page-title {
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
+}
+
+.section {
+    .section-title {
+        @include typography.typography('headline5');
+    }
+
+    .section-description {
+        @include typography.typography('body1');
+    }
+
+    p {
+        @include typography.typography('body1');
+    }
+}
+
+.code-block {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+
+    pre {
+        margin: 0;
+    }
+}
+
+.example {
+    .code-block {
+        display: none;
+        margin-top: 1rem;
+    }
+
+    + .example {
+        margin-top: 1rem;
+    }
+}
+
+iframe {
+    border: none;
+}

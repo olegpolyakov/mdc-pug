@@ -1,0 +1,22 @@
+extends /layouts/component-page
+
+prepend head
+    - ID = 'radio'
+    - TITLE = 'Radio Button'
+    - DESC = 'Radio buttons allow for a single option to be selected from a visible list.'
+
+block main
+    +section('Basic Radio Buttons')
+        +mdc-radio('options', '1')
+        +mdc-radio('options', '2')
+        +mdc-radio('options', '3')(disabled)
+
+    +section('Radio Buttons with Form Field') 
+        +mdc-form-field('Option 1')
+            +mdc-radio('options', '1')
+
+        +mdc-form-field('Option 2')
+            +mdc-radio('options', '2')
+
+        +mdc-form-field('Option 3 (Disabled)')
+            +mdc-radio('options', '3')(disabled)

@@ -1,0 +1,22 @@
+extends /layouts/component-page
+
+prepend head
+    - ID = 'segmented-button'
+    - TITLE = 'Segmented Button'
+    - DESC = 'Segmented buttons allow users to toggle the selected states of grouped buttons.'
+    - DOCS_URL = 'https://github.com/material-components/material-components-web/tree/master/packages/mdc-segmented-button'
+
+block main
+    +section('Multi select')
+        :code(lang='pug')
+            +mdc-segmented-button
+                +mdc-segmented-button__segment()(icon='favorite')
+                +mdc-segmented-button__segment()(label='Sample Text')
+                +mdc-segmented-button__segment()(icon='favorite' label='Sample Text')
+
+    +section('Single select')
+        :code(lang='pug')
+            +mdc-segmented-button()(singleSelect)
+                +mdc-segmented-button__segment()(icon='favorite' selected)
+                +mdc-segmented-button__segment()(label='Sample Text')
+                +mdc-segmented-button__segment()(icon='favorite' label='Sample Text')

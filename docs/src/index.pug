@@ -1,0 +1,27 @@
+extends /layouts/page
+
+append head
+    - ID = 'home'
+    - TITLE = 'MDC Pug'
+    - DESC = 'Material Components Web implemented in Pug'
+
+block main
+    +section('Setup')
+        :markdown-it
+            Install the library using npm:
+
+            ```sh
+            npm i mdc-pug
+            ```
+
+            If you plan on using the Sass files, you'll also need to install Sass:
+
+            ```sh
+            npm i sass -D
+            ```
+
+            NOTE: MDC Pug (as well as MDC Web) uses the new [Sass Module System](https://sass-lang.com/blog/the-module-system-is-launched). Unfortunately at this time the `node-sass` implementation does not support it. Please use the `sass` library.
+
+        +section('Usage')
+            :markdown-it
+                You can include the whole library in your layout file:

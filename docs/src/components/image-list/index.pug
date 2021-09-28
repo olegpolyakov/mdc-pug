@@ -1,0 +1,12 @@
+extends /layouts/component-page
+
+prepend head
+    - ID = 'image-list'
+    - TITLE = 'Image List'
+    - DESC = 'Image lists display a collection of images in an organized grid.';
+
+block main
+    +section
+        +mdc-image-list()(withTextProtection)
+            for n in Array(15).fill(1).map((value, index) => value + index)
+                +mdc-image-list__item(`https://material-components.github.io/material-components-web-catalog/static/media/photos/3x2/${n}.jpg`, 'Text Label')

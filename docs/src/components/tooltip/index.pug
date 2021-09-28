@@ -1,0 +1,13 @@
+extends /layouts/component-page
+
+prepend head
+    - ID = 'tooltip'
+    - TITLE = 'Tooltip'
+    - DESC = 'Tooltips display informative text when users hover over, focus on, or tap an element.'
+
+block main
+    +section
+        +mdc-icon-button('favorite')(aria-describedby='favorite-tooltip')
+
+append body
+    +mdc-tooltip('Mark as favorite')(id='favorite-tooltip')

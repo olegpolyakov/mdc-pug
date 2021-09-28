@@ -1,0 +1,43 @@
+extends /layouts/component-page
+
+prepend head
+    - ID = 'menu'
+    - TITLE = 'Menu'
+    - DESC = 'Menus display a list of choices on a transient sheet of material.'
+
+block main
+    +section('Anchored To Parent', 'The menu can be positioned to automatically anchor to a parent element when opened.')
+        +mdc-menu-anchor#toolbar
+            +mdc-menu
+                +mdc-menu-item('Item 1')
+                +mdc-menu-item('Item 2')
+                +mdc-menu-item('Item 3')
+
+    +section('Anchor To Element Within Wrapper', 'The menu can be positioned to automatically anchor to another element, by wrapping the other element with the anchor class.')
+        +mdc-menu-anchor
+            +mdc-button('Open Menu')(onclick='window["basic-menu"].MDCMenu.open = true')
+            +mdc-menu#basic-menu
+                +mdc-menu-item('Item 1')
+                +mdc-menu-item('Item 2')
+                +mdc-menu-item('Item 3')
+
+    +section('Fixed Position', 'The menu can use fixed positioning when being displayed.')
+        +mdc-menu-anchor
+            +mdc-button('Open Menu')(onclick='window["fixed-menu"].MDCMenu.open = true')
+            +mdc-menu#fixed-menu
+                +mdc-menu-item('Item 1')
+                +mdc-menu-item('Item 2')
+                +mdc-menu-item('Item 3')
+
+    +section('Absolute Position', 'The menu can use absolutely positioned when being displayed.')
+        +mdc-menu-anchor()(style='position: relative')
+            +mdc-button('Open Menu')(onclick='window["absolute-menu"].MDCMenu.open = true')
+            +mdc-menu#absolute-menu
+                +mdc-menu-item('Item 1')
+                +mdc-menu-item('Item 2')
+                +mdc-menu-item('Item 3')
+
+append scripts
+    script.
+        window['fixed-menu'].MDCMenu.setFixedPosition(true);
+        window['absolute-menu'].MDCMenu.setAbsolutePosition(100, 100);

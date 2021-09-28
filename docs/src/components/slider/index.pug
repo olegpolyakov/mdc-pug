@@ -1,0 +1,19 @@
+extends /layouts/component-page
+
+prepend head
+    - ID = 'slider'
+    - TITLE = 'Slider'
+    - DESC = 'Sliders let users select from a range of values by moving the slider thumb.';
+
+block main
+    +section('Continuous')
+        +mdc-slider(42)
+
+    +section('Discrete')
+        +mdc-slider(42)(discrete step=10)
+
+    +section('Discrete with Tick Marks')
+        +mdc-slider(50)(discrete tickMarks step=10)
+
+    +section('Disabled')
+        +mdc-slider(42)(disabled)

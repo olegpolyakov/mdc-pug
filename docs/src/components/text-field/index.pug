@@ -1,0 +1,21 @@
+extends /layouts/component-page
+
+prepend head
+    - ID = 'text-field'
+    - TITLE = 'Text Field'
+    - DESC = 'Text fields allow users to input, edit, and select text.'
+
+block main
+    +section('Filled')
+        +mdc-text-field()(label='Label' filled)
+
+    +section('Outlined')
+        +mdc-text-field()(label='Label' outlined)
+
+    +section('Text Field without Label')
+        +mdc-text-field()(filled)
+        +mdc-text-field()(outlined)
+
+    +section('Textarea')
+        +mdc-text-field()(textarea filled)
+        +mdc-text-field()(textarea outlined)

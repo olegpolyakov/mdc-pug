@@ -1,0 +1,40 @@
+extends /layouts/component-page
+
+prepend head
+    - ID = 'avatar'
+    - TITLE = 'Avatar'
+    - DESC = 'Avatars are found throughout material design with uses in everything from tables to dialog menus.'
+
+block main
+    +section('Examples')
+        +example('Text')(code)
+            :code
+                +mdc-avatar('P')
+                // +mdc-avatar()(text='P')
+
+        +example('Icon')(code)
+            :code
+                +mdc-avatar()(icon='star')
+
+        +example('Image')(code)
+            :code
+                +mdc-avatar()(src='https://placeimg.com/128/128/people')
+
+        +example('Sizes')(code)
+            :code
+                +mdc-avatar()(src='https://placeimg.com/128/128/people' size='small')
+                +mdc-avatar()(src='https://placeimg.com/128/128/people' size='medium')
+                +mdc-avatar()(src='https://placeimg.com/128/128/people' size='large')
+
+    +section('Arguments')
+        +arg-table([
+            ['string', 'The text content.']
+        ])
+
+    +section('Attributes')
+        +attr-table([
+            ['text', 'string', 'The text content.'],
+            ['icon', 'string', 'The name of the icon.'],
+            ['src', 'string', 'The source of the image.'],
+            ['size', 'string', 'The size of the avatar.']
+        ])

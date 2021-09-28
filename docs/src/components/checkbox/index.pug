@@ -1,0 +1,22 @@
+extends /layouts/component-page
+
+prepend head
+    - ID = 'checkbox'
+    - TITLE = 'Checkbox'
+    - DESC = 'Checkboxes allow the user to select multiple options from a set.'
+    - DOCS_URL = 'https://github.com/material-components/material-components-web/tree/master/packages/mdc-checkbox'
+    - GUIDE_URL = 'https://material.io/components/checkboxes'
+
+block main
+    +section
+        +example('Basic')(code)
+            :code
+                +mdc-checkbox
+
+        +example('Indeterminate')(code)
+            :code
+                +mdc-checkbox()(indeterminate)
+
+        +example('Disabled')(code)
+            :code
+                +mdc-checkbox()(disabled)

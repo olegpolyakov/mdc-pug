@@ -1,0 +1,43 @@
+extends /layouts/component-page
+
+prepend head
+    - ID = 'chips'
+    - TITLE = 'Chips'
+    - DESC = 'Chips are compact elements that allow users to enter information, select a choice, filter content, or trigger an action.'
+    - DOCS_URL = 'https://github.com/material-components/material-components-web/tree/master/packages/mdc-chips'
+    - GUIDE_URL = 'https://material.io/components/chips'
+
+block main
+    +section('Examples')
+        +example('Action chips')(code)#action-chips
+            :code
+                +mdc-chip-set
+                    +mdc-chip('One')(action)
+                    +mdc-chip('Two')(action)
+                    +mdc-chip('Three')(action)
+                    +mdc-chip('Four')(action disabled)
+
+        +example('Input chips')(code)#input-chips
+            :code
+                +mdc-chip-set
+                    +mdc-chip('One')(input)#i1
+                    +mdc-chip('Two')(input)#i2
+                    +mdc-chip('Three')(input)#i3
+                    +mdc-chip('Four')(input disabled)#i4
+
+        +example('Filter chips')(code)#filter-chips
+            :code
+                +mdc-chip-set()(filter)
+                    +mdc-chip('One')(filter selected)#f1
+                    +mdc-chip('Two')(filter)#f2
+                    +mdc-chip('Three')(filter)#f3
+                    +mdc-chip('Four')(filter)#f4
+
+block scripts
+    script.
+        const filterChipSet = document.querySelector('#filter-chips .mdc-evolution-chip-set');
+
+        filterChipSet.addEventListener('MDCChipSet:interaction', (event) => {
+            console.log(event.detail.chipIndex)
+            filterChipSet.MDCChipSet.setChipSelected(event.detail.chipIndex, undefined, true);
+        });

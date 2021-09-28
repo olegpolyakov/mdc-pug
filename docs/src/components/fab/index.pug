@@ -1,0 +1,24 @@
+extends /layouts/component-page
+
+prepend head
+    - ID = 'fab'
+    - TITLE = 'FAB'
+    - DESC = 'Floating action buttons represents the primary action in an application. Only one floating action button is recommended per screen to represent the most common action.'
+
+block main
+    +section('Basic')
+        +mdc-fab('star')(ripple)
+
+    +section('Mini')
+        +mdc-fab('star')(mini ripple)
+
+    +section('Icon with label')
+        +mdc-fab('add', 'Create')(ripple)
+
+    +section('Label with icon')
+        +mdc-fab()(extended ripple)
+            +mdc-fab__label('Create')
+            +mdc-fab__icon('add')
+
+    +section('Just label')
+        +mdc-fab(null, 'Create')(ripple)

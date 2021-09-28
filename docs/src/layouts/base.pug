@@ -1,0 +1,34 @@
+include /../../index
+include /mixins
+
+doctype html
+html(lang="en")
+    head
+        - let ROOT = './', TITLE, DESC, DOCS_URL, IMAGE_URL;
+        
+        block head
+            meta(charset="UTF-8")
+            meta(name="viewport" content="width=device-width, initial-scale=1.0")
+            meta(http-equiv="X-UA-Compatible" content="ie=edge")
+            title= TITLE ? `MDC Pug | ${TITLE}` : 'MDC Pug'
+            link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono")
+            link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500")
+            link(rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons")
+            link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism.min.css")
+            link(rel="stylesheet" href=`${ROOT}index.css`)
+            script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js' defer)
+            script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-pug.min.js' defer)
+
+    body.mdc-typography
+        block body
+            block header
+
+            block content
+
+            block footer
+
+        script(src=`${ROOT}index.js`)
+        script.
+            mdc.autoInit();
+
+        block scripts

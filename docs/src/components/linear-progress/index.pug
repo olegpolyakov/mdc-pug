@@ -1,0 +1,22 @@
+extends /layouts/component-page
+
+prepend head
+    - ID = 'linear-progress'
+    - TITLE = 'Linear Progress'
+    - DESC = 'Progress indicators display the length of a process or express an unspecified wait time.';
+
+block main
+    +section('Basic')
+        +mdc-linear-progress(42)
+
+    +section('Buffered')
+        +mdc-linear-progress(24, 42)
+
+    +section('Indeterminate')
+        +mdc-linear-progress()(indeterminate)
+
+    +section('Reversed')
+        +mdc-linear-progress(42)(reversed)
+
+    +section('Reversed Buffered')
+        +mdc-linear-progress(24, 42)(reversed)

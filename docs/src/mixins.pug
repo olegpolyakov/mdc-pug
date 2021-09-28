@@ -1,0 +1,87 @@
+mixin page
+    article(id=`${ID}-page`).page
+        header.page-header
+            +mdc-typography(TITLE)(type='headline3').page-title
+
+            if DESC
+                +mdc-typography(DESC)(type='body1').page-description
+
+            ul
+                if DOCS_URL
+                    li: a(href=DOCS_URL target='_blank') Docs
+                if GUIDE_URL
+                    li: a(href=GUIDE_URL target='_blank') Guide
+
+        section.page-content  
+            block
+
+mixin section(title, description)
+    section.section
+        if title
+            +mdc-typography(title)(element='h2' type='headline5').section-title
+        
+        if description
+            +mdc-typography(description)(type='body1').section-description
+
+        block
+
+mixin example(title, description)
+    section.example&attributes(Object.assign({}, attributes, { code: undefined }))
+        +mdc-card()(outlined)
+            +mdc-card__header()(withActions)
+                +mdc-card__header__content(title)
+
+                if attributes.code
+                    +mdc-card__header__actions
+                        +mdc-icon-button('code', 'code_off')(on title='Показать код').code-button
+            
+            if description
+                +mdc-card__section(description)(secondary)
+
+            +mdc-card__section()(primary)
+                block
+
+mixin markdown(text)
+    if attributes.inline
+        != markdown.parseInline(text)
+    else
+        != markdown(text)
+
+mixin arg-table(args)
+    +mdc-data-table
+        +mdc-data-table__header
+            +mdc-data-table__header-row
+                +mdc-data-table__header-cell Position
+                +mdc-data-table__header-cell Type
+                +mdc-data-table__header-cell Description
+        +mdc-data-table__content
+            for arg, index in args
+                +mdc-data-table__row
+                    +mdc-data-table__cell
+                        = index + 1
+                    +mdc-data-table__cell
+                        code= arg[0]
+                    +mdc-data-table__cell= arg[1]
+
+mixin attr-table(attrs)
+    +mdc-data-table
+        +mdc-data-table__header
+            +mdc-data-table__header-row
+                +mdc-data-table__header-cell Name
+                +mdc-data-table__header-cell Type
+                +mdc-data-table__header-cell Description
+        +mdc-data-table__content
+            for attr in attrs
+                +mdc-data-table__row
+                    +mdc-data-table__cell
+                        code=attr[0]
+                    +mdc-data-table__cell
+                        code= attr[1]
+                    +mdc-data-table__cell= attr[2]
+
+mixin nav-item(id, text)
+    +mdc-list-item(text)(
+        element='a'
+        href=`/components/${id}`
+        activated=id === ID
+    )

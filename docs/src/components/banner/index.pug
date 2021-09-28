@@ -1,0 +1,73 @@
+extends /layouts/component-page
+
+prepend head
+    - ID = 'banner'
+    - TITLE = 'Banner'
+    - DESC = 'A banner displays a prominent message and related optional actions.'
+    - DOCS_URL = 'https://github.com/material-components/material-components-web/tree/master/packages/mdc-banner'
+    - GUIDE_URL = 'https://material.io/components/banners'
+
+block main
+    +section('Examples')
+        +example('Text Banner')(code)
+            +mdc-button('Open')(outlined).dialog-button
+
+            :code
+                +mdc-banner('There was a problem processing a transaction on your credit card.')
+
+        +example('Centered banner')(code)
+            +mdc-button('Open')(outlined).dialog-button
+
+            :code
+                +mdc-banner('There was a problem processing a transaction on your credit card.')(centered)
+
+        +example('Fixed banner')(code)
+            +mdc-button('Open')(outlined).dialog-button
+
+            :code
+                +mdc-banner('There was a problem processing a transaction on your credit card.')(fixed)
+
+        +example('Banner with graphic')(code)
+            +mdc-button('Open')(outlined).dialog-button
+
+            :code
+                +mdc-banner('There was a problem processing a transaction on your credit card.')(icon='error_outline')
+
+        +example('Banner with one action')(code)
+            +mdc-button('Open')(outlined).dialog-button
+
+            :code
+                +mdc-banner('There was a problem processing a transaction on your credit card.')(icon='error_outline')
+                    +mdc-banner__action('Fix it')(primary)
+
+        +example('Banner with two actions')(code)
+            +mdc-button('Open')(outlined).dialog-button
+
+            :code
+                +mdc-banner('There was a problem processing a transaction on your credit card.')(icon='error_outline')
+                    +mdc-banner__action('Learn more')(secondary)
+                    +mdc-banner__action('Fix it')(primary)
+
+        +example('Mobile stacked')(code)
+            +mdc-button('Open')(outlined).dialog-button
+
+            :code
+                +mdc-banner('There was a problem processing a transaction on your credit card.')(mobileStacked)
+                    +mdc-banner__action('Learn more')(secondary)
+                    +mdc-banner__action('Fix it')(primary)
+
+block scripts
+    script.
+        document.querySelectorAll('.dialog-button').forEach(button => {
+            const banner = button.parentElement.querySelector('.mdc-banner').MDCBanner;
+
+            button.addEventListener('click', function() {
+                if (banner.isOpen) {
+                    banner.close();
+                    this.textContent = 'Open';
+                } else {
+                    banner.open();
+                    this.textContent = 'Close';
+                }
+            });
+        });

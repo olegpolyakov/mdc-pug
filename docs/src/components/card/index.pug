@@ -1,0 +1,75 @@
+extends /layouts/component-page
+
+prepend head
+    - ID = 'card'
+    - TITLE = 'Card'
+    - DESC = 'Cards contain content and actions about a single subject.'
+    - DOCS_URL = 'https://github.com/material-components/material-components-web/tree/master/packages/mdc-card'
+    - GUIDE_URL = 'https://material.io/components/cards'
+
+block main
+    +section('Examples')
+        +example('Basic card')(code)
+            :code
+                +mdc-card
+                    +mdc-card__header('Title')
+
+                    +mdc-card__section()(secondary)
+                        +mdc-typography('Visit ten places on our planet that are undergoing the biggest changes today.')(type='body2' noMargin)
+
+        +example('Card with subtitle')(code)
+            :code
+                +mdc-card
+                    +mdc-card__header('Title', 'Subtitle')
+
+                    +mdc-card__section()(secondary)
+                        +mdc-typography('Visit ten places on our planet that are undergoing the biggest changes today.')(type='body2' noMargin)
+
+        +example('Card with overline')(code)
+            :code
+                +mdc-card
+                    +mdc-card__header('Title', 'Subtitle', 'Overline')
+
+                    +mdc-card__section()(secondary)
+                        +mdc-typography('Visit ten places on our planet that are undergoing the biggest changes today.')(type='body2' noMargin)
+
+        +example('Card with buttons')(code)
+            :code
+                +mdc-card
+                    +mdc-card__header('Title')
+
+                    +mdc-card__section()(secondary)
+                        +mdc-typography('Visit ten places on our planet that are undergoing the biggest changes today.')(type='body2' noMargin)
+
+                    +mdc-card__actions
+                        +mdc-card__button('Button')
+                        +mdc-card__button('Button')
+
+        +example('Card with icons')(code)
+            :code
+                +mdc-card
+                    +mdc-card__header('Title')
+
+                    +mdc-card__section()(secondary)
+                        +mdc-typography('Visit ten places on our planet that are undergoing the biggest changes today.')(type='body2' noMargin)
+
+                    +mdc-card__actions
+                        +mdc-card__icon('star')
+                        +mdc-card__icon('favorite')
+
+        +example('Card with buttons and icons')(code)
+            :code
+                +mdc-card
+                    +mdc-card__header('Title')
+
+                    +mdc-card__section()(secondary)
+                        +mdc-typography('Visit ten places on our planet that are undergoing the biggest changes today.')(type='body2' noMargin)
+
+                    +mdc-card__actions
+                        +mdc-card__action-buttons
+                            +mdc-card__button('Button')
+                            +mdc-card__button('Button')
+
+                        +mdc-card__action-icons
+                            +mdc-card__icon('star')
+                            +mdc-card__icon('favorite')
