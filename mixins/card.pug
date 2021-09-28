@@ -13,15 +13,32 @@ mixin mdc-card__primary-action
     )&attributes(Object.assign({}, attributes, { element: undefined, ripple: undefined }))
         block
 
-mixin mdc-card__header(title, subtitle)
-    #{attributes.element || 'div'}.mdc-card__header&attributes(Object.assign({}, attributes, { element: undefined }))
-        if title || subtitle
-            +mdc-card__header__text(title, subtitle)
+        div.mdc-card__ripple
 
+mixin mdc-card__header(title, subtitle, overline)
+    - title = title || attributes.title
+    - subtitle = subtitle || attributes.subtitle
+    - overline = overline || attributes.overline
+    
+    #{attributes.element || 'div'}.mdc-card__header(
+        class={
+            'mdc-card__header--with-actions': attributes.withActions
+        }
+    )&attributes(Object.assign({}, attributes, { element: undefined, title: undefined, subtitle: undefined, overline: undefined, withActions: undefined }))
+        if title || subtitle || overline
+            +mdc-card__header__content(title, subtitle, overline)&attributes(attributes)
+        
         block
 
-mixin mdc-card__header__text(title, subtitle)
-    div.mdc-card__header__text&attributes(attributes)
+mixin mdc-card__header__content(title, subtitle, overline)
+    - title = title || attributes.title
+    - subtitle = subtitle || attributes.subtitle
+    - overline = overline || attributes.overline
+
+    div.mdc-card__header__content&attributes(attributes)
+        if overline
+            +mdc-card__overline(overline)
+
         if title
             +mdc-card__title(title)
         
@@ -36,6 +53,11 @@ mixin mdc-card__header__graphic
 
 mixin mdc-card__header__actions
     div.mdc-card__header__actions&attributes(attributes)
+        block
+    
+mixin mdc-card__overline(text)
+    #{attributes.element || 'span'}.mdc-card__overline&attributes(Object.assign({}, attributes, { element: undefined }))
+        = text
         block
 
 mixin mdc-card__title(text)
@@ -69,6 +91,10 @@ mixin mdc-card__media(src)
             div.mdc-card__media-content
                 block
 
+mixin mdc-card__content
+    div.mdc-card__content&attributes(attributes)
+        block
+
 mixin mdc-card__actions
     #{attributes.element || 'div'}.mdc-card__actions(
         class={
@@ -91,8 +117,4 @@ mixin mdc-card__button(label)
 
 mixin mdc-card__icon(icon)
     +mdc-icon-button(icon).mdc-card__action.mdc-card__action--icon&attributes(attributes)
-        block
-
-mixin mdc-card__content
-    div.mdc-card__content
         block

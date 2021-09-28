@@ -17,41 +17,49 @@
             @include theme.property(color, text-secondary-on-light);
         }
     
-        .mdc-card__header__text {
+        .mdc-card__header__content {
             flex: 1;
             overflow: hidden;
-        }
-    
-        .mdc-card__title {
-            margin: 0;
-            @include typography.typography(headline6);
-            @include theme.property(color, text-primary-on-light);
-            @include typography.overflow-ellipsis;
-    
-            + .mdc-card__subtitle {
-                line-height: 1.5rem;
-            }
-        }
-    
-        .mdc-card__subtitle {
-            margin: 0;
-            @include typography.typography(body2);
-            @include theme.property(color, text-secondary-on-light);
         }
 
         .mdc-card__header__actions {
             display: inline-flex;
             margin-left: auto;
-        }
-    
-        .mdc-card__header__graphic,
-        .mdc-card__action {
-            &.mdc-icon-button,
+
             .mdc-icon-button {
                 @include icon-button.size(32px);
                 @include icon-button.ink-color(text-secondary-on-light);
             }
         }
+
+        &.mdc-card__header--with-actions {
+            padding-right: 8px;
+        }
+    }
+
+    .mdc-card__title {
+        @include typography.typography(headline6);
+        @include theme.property(color, text-primary-on-light);
+        @include typography.overflow-ellipsis;
+        margin: 0;
+
+        + .mdc-card__subtitle {
+            line-height: 1.5rem;
+        }
+    }
+
+    .mdc-card__subtitle {
+        @include typography.typography(body2);
+        @include theme.property(color, text-secondary-on-light);
+        margin: 0;
+    }
+
+    .mdc-card__overline {
+        @include typography.typography(overline);
+        @include theme.property(color, text-secondary-on-light);
+        margin: 0;
+        display: block;
+        line-height: normal;
     }
 
     .mdc-card__media {
