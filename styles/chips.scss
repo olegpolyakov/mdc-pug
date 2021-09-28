@@ -1,10 +1,2 @@
 @forward '@material/chips';
-@use '@material/chips/mdc-chips';
-
-.mdc-chip {
-    &.mdc-chip--outlined {
-        box-sizing: border-box;
-        border: 1px solid #e0e0e0;
-        background-color: transparent;
-    }
-}
+@use '@material/chips/styles';
