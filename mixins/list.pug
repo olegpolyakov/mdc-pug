@@ -1,63 +1,77 @@
 mixin mdc-list
     #{attributes.element || 'ul'}.mdc-list(
-        class={
-            'mdc-list--dense': attributes.dense,
-            'mdc-list--two-line': attributes.twoLine,
-            'mdc-list--textual-list': attributes.textualList,
-            'mdc-list--avatar-list': attributes.avatarList,
-            'mdc-list--icon-list': attributes.iconList,
-            'mdc-list--image-list': attributes.imageList,
-            'mdc-list--thumbnail-list': attributes.thumbnailList,
-            'mdc-list--video-list': attributes.videoList
-        }
         data-mdc-auto-init='MDCList'
-    )&attributes(Object.assign({}, attributes, { element: undefined, dense: undefined, twoLine: undefined, textualList: undefined, avatarList: undefined, iconList: undefined, imageList: undefined, thumbnailList: undefined, videoList: undefined }))
+    )&attributes(Object.assign({}, attributes, { element: undefined }))
         block
 
 mixin mdc-list-item(primary, secondary)
+    - const lines = Boolean(attributes.overline) + Boolean(primary || attributes.primary) + Boolean(secondary || attributes.secondary);
+
     #{attributes.element || 'li'}.mdc-list-item(
         class={
             'mdc-list-item--activated': attributes.activated,
             'mdc-list-item--selected': attributes.selected,
-            'mdc-list-item--disabled': attributes.disabled
+            'mdc-list-item--disabled': attributes.disabled,
+            'mdc-list-item--non-interactive': attributes.nonInteractive,
+            'mdc-list-item--with-one-line': lines === 1,
+            'mdc-list-item--with-two-lines': lines === 2,
+            'mdc-list-item--with-three-lines': lines === 3,
+            'mdc-list-item--with-overline': attributes.overline,
+            'mdc-list-item--with-leading-icon': attributes.icon || attributes.leadingIcon,
+            'mdc-list-item--with-leading-image': attributes.leadingImage,
+            'mdc-list-item--with-leading-thumbnail': attributes.leadingThumbnail,
+            'mdc-list-item--with-leading-video': attributes.leadingVideo,
+            'mdc-list-item--with-leading-checkbox': attributes.leadingCheckbox,
+            'mdc-list-item--with-leading-radio': attributes.leadingRadio,
+            'mdc-list-item--with-leading-switch': attributes.leadingSwitch,
+            'mdc-list-item--with-trailing-icon': attributes.trailingIcon,
+            'mdc-list-item--with-trailing-meta': attributes.meta || attributes.trailingMeta,
+            'mdc-list-item--with-trailing-checkbox': attributes.trailingCheckbox,
+            'mdc-list-item--with-trailing-radio': attributes.trailingRadio,
+            'mdc-list-item--with-trailing-switch': attributes.trailingSwitch,
         }
         data-mdc-auto-init=(attributes.ripple !== false) && 'MDCRipple'
-    )&attributes(Object.assign({}, attributes, { element: undefined, graphic: undefined, meta: undefined, activated: undefined, selected: undefined, disabled: undefined, ripple: undefined }))
+    )&attributes(Object.assign({}, attributes, { element: undefined, activated: undefined, selected: undefined, disabled: undefined, nonInteractive: undefined, overline: undefined, primary: undefined, secondary: undefined, icon: undefined, meta: undefined, leadingIcon: undefined, leadingImage: undefined, leadingThumbnail: undefined, leadingVideo: undefined, leadingCheckbox: undefined, leadingRadio: undefined, leadingSwitch: undefined, trailingIcon: undefined, trailingMeta: trailingMeta, trailingCheckbox: undefined, trailingRadio: undefined, trailingSwitch: undefined, ripple: undefined }))
         span.mdc-list-item__ripple
 
-        if attributes.graphic
-            +mdc-list-item__graphic(attributes.graphic)
+        if attributes.icon
+            +mdc-list-item__start
+                +mdc-icon(attributes.icon)
 
-        if primary || secondary
-            +mdc-list-item__text(primary, secondary)
-
+        if (primary || attributes.primary) || (secondary || attributes.secondary) || attributes.overline
+            +mdc-list-item__content(primary, secondary)(
+                overline=attributes.overline
+                primary=attributes.primary
+                secondary=attributes.secondary
+            )
+        
         if attributes.meta
-            +mdc-list-item__meta(attributes.meta)
-
+            +mdc-list-item__end= attributes.meta
+        
         block
 
-mixin mdc-list-item__graphic(icon)
-    #{attributes.element || 'span'}.mdc-list-item__graphic(
-        class={
-            'material-icons mdc-icon': icon
-        }
-    )&attributes(Object.assign({}, attributes, { element: undefined }))
-        if icon
-            =icon
+mixin mdc-list-item__start(content)
+    #{attributes.element || 'span'}.mdc-list-item__start&attributes(Object.assign({}, attributes, { element: undefined }))
+        =content
         block
 
-mixin mdc-list-item__text(primary, secondary)
-    #{attributes.element || 'span'}.mdc-list-item__text&attributes(Object.assign({}, attributes, { element: undefined }))
-        if primary && secondary
-            span.mdc-list-item__primary-text= primary
-            span.mdc-list-item__secondary-text= secondary
-        else
-            =primary
-            block
+mixin mdc-list-item__content(content)
+    #{attributes.element || 'span'}.mdc-list-item__content&attributes(Object.assign({}, attributes, { element: undefined, overline: undefined, primary: undefined, secondary: undefined }))
+        if attributes.overline
+            span.mdc-list-item__overline-text= attributes.overline
 
-mixin mdc-list-item__meta(text)
-    #{attributes.element || 'span'}.mdc-list-item__meta&attributes(Object.assign({}, attributes, { element: undefined }))
-        =text
+        if attributes.primary
+            span.mdc-list-item__primary-text= attributes.primary
+
+        if attributes.secondary
+            span.mdc-list-item__secondary-text= attributes.secondary
+
+        =content
+        block
+
+mixin mdc-list-item__end(content)
+    #{attributes.element || 'span'}.mdc-list-item__end&attributes(Object.assign({}, attributes, { element: undefined }))
+        =content
         block
 
 mixin mdc-list-divider
