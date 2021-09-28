@@ -23,7 +23,7 @@ mixin mdc-data-table__header-row
     tr.mdc-data-table__header-row&attributes(attributes)
         block
 
-mixin mdc-data-table__header-cell
+mixin mdc-data-table__header-cell(content)
     td.mdc-data-table__header-cell(
         class={
             'mdc-data-table__header-cell--numeric': attributes.numeric,
@@ -36,12 +36,14 @@ mixin mdc-data-table__header-cell
         if attributes.withSort
             div.mdc-data-table__header-cell-wrapper
                 div.mdc-data-table__header-cell-label
+                    =content
                     block
 
                 button.mdc-icon-button.material-icons.mdc-data-table__sort-icon-button arrow_upward
 
                 div.mdc-data-table__sort-status-label(aria-hidden='true')
         else
+            =content
             block
 
 mixin mdc-data-table__content
@@ -56,13 +58,14 @@ mixin mdc-data-table__row
     )&attributes(Object.assign({}, attributes, { selected: undefined }))
         block
 
-mixin mdc-data-table__cell
+mixin mdc-data-table__cell(content)
     #{attributes.element || 'td'}.mdc-data-table__cell(
         class={
             'mdc-data-table__cell--numeric': attributes.numeric,
             'mdc-data-table__cell--checkbox': attributes.checkbox,
         }
     )&attributes(Object.assign({}, attributes, { element: undefined, numeric: undefined, checkbox: undefined }))
+        =content
         block
 
 mixin mdc-data-table__header-row-checkbox(name)
