@@ -1,15 +1,16 @@
 mixin mdc-circular-progress(progress = 0)
     - progress = progress > 1 ? (progress / 100) : Number(progress);
     - let props;
+    - const size = attributes.size || 'medium';
 
-    case attributes.size
-        when 'large'
-            - props = { viewBox: 48, radius: 18, strokeWidth: 4, gapPatchStrokeWidth: 3.2, strokeDasharray: 113.097, indeterminateStrokeDashoffset: 56.549 }
-        when 'medium'
-            - props = { viewBox: 32, radius: 12.5, strokeWidth: 3, gapPatchStrokeWidth: 2.4, strokeDasharray: 78.54, indeterminateStrokeDashoffset: 39.27 }
+    case size
         when 'small'
             - props = { viewBox: 24, radius: 8.75, strokeWidth: 2.5, gapPatchStrokeWidth: 2, strokeDasharray: 54.978, indeterminateStrokeDashoffset: 27.489 }
-        default
+
+        when 'medium'
+            - props = { viewBox: 32, radius: 12.5, strokeWidth: 3, gapPatchStrokeWidth: 2.4, strokeDasharray: 78.54, indeterminateStrokeDashoffset: 39.27 }
+        
+        when 'large'
             - props = { viewBox: 48, radius: 18, strokeWidth: 4, gapPatchStrokeWidth: 3.2, strokeDasharray: 113.097, indeterminateStrokeDashoffset: 56.549 }
     
     - const { viewBox, radius, strokeWidth, gapPatchStrokeWidth, strokeDasharray, indeterminateStrokeDashoffset } = props;
@@ -19,9 +20,9 @@ mixin mdc-circular-progress(progress = 0)
     
     div.mdc-circular-progress(
         class={
-            'mdc-circular-progress--large': attributes.size === 'large' || !attributes.size,
-            'mdc-circular-progress--medium': attributes.size === 'medium',
-            'mdc-circular-progress--small': attributes.size === 'small',
+            'mdc-circular-progress--large': size === 'large',
+            'mdc-circular-progress--medium': size === 'medium',
+            'mdc-circular-progress--small': size === 'small',
             'mdc-circular-progress--indeterminate': attributes.indeterminate,
             'mdc-circular-progress--closed': attributes.closed
         }
