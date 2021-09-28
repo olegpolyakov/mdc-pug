@@ -1,4 +1,4 @@
 .vscode
 node_modules
-./index.css
-./index.js
+/index.css
+/index.js
