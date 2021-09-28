@@ -7,6 +7,8 @@ mixin mdc-icon-button(onIcon, offIcon)
         data-mdc-auto-init=offIcon ? 'MDCIconButtonToggle' : 'MDCRipple'
         data-mdc-ripple-is-unbounded
     )&attributes(Object.assign({}, attributes, { element: undefined, on: undefined, ripple: undefined }))
+        span.mdc-icon-button__ripple
+        
         unless offIcon
             =onIcon
         else
