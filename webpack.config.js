@@ -12,7 +12,7 @@ module.exports = {
     entry: './scripts/material-components-web.js',
 
     output: {
-        path: path.resolve(__dirname),
+        path: path.resolve(__dirname, 'dist'),
         filename: 'index.js',
         library: {
             type: 'window',
