@@ -20,11 +20,15 @@ body {
     position: fixed;
     top: 64px;
     height: calc(100% - 64px);
+    z-index: 1;
 }
 
 .app-content {
+    max-height: calc(100vh - 64px);
     margin-left: 256px;
     padding: 2rem;
+    box-sizing: border-box;
+    overflow: auto;
 }
 
 .page {
