@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "build-docs": "gulp",
-    "serve-docs": "http-server ./docs -c-1",
+    "docs": "http-server ./docs -c-1",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
