@@ -57,7 +57,7 @@ block body
     +mdc-button('Click Me')
 ```
 
-Alternitavely you can include only the components you need:
+Alternatively you can include only the components you need:
 
 ```pug
 include path-to-node_modules/mdc-pug/mixins/button
