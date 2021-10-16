@@ -10,11 +10,11 @@ module.exports = [
 
         mode: 'production',
 
-        entry: './lib/index.js',
+        entry: ['./lib/index.js', './lib/styles/index.scss'],
 
         output: {
             path: path.resolve(__dirname, 'dist'),
-            filename: 'index.js',
+            filename: 'mdc.js',
             library: {
                 type: 'window',
                 name: 'mdc'
@@ -65,7 +65,7 @@ module.exports = [
 
         plugins: [
             new CssExtractPlugin({
-                filename: 'index.css'
+                filename: 'mdc.css'
             })
         ],
 
@@ -73,8 +73,13 @@ module.exports = [
             minimize: true,
             minimizer: [
                 new TerserPlugin({
-                    extractComments: false
-                }),
+                    terserOptions: {
+                        format: {
+                            comments: false,
+                        },
+                    },
+                    extractComments: false,
+                }), ,
                 new CssMinimizerPlugin()
             ]
         }
@@ -84,7 +89,7 @@ module.exports = [
 
         mode: 'production',
 
-        entry: './lib/index.js',
+        entry: './docs/src/index.js',
 
         output: {
             path: path.resolve(__dirname, 'docs'),
@@ -105,6 +110,11 @@ module.exports = [
                         options: {
                             presets: [
                                 '@babel/preset-env'
+                            ],
+                            plugins: [
+                                ['prismjs', {
+                                    languages: ['pug', 'scss'],
+                                }]
                             ]
                         }
                     }
@@ -116,7 +126,12 @@ module.exports = [
             minimize: true,
             minimizer: [
                 new TerserPlugin({
-                    extractComments: false
+                    terserOptions: {
+                        format: {
+                            comments: false,
+                        },
+                    },
+                    extractComments: false,
                 }),
                 new CssMinimizerPlugin()
             ]
