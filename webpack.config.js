@@ -79,7 +79,7 @@ module.exports = [
                         },
                     },
                     extractComments: false,
-                }), ,
+                }),
                 new CssMinimizerPlugin()
             ]
         }
