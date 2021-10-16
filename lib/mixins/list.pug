@@ -5,7 +5,7 @@ mixin mdc-list
         block
 
 mixin mdc-list-item(primary, secondary)
-    - const lines = Boolean(attributes.overline) + Boolean(primary || attributes.primary) + Boolean(secondary || attributes.secondary);
+    - const lines = Boolean(primary || attributes.primary) + Boolean(secondary || attributes.secondary) + Boolean(attributes.overline);
 
     #{attributes.element || 'li'}.mdc-list-item(
         class={
@@ -39,10 +39,10 @@ mixin mdc-list-item(primary, secondary)
                 +mdc-icon(attributes.icon)
 
         if (primary || attributes.primary) || (secondary || attributes.secondary) || attributes.overline
-            +mdc-list-item__content(primary, secondary)(
+            +mdc-list-item__content()(
                 overline=attributes.overline
-                primary=attributes.primary
-                secondary=attributes.secondary
+                primary=primary || attributes.primary
+                secondary=secondary || attributes.secondary
             )
         
         if attributes.meta

@@ -4,77 +4,122 @@ const TerserPlugin = require('terser-webpack-plugin');
 const CssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
-module.exports = {
-    name: 'lib',
+module.exports = [
+    {
+        name: 'lib',
 
-    mode: 'production',
+        mode: 'production',
 
-    entry: './scripts/material-components-web.js',
+        entry: './lib/index.js',
 
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'index.js',
-        library: {
-            type: 'window',
-            name: 'mdc'
+        output: {
+            path: path.resolve(__dirname, 'dist'),
+            filename: 'index.js',
+            library: {
+                type: 'window',
+                name: 'mdc'
+            }
+        },
+
+        module: {
+            rules: [
+                {
+                    test: /\.js$/,
+                    exclude: /node_modules/,
+                    use: {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [
+                                '@babel/preset-env'
+                            ]
+                        }
+                    }
+                },
+                {
+                    test: /\.scss$/,
+                    use: [
+                        CssExtractPlugin.loader,
+                        {
+                            loader: 'css-loader'
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                postcssOptions: {
+                                    plugins: [autoprefixer]
+                                }
+                            }
+                        },
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sassOptions: {
+                                    includePaths: [path.resolve('node_modules')]
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+
+        plugins: [
+            new CssExtractPlugin({
+                filename: 'index.css'
+            })
+        ],
+
+        optimization: {
+            minimize: true,
+            minimizer: [
+                new TerserPlugin({
+                    extractComments: false
+                }),
+                new CssMinimizerPlugin()
+            ]
         }
     },
+    {
+        name: 'docs',
 
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: [
-                            '@babel/preset-env'
-                        ]
+        mode: 'production',
+
+        entry: './lib/index.js',
+
+        output: {
+            path: path.resolve(__dirname, 'docs'),
+            filename: 'index.js',
+            library: {
+                type: 'window',
+                name: 'mdc'
+            }
+        },
+
+        module: {
+            rules: [
+                {
+                    test: /\.js$/,
+                    exclude: /node_modules/,
+                    use: {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [
+                                '@babel/preset-env'
+                            ]
+                        }
                     }
                 }
-            },
-            {
-                test: /\.scss$/,
-                use: [
-                    CssExtractPlugin.loader,
-                    {
-                        loader: 'css-loader'
-                    },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            postcssOptions: {
-                                plugins: [autoprefixer]
-                            }
-                        }
-                    },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            sassOptions: {
-                                includePaths: [path.resolve('node_modules')]
-                            }
-                        }
-                    }
-                ]
-            }
-        ]
-    },
+            ]
+        },
 
-    plugins: [
-        new CssExtractPlugin({
-            filename: 'index.css'
-        })
-    ],
-
-    optimization: {
-        minimize: true,
-        minimizer: [
-            new TerserPlugin({
-                extractComments: false
-            }),
-            new CssMinimizerPlugin()
-        ]
+        optimization: {
+            minimize: true,
+            minimizer: [
+                new TerserPlugin({
+                    extractComments: false
+                }),
+                new CssMinimizerPlugin()
+            ]
+        }
     }
-};
+];

@@ -5,7 +5,7 @@
   "main": "index.pug",
   "scripts": {
     "build": "webpack",
-    "build-docs": "gulp",
+    "dev": "webpack --config-name=docs && gulp",
     "docs": "http-server ./docs -c-1",
     "prepublishOnly": "npm run build"
   },

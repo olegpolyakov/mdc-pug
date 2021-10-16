@@ -25,24 +25,6 @@ mixin mdc-chip(label)
         }
         data-mdc-auto-init='MDCChip'
     )&attributes(Object.assign({}, attributes, { element: undefined, leadingIcon: undefined, trailingIcon: undefined, selected: undefined, action: undefined, filter: undefined, input: undefined }))
-        if attributes.action
-            +mdc-chip__cell()(primary)
-                +mdc-chip__action(label)(primary disabled=attributes.disabled)
-                    block
-
-        if attributes.input
-            +mdc-chip__cell()(primary)
-                +mdc-chip__action(label)(primary disabled=attributes.disabled)
-                    block
-
-            +mdc-chip__cell()(trailing)
-                +mdc-chip__action()(
-                    trailing
-                    trailingIcon=attributes.trailingIcon
-                    disabled=attributes.disabled
-                    deletable
-                )
-        
         if attributes.filter
             +mdc-chip__action(label)(
                 element='span'
@@ -52,6 +34,24 @@ mixin mdc-chip(label)
                 checkmark
             )
                 block
+
+        else
+            +mdc-chip__cell()(primary)
+                +mdc-chip__action(label)(
+                    primary
+                    leadingIcon=attributes.leadingIcon
+                    disabled=attributes.disabled
+                )
+                    block
+
+            if attributes.input
+                +mdc-chip__cell()(trailing)
+                    +mdc-chip__action()(
+                        trailing
+                        trailingIcon=attributes.trailingIcon
+                        disabled=attributes.disabled
+                        deletable
+                    )
 
 mixin mdc-chip__cell
     span.mdc-evolution-chip__cell(
@@ -81,7 +81,7 @@ mixin mdc-chip__action(label)
         if attributes.leadingIcon || attributes.checkmark
             span.mdc-evolution-chip__graphic
                 if attributes.leadingIcon
-                    span.mdc-evolution-chip__icon.mdc-evolution-chip__icon--primary.material-icons= leadingIcon
+                    span.mdc-evolution-chip__icon.mdc-evolution-chip__icon--primary.material-icons= attributes.leadingIcon
 
                 if attributes.checkmark
                     span.mdc-evolution-chip__checkmark

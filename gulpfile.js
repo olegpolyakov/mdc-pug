@@ -34,18 +34,13 @@ function buildPug() {
 function buildSass() {
     return gulp.src('./docs/src/index.scss')
         .pipe(sass({
-            includePaths: ['./node_modules/'],
+            includePaths: ['./', './node_modules/'],
             outputStyle: 'compressed'
         }))
         .pipe(gulp.dest('./docs'));
 }
 
-function copyJs() {
-    return gulp.src('./index.js')
-        .pipe(gulp.dest('./docs'));
-}
-
-gulp.watch('./docs/**/*.scss', buildSass);
 gulp.watch('./docs/**/*.pug', buildPug);
+gulp.watch('./docs/**/*.scss', buildSass);
 
-module.exports.default = gulp.parallel(buildPug, buildSass, copyJs);
+module.exports.default = gulp.parallel(buildPug, buildSass);
