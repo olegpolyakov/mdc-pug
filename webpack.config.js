@@ -10,7 +10,7 @@ module.exports = [
 
         mode: 'production',
 
-        entry: ['./lib/index.js', './lib/styles/index.scss'],
+        entry: ['./lib/styles/index.scss', './lib/index.js'],
 
         output: {
             path: path.resolve(__dirname, 'dist'),
@@ -93,11 +93,7 @@ module.exports = [
 
         output: {
             path: path.resolve(__dirname, 'docs'),
-            filename: 'index.js',
-            library: {
-                type: 'window',
-                name: 'mdc'
-            }
+            filename: 'index.js'
         },
 
         module: {
