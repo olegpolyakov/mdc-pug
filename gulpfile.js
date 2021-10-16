@@ -4,6 +4,8 @@ const sass = require('gulp-sass')(require('sass'));
 const { render } = require('pug');
 const marked = require('marked');
 
+const { version } = require('./package.json');
+
 function buildPug() {
     return gulp.src([
         './docs/src/**/*.pug',
@@ -14,6 +16,7 @@ function buildPug() {
             basedir: './docs/src/',
             filename: 'index.pug',
             locals: {
+                VERSION: version,
                 markdown: marked
             },
             filters: {
