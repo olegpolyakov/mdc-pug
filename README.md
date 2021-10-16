@@ -18,7 +18,7 @@ If you plan on using the Sass files, you'll also need to install `sass`:
 npm i -D sass
 ```
 
-> NOTE: MDC Pug (as well as MDC Web) uses the new [Sass Module System](https://sass-lang.com/blog/the-module-system-is-launched). Unfortunately at this time the `node-sass` implementation does not support it. Please use the `sass` library.
+> **NOTE**: MDC Pug (as well as MDC Web) uses the new [Sass Module System](https://sass-lang.com/blog/the-module-system-is-launched). Unfortunately at this time the `node-sass` implementation does not support it. Please use the `sass` library.
 
 ## Usage
 
@@ -32,18 +32,17 @@ include path-to-node_modules/mdc-pug/index
 
 doctype html
 html
-    head
-        link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500')
-        link(rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons')
+  head
+    link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500')
+    link(rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons')
+    link(rel='stylesheet' href='path-to-node-modules/mdc-pug/dist/mdc.css')
 
 body.mdc-typography
-    block body
+  block body
 
-    // Required Material Web JavaScript library
-    script(src='https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js')
-    // Initialize all the components
-    script.
-        mdc.autoInit();
+  script(src='path-to-node-modules/mdc-pug/dist/mdc.js')
+  script.
+    mdc.autoInit();
 ```
 
 All of the components will be available as mixins in other pug files that extend the `layout`:
@@ -68,12 +67,13 @@ html
     head
         link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500')
         link(rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons')
+        link(rel='stylesheet' href='path-to-node-modules/mdc-pug/dist/mdc.css')
 
     body.mdc-typography
         +mdc-typography('Hello World')
         +mdc-button('Click Me')
 
-    script(src='https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js')
+    script(src='path-to-node-modules/mdc-pug/dist/mdc.js')
     script.
         mdc.autoInit();
 ```
@@ -86,9 +86,9 @@ You can use all the styles:
 @use 'path-to-node_modules/mdc-pug';
 ```
 
-or only the ones you need:
+or only the compon you need:
 
 ```scss
-@use 'path-to-node_modules/mdc-pug/styles/button';
-@use 'path-to-node_modules/mdc-pug/styles/typography';
+@use 'path-to-node_modules/mdc-pug/lib/styles/button';
+@use 'path-to-node_modules/mdc-pug/lib/styles/typography';
 ```
