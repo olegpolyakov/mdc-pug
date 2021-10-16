@@ -1,8 +1,11 @@
-@use '../../index.scss' with (
-    $theme-primary: #a86454
+$theme-primary-color: #a86454;
+
+@use 'lib/styles' with (
+    $theme-primary: $theme-primary-color
 );
-@use '../../styles/theme';
-@use '@material/typography';
+@use 'prismjs/themes/prism';
+@use 'lib/styles/theme';
+@use 'lib/styles/typography';
 
 @include theme.scrollbars();
 
@@ -13,6 +16,12 @@ body {
 .app-header {
     img {
         height: 100%;
+    }
+
+    .version {
+        margin-top: 4px;
+        margin-left: 1rem;
+        color: rgba(255, 255, 255, .8);
     }
 }
 
@@ -26,7 +35,6 @@ body {
 .app-content {
     max-height: calc(100vh - 64px);
     margin-left: 256px;
-    padding: 2rem;
     box-sizing: border-box;
     overflow: auto;
 }
@@ -34,11 +42,10 @@ body {
 .page {
     max-width: 1024px;
     margin: auto;
+    padding: 2rem;
 
     .page-header {
-        img {
-            max-width: 100%;
-        }
+
     }
 
     .page-title {
@@ -83,4 +90,31 @@ body {
 
 iframe {
     border: none;
+}
+
+.markdown {
+    h1, h2, h3, h4, h5, h6 {
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
+
+    h1 {
+        @include typography.typography('headline4');
+    }
+
+    h2 {
+        @include typography.typography('headline5');
+    }
+
+    h3 {
+        @include typography.typography('headline6');
+    }
+
+    blockquote {
+        @include typography.typography('body2');
+        margin-left: 0;
+        margin-top: 0;
+        padding-left: 1rem;
+        border-left: 4px solid $theme-primary-color;
+    }
 }

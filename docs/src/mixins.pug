@@ -43,9 +43,9 @@ mixin example(title, description)
 
 mixin markdown(text)
     if attributes.inline
-        != markdown.parseInline(text)
+        != markdown.parseInline(text || block)
     else
-        != markdown(text)
+        != markdown(text || block)
 
 mixin arg-table(args)
     +mdc-data-table

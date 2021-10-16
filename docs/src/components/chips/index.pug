@@ -9,13 +9,21 @@ prepend head
 
 block main
     +section('Examples')
-        +example('Action chips')(code)#action-chips
+        +example('Basic chips')(code)
             :code
                 +mdc-chip-set
-                    +mdc-chip('One')(action)
-                    +mdc-chip('Two')(action)
-                    +mdc-chip('Three')(action)
-                    +mdc-chip('Four')(action disabled)
+                    +mdc-chip('One')
+                    +mdc-chip('Two')
+                    +mdc-chip('Three')
+                    +mdc-chip('Four')(disabled)
+
+        +example('Chips with icons')(code)
+            :code
+                +mdc-chip-set
+                    +mdc-chip('One')(leadingIcon='star')
+                    +mdc-chip('Two')(leadingIcon='star')
+                    +mdc-chip('Three')(leadingIcon='star')
+                    +mdc-chip('Four')(leadingIcon='star' disabled)
 
         +example('Input chips')(code)#input-chips
             :code
@@ -33,7 +41,7 @@ block main
                     +mdc-chip('Three')(filter)#f3
                     +mdc-chip('Four')(filter)#f4
 
-block scripts
+append scripts
     script.
         const filterChipSet = document.querySelector('#filter-chips .mdc-evolution-chip-set');
 

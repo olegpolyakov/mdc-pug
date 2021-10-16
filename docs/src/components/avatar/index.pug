@@ -3,13 +3,14 @@ extends /layouts/component-page
 prepend head
     - ID = 'avatar'
     - TITLE = 'Avatar'
-    - DESC = 'Avatars are found throughout material design with uses in everything from tables to dialog menus.'
+    - DESC = 'An avatar is a graphical representation of a user or a thing.'
 
 block main
     +section('Examples')
         +example('Text')(code)
             :code
                 +mdc-avatar('P')
+                // or
                 // +mdc-avatar()(text='P')
 
         +example('Icon')(code)

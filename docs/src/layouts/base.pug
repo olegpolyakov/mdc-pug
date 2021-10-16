@@ -14,10 +14,9 @@ html(lang="en")
             link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono")
             link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500")
             link(rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons")
-            link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism.min.css")
             link(rel="stylesheet" href=`${ROOT}index.css`)
-            script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js' defer)
-            script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-pug.min.js' defer)
+
+            block styles
 
     body.mdc-typography
         block body
@@ -28,7 +27,5 @@ html(lang="en")
             block footer
 
         script(src=`${ROOT}index.js`)
-        script.
-            mdc.autoInit();
 
         block scripts

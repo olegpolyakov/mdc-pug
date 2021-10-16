@@ -5,12 +5,14 @@ block header
         +mdc-top-app-bar__row
             +mdc-top-app-bar__section()(align='start')
                 +mdc-top-app-bar__title('MDC Pug')
+                +mdc-typography(VERSION)(element='span' type='overline').version
 
-            +mdc-top-app-bar__section()(align='center')
-                img(src='https://cdn.rawgit.com/pugjs/pug-logo/eec436cee8fd9d1726d7839cbe99d1f694692c0c/SVG/pug-final-logo-_-colour-128.svg')
-                
             +mdc-top-app-bar__section()(align='end')
-                +mdc-top-app-bar__action-item('code')(element='a' href='https://github.com/olegpolyakov/mdc-pug' target='_blank')
+                +mdc-top-app-bar__action-item()(element='a' href='https://pugjs.org' target='_blank' title='Pug docs')
+                    img(src='https://cdn.rawgit.com/pugjs/pug-logo/eec436cee8fd9d1726d7839cbe99d1f694692c0c/SVG/pug-final-logo-_-colour-128.svg')
+                +mdc-top-app-bar__action-item('code')(element='a' href='https://github.com/olegpolyakov/mdc-pug' target='_blank' title='Source code')
+                +mdc-top-app-bar__action-item('forum')(element='a' href='https://github.com/olegpolyakov/mdc-pug/discussons' target='_blank' title='Discussions')
+                +mdc-top-app-bar__action-item('bug_report')(element='a' href='https://github.com/olegpolyakov/mdc-pug/issues' target='_blank' title='Issues')
 
 block content
     div.mdc-top-app-bar--fixed-adjust

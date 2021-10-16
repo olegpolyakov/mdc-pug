@@ -3,14 +3,14 @@ extends /layouts/component-page
 prepend head
     - ID = 'badge'
     - TITLE = 'Badge'
-    - DESC = 'Badge generates a small badge to the top-right of its child(ren).'
+    - DESC = 'A badge generates a number indicator to the top-right of its child(ren).'
 
 block main
     +section('Examples')
-        +example('With text')(code)
+        +example('With an avatar')(code)
             :code
                 +mdc-badge(4)
-                  +mdc-typography('Text', 'body1')(element='span')
+                  +mdc-avatar()(src='https://placeimg.com/128/128/people')
 
         +example('With a button')(code)
             :code
@@ -26,3 +26,8 @@ block main
             :code
                 +mdc-badge(4)(inset)
                   +mdc-icon-button('notifications')
+
+        +example('With text')(code)
+            :code
+                +mdc-badge(4)
+                  +mdc-typography('Text', 'body1')(element='span')
