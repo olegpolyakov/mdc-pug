@@ -9,47 +9,35 @@
         flex-direction: column;
     }
     
-    &.mdc-layout--align-items--start {
+    &.mdc-layout--align-start {
         align-items: flex-start;
     }
     
-    &.mdc-layout--align-items--center {
+    &.mdc-layout--align-center {
         align-items: center;
     }
     
-    &.mdc-layout--align-items--end {
+    &.mdc-layout--align-end {
         align-items: flex-end;
     }
     
-    &.mdc-layout--align-self--start {
-        align-self: flex-start;
-    }
-    
-    &.mdc-layout--align-self--center {
-        align-self: center
-    }
-    
-    &.mdc-layout--align-self--end {
-        align-self: flex-end;
-    }
-    
-    &.mdc-layout--justify-content--start  {
+    &.mdc-layout--justify-start  {
         justify-content: flex-start;
     }
     
-    &.mdc-layout--justify-content--center  {
+    &.mdc-layout--justify-center  {
         justify-content: center;
     }
     
-    &.mdc-layout--justify-content--end  {
+    &.mdc-layout--justify-end  {
         justify-content: flex-end;
     }
     
-    &.mdc-layout--justify-content--around  {
+    &.mdc-layout--justify-around  {
         justify-content: space-around;
     }
     
-    &.mdc-layout--justify-content--between  {
+    &.mdc-layout--justify-between  {
         justify-content: space-between;
     }
 }

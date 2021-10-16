@@ -4,9 +4,8 @@ mixin mdc-layout
             'mdc-layout--row': attributes.row,
             'mdc-layout--column': attributes.column,
             [`mdc-layout--direction--${attributes.direction}`]: attributes.direction,
-            [`mdc-layout--justify-content--${attributes.justifyContent}`]: attributes.justifyContent,
-            [`mdc-layout--align-items--${attributes.alignItems}`]: attributes.alignItems,
-            [`mdc-layout--align-self--${attributes.alignSelf}`]: attributes.alignSelf
+            [`mdc-layout--justify-${attributes.justify}`]: attributes.justify,
+            [`mdc-layout--align-${attributes.align}`]: attributes.align
         }
-    )&attributes(Object.assign({}, attributes, { element: undefined, row: undefined, column: undefined, direction: undefined, justifyContent: undefined, alignItems: undefined, alignSelf: undefined }))
+    )&attributes(Object.assign({}, attributes, { element: undefined, row: undefined, column: undefined, direction: undefined, justify: undefined, align: undefined }))
         block
