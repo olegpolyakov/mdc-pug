@@ -16,7 +16,7 @@ module.exports = [
             path: path.resolve(__dirname, 'dist'),
             filename: 'mdc.js',
             library: {
-                type: 'window',
+                type: 'umd',
                 name: 'mdc'
             }
         },
