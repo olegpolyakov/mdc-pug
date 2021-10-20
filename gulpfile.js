@@ -27,7 +27,7 @@ function buildPug() {
                 },
 
                 highlight: function(text, options) {
-                    return render(`div\n    pre\n      code.language-${options.lang}\n        | ${text.trim().split('\n').join('\n        | ')}`);
+                    return render(`div.code-block\n    pre\n      code.language-${options.lang}\n        | ${text.trim().split('\n').join('\n        | ')}`);
                 }
             }
         }))
