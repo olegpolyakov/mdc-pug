@@ -3,48 +3,33 @@ extends /layouts/component-page
 prepend head
     - ID = 'typography'
     - TITLE = 'Typography'
-    - DESC = 'MDC Typography is a foundational module that applies these styles to MDC Web components.'
+    - DESC = 'Typography expresses hierarchy and brand presence.'
+    - DOCS_URL = 'https://github.com/material-components/material-components-web/tree/master/packages/mdc-typography'
+    - GUIDE_URL = 'https://material.io/design/typography'
+
+append styles
+    style.
+        .example .mdc-typography {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
 
 block main
-    +section('Example')
+    +section('Demo')
         +example()(code)
             :code
-                +mdc-typography('Headline 1')(type='headline1')
-            
-            :code
-                +mdc-typography('Headline 2')(type='headline2')
-
-            :code
-                +mdc-typography('Headline 3')(type='headline3')
-
-            :code
-                +mdc-typography('Headline 4')(type='headline4')
-            
-            :code
-                +mdc-typography('Headline 5')(type='headline5')
-            
-            :code
-                +mdc-typography('Headline 6')(type='headline6')
-            
-            :code
+                +mdc-typography('Headline 1')(element='h1' type='headline1')
+                +mdc-typography('Headline 2')(element='h2' type='headline2')
+                +mdc-typography('Headline 3')(element='h3' type='headline3')
+                +mdc-typography('Headline 4')(element='h4' type='headline4')
+                +mdc-typography('Headline 5')(element='h5' type='headline5')
+                +mdc-typography('Headline 6')(element='h6' type='headline6')
                 +mdc-typography('Subtitle 1')(type='subtitle1')
-            
-            :code
                 +mdc-typography('Subtitle 2')(type='subtitle2')
-
-            :code
                 +mdc-typography('Body 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.')(type='body1')
-            
-            :code
                 +mdc-typography('Body 2. Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate aliquid ad quas sunt voluptatum officia dolorum cumque, possimus nihil molestias sapiente necessitatibus dolor saepe inventore, soluta id accusantium voluptas beatae.')(type='body2')
-
-            :code
                 +mdc-typography('Button Text')(type='button')
-
-            :code
                 +mdc-typography('Caption Text')(type='caption')
-
-            :code
                 +mdc-typography('Overline Text')(type='overline')
     
     +section('Attributes')

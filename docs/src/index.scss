@@ -4,6 +4,7 @@ $theme-primary-color: #a86454;
     $theme-primary: $theme-primary-color
 );
 @use 'prismjs/themes/prism';
+@use 'lib/styles/image-list';
 @use 'lib/styles/theme';
 @use 'lib/styles/typography';
 
@@ -11,6 +12,10 @@ $theme-primary-color: #a86454;
 
 body {
     margin: 0;
+}
+
+p {
+    margin-top: 0;
 }
 
 .app-header {
@@ -62,10 +67,6 @@ body {
     .section-description {
         @include typography.typography('body1');
     }
-
-    p {
-        @include typography.typography('body1');
-    }
 }
 
 .code-block {
@@ -85,6 +86,12 @@ body {
 
     + .example {
         margin-top: 1rem;
+    }
+
+    iframe {
+        display: block;
+        width: 100%;
+        height: 400px;
     }
 }
 
@@ -117,4 +124,16 @@ iframe {
         padding-left: 1rem;
         border-left: 4px solid $theme-primary-color;
     }
+}
+
+.mdc-data-table {
+    width: 100%;
+}
+
+.standard-image-list {
+    @include image-list.standard-columns(5);
+}
+
+.masonry-image-list {
+    @include image-list.masonry-columns(5);
 }

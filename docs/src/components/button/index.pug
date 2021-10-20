@@ -17,29 +17,54 @@ block main
         +example('Text Button')(code)
             :code
                 +mdc-button('Button')
-
-        +example('Raised Button')(code)
-            :code
+                +mdc-button('Button')(outlined)
+                +mdc-button('Button')(unelevated)
                 +mdc-button('Button')(raised)
 
-        +example('Unelevated Button')(code)
-            :code
-                +mdc-button('Button')(unelevated)
+                // or
+                // +mdc-button(label='Button')
+                // +mdc-button(label='Button' outlined)
+                // +mdc-button(label='Button' unelevated)
+                // +mdc-button(label='Button' raised)
 
-        +example('Outlined Button')(code)
-            :code
-                +mdc-button('Button')(outlined)
-
-        +example('Buttons with an Icon')(code)
+        +example('Buttons with an icon')(code)
             :code
                 +mdc-button('Button')(icon='star')
-                +mdc-button('Button')(raised icon='star')
-                +mdc-button('Button')(unelevated icon='star')
-                +mdc-button('Button')(outlined icon='star')
+                +mdc-button('Button')(icon='star' outlined)
+                +mdc-button('Button')(icon='star' unelevated)
+                +mdc-button('Button')(icon='star' raised)
 
-        +example('Buttons with a Trailing Icon')(code)
+                // or
+                // +mdc-button('Button')(leadingIcon='star')
+                // +mdc-button('Button')(leadingIcon='star' outlined)
+                // +mdc-button('Button')(leadingIcon='star' unelevated)
+                // +mdc-button('Button')(leadingIcon='star' raised)
+
+        +example('Buttons with a trailing icon')(code)
             :code
                 +mdc-button('Button')(trailingIcon='star')
-                +mdc-button('Button')(raised trailingIcon='star')
-                +mdc-button('Button')(unelevated trailingIcon='star')
-                +mdc-button('Button')(outlined trailingIcon='star')
+                +mdc-button('Button')(trailingIcon='star' outlined)
+                +mdc-button('Button')(trailingIcon='star' unelevated)
+                +mdc-button('Button')(trailingIcon='star' raised)
+
+        +example('Buttons with leading and trailing icons')(code)
+            :code
+                +mdc-button('Button')(
+                    leadingIcon='star'
+                    trailingIcon='star'
+                )
+                +mdc-button('Button')(
+                    leadingIcon='star'
+                    trailingIcon='star'
+                    outlined
+                )
+                +mdc-button('Button')(
+                    leadingIcon='star'
+                    trailingIcon='star'
+                    unelevated
+                )
+                +mdc-button('Button')(
+                    leadingIcon='star',
+                    trailingIcon='star'
+                    raised
+                )

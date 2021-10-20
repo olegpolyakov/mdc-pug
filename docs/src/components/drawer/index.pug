@@ -7,22 +7,49 @@ prepend head
     - DOCS_URL = 'https://github.com/material-components/material-components-web/tree/master/packages/mdc-drawer'
     - GUIDE_URL = 'https://material.io/components/navigation-drawer'
 
-    style.
-        iframe {
-            display: block;
-            width: 100%;
-            height: 400px;
-        }
-
 block main
-    +section('Permanent')
-        +mdc-card()(outlined)
-            iframe(src='/components/drawer/permanent.html')
+    +section('Examples')
+        +example('Permanent')(code)
+            +mdc-card()(outlined)
+                iframe(src='/components/drawer/permanent.html')
 
-    +section('Dismissible')
-        +mdc-card()(outlined)
-            iframe(src='/components/drawer/dismissible.html')
+            :highlight(lang='pug')
+                +mdc-drawer
+                    +mdc-drawer__header('Mail', 'email@material.io')
 
-    +section('Modal')
-        +mdc-card()(outlined)
-            iframe(src='/components/drawer/modal.html')
+                +mdc-drawer__content
+                    +mdc-list
+                        +mdc-list-item('Inbox')(activated)
+                        +mdc-list-item('Star')
+                        +mdc-list-item('Sent Email')
+                        +mdc-list-item('Drafts')
+
+        +example('Dismissible')(code)
+            +mdc-card()(outlined)
+                iframe(src='/components/drawer/dismissible.html')
+
+            :highlight(lang='pug')
+                +mdc-drawer()(dismissible)
+                    +mdc-drawer__header('Mail', 'email@material.io')
+
+                +mdc-drawer__content
+                    +mdc-list
+                        +mdc-list-item('Inbox')(activated)
+                        +mdc-list-item('Star')
+                        +mdc-list-item('Sent Email')
+                        +mdc-list-item('Drafts')
+
+        +example('Modal')(code)
+            +mdc-card()(outlined)
+                iframe(src='/components/drawer/modal.html')
+
+            :highlight(lang='pug')
+                +mdc-drawer()(modal)
+                    +mdc-drawer__header('Mail', 'email@material.io')
+
+                +mdc-drawer__content
+                    +mdc-list
+                        +mdc-list-item('Inbox')(activated)
+                        +mdc-list-item('Star')
+                        +mdc-list-item('Sent Email')
+                        +mdc-list-item('Drafts')

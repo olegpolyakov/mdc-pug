@@ -6,17 +6,15 @@ prepend head
     - DESC = 'Progress indicators display the length of a process or express an unspecified wait time.';
 
 block main
-    +section('Basic')
-        +mdc-linear-progress(42)
+    +section('Demos')
+        +example('Basic')(code)
+            :code
+                +mdc-linear-progress(42)
 
-    +section('Buffered')
-        +mdc-linear-progress(24, 42)
+        +example('Buffered')(code)
+            :code
+                +mdc-linear-progress(24, 42)
 
-    +section('Indeterminate')
-        +mdc-linear-progress()(indeterminate)
-
-    +section('Reversed')
-        +mdc-linear-progress(42)(reversed)
-
-    +section('Reversed Buffered')
-        +mdc-linear-progress(24, 42)(reversed)
+        +example('Indeterminate')(code)
+            :code
+                +mdc-linear-progress()(indeterminate)

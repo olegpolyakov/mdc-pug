@@ -4,6 +4,27 @@ prepend head
     - ID = 'top-app-bar'
     - TITLE = 'Top App Bar'
     - DESC = 'Top App Bars are a container for items such as application title, navigation icon, and action items.'
+    - DOCS_URL = 'https://github.com/material-components/material-components-web/tree/master/packages/mdc-top-app-bar'
+    - GUIDE_URL = 'https://material.io/components/app-bars-top'
 
 block main
-     
+     +section('Examples')
+        +example('Standard')(code)
+            +mdc-card()(outlined)
+                iframe(src='/components/top-app-bar/standard.html')
+
+        +example('Fixed')(code)
+            +mdc-card()(outlined)
+                iframe(src='/components/top-app-bar/fixed.html')
+
+        +example('Dense')(code)
+            +mdc-card()(outlined)
+                iframe(src='/components/top-app-bar/dense.html')
+
+        +example('Prominent')(code)
+            +mdc-card()(outlined)
+                iframe(src='/components/top-app-bar/prominent.html')
+
+        +example('Short')(code)
+            +mdc-card()(outlined)
+                iframe(src='/components/top-app-bar/short.html')

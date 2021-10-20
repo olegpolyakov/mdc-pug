@@ -13,6 +13,9 @@ block main
             :code
                 +mdc-circular-progress(42)
 
+                // or
+                // +mdc-circular-progress(value=42)
+
         +example('Indeterminate')(code)
             :code
                 +mdc-circular-progress()(indeterminate)
@@ -22,6 +25,11 @@ block main
                 +mdc-circular-progress(42)(size='large')
                 +mdc-circular-progress(42)(size='medium')
                 +mdc-circular-progress(42)(size='small')
+
+                // or
+                // +mdc-circular-progress(42)(large)
+                // +mdc-circular-progress(42)(medium)
+                // +mdc-circular-progress(42)(small)
 
         +example('Four-Colored')(code)
             :code

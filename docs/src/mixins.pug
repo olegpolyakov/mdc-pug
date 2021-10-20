@@ -26,12 +26,12 @@ mixin section(title, description)
         block
 
 mixin example(title, description)
-    section.example&attributes(Object.assign({}, attributes, { code: undefined }))
-        +mdc-card()(outlined)
-            +mdc-card__header()(withActions)
-                +mdc-card__header__content(title)
+    - const { code, ...rest } = attributes
 
-                if attributes.code
+    section.example&attributes(rest)
+        +mdc-card()(outlined)
+            +mdc-card__header(title)(withActions)
+                if code
                     +mdc-card__header__actions
                         +mdc-icon-button('code', 'code_off')(on title='Показать код').code-button
             
@@ -61,7 +61,7 @@ mixin arg-table(args)
                         = index + 1
                     +mdc-data-table__cell
                         code= arg[0]
-                    +mdc-data-table__cell= arg[1]
+                    +mdc-data-table__cell!= markdown.parseInline(arg[1])
 
 mixin attr-table(attrs)
     +mdc-data-table
@@ -77,11 +77,12 @@ mixin attr-table(attrs)
                         code=attr[0]
                     +mdc-data-table__cell
                         code= attr[1]
-                    +mdc-data-table__cell= attr[2]
+                    +mdc-data-table__cell!= markdown.parseInline(attr[2])
 
 mixin nav-item(id, text)
-    +mdc-list-item(text)(
+    +mdc-list-item(
         element='a'
         href=`/components/${id}`
+        primaryText=text
         activated=id === ID
     )

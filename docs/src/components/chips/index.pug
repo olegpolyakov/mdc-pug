@@ -15,23 +15,46 @@ block main
                     +mdc-chip('One')
                     +mdc-chip('Two')
                     +mdc-chip('Three')
-                    +mdc-chip('Four')(disabled)
+
+                // or
+                // +mdc-chip-set
+                //     +mdc-chip(label='One')
+                //     +mdc-chip(label='Two')
+                //     +mdc-chip(label='Three')
 
         +example('Chips with icons')(code)
             :code
                 +mdc-chip-set
-                    +mdc-chip('One')(leadingIcon='star')
-                    +mdc-chip('Two')(leadingIcon='star')
-                    +mdc-chip('Three')(leadingIcon='star')
-                    +mdc-chip('Four')(leadingIcon='star' disabled)
+                    +mdc-chip('One')(icon='star')
+                    +mdc-chip('Two')(icon='star')
+                    +mdc-chip('Three')(icon='star')
+
+                // or
+                // +mdc-chip-set
+                //   +mdc-chip('One')(leadingIcon='star')
+                //   +mdc-chip('Two')(leadingIcon='star')
+                //   +mdc-chip('Three')(leadingIcon='star')
+
+        +example('Chips with trailing icons')(code)
+            :code
+                +mdc-chip-set
+                    +mdc-chip('One')(trailingIcon='delete')
+                    +mdc-chip('Two')(trailingIcon='delete')
+                    +mdc-chip('Three')(trailingIcon='delete')
+
+        +example('Chips with avatars')(code)
+            :code
+                +mdc-chip-set
+                    +mdc-chip('One')(avatar={image: 'https://placeimg.com/128/128/people'})
+                    +mdc-chip('Two')(avatar={image: 'https://placeimg.com/128/128/people'})
+                    +mdc-chip('Three')(avatar={image: 'https://placeimg.com/128/128/people'})
 
         +example('Input chips')(code)#input-chips
             :code
-                +mdc-chip-set
+                +mdc-chip-set()(input)
                     +mdc-chip('One')(input)#i1
                     +mdc-chip('Two')(input)#i2
                     +mdc-chip('Three')(input)#i3
-                    +mdc-chip('Four')(input disabled)#i4
 
         +example('Filter chips')(code)#filter-chips
             :code
@@ -39,13 +62,19 @@ block main
                     +mdc-chip('One')(filter selected)#f1
                     +mdc-chip('Two')(filter)#f2
                     +mdc-chip('Three')(filter)#f3
-                    +mdc-chip('Four')(filter)#f4
 
 append scripts
     script.
+        const inputChipSet = document.querySelector('#input-chips .mdc-evolution-chip-set');
         const filterChipSet = document.querySelector('#filter-chips .mdc-evolution-chip-set');
 
+        inputChipSet.addEventListener('MDCChipSet:interaction', (event) => {
+            console.log(inputChipSet.MDCChipSet, event.detail.chipIndex);
+            inputChipSet.MDCChipSet.removeChip(event.detail.chipIndex);
+        });
+
         filterChipSet.addEventListener('MDCChipSet:interaction', (event) => {
-            console.log(event.detail.chipIndex)
-            filterChipSet.MDCChipSet.setChipSelected(event.detail.chipIndex, undefined, true);
+            console.log(event.detail.chipIndex);
+            console.log(inputChipSet.MDCChipSet, event.detail.chipIndex);
+            filterChipSet.MDCChipSet.setChipSelected(event.detail.chipIndex, 0, true);
         });

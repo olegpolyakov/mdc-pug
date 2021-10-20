@@ -6,19 +6,23 @@ prepend head
     - DESC = 'Floating action buttons represents the primary action in an application.'
 
 block main
-    +section('Basic')
-        +mdc-fab('star')(ripple)
+    +section('Examples')
+        +example('Basic FAB')(code)
+            :code
+                +mdc-fab('star')
 
-    +section('Mini')
-        +mdc-fab('star')(mini ripple)
+        +example('Mini FAB')(code)
+            :code
+                +mdc-fab('star')(mini)
 
-    +section('Icon with label')
-        +mdc-fab('add', 'Create')(ripple)
+        +example('FAB with an icon and label')(code)
+            :code
+                +mdc-fab(icon='add' label='Create')
 
-    +section('Label with icon')
-        +mdc-fab()(extended ripple)
-            +mdc-fab__label('Create')
-            +mdc-fab__icon('add')
+        +example('FAB with a label and trailing icon')(code)
+            :code
+                +mdc-fab(label='Create' trailingIcon='add')
 
-    +section('Just label')
-        +mdc-fab(null, 'Create')(ripple)
+        +example('FAB with a label')(code)
+            :code
+                +mdc-fab(label='Create')

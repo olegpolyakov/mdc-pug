@@ -14,13 +14,28 @@ block main
                 +mdc-card
                     +mdc-card__header('Title')
 
+                    // or
+                    // +mdc-card__header(title='Title')
+
                     +mdc-card__section()(secondary)
                         +mdc-typography('Visit ten places on our planet that are undergoing the biggest changes today.')(type='body2' noMargin)
+
+        +example('Card with a primary action')(code)
+            :code
+                +mdc-card
+                    +mdc-card__primary-action
+                        +mdc-card__header('Title')
+
+                        +mdc-card__section()(secondary)
+                            +mdc-typography('Visit ten places on our planet that are undergoing the biggest changes today.')(type='body2' noMargin)
 
         +example('Card with subtitle')(code)
             :code
                 +mdc-card
                     +mdc-card__header('Title', 'Subtitle')
+
+                    // or
+                    // +mdc-card__header(title='Title' subtitle='Subtitle')
 
                     +mdc-card__section()(secondary)
                         +mdc-typography('Visit ten places on our planet that are undergoing the biggest changes today.')(type='body2' noMargin)
@@ -29,6 +44,34 @@ block main
             :code
                 +mdc-card
                     +mdc-card__header('Title', 'Subtitle', 'Overline')
+
+                    // or
+                    // +mdc-card__header(
+                    //     overline='Overline'
+                    //     title='Title'
+                    //     subtitle='Subtitle'
+                    // )
+
+                    +mdc-card__section()(secondary)
+                        +mdc-typography('Visit ten places on our planet that are undergoing the biggest changes today.')(type='body2' noMargin)
+
+        +example('Card with a header graphic')(code)
+            :code
+                +mdc-card
+                    +mdc-card__header(
+                        title='Title'
+                        icon='star'
+                    )
+
+                    +mdc-card__section()(secondary)
+                        +mdc-typography('Visit ten places on our planet that are undergoing the biggest changes today.')(type='body2' noMargin)
+
+        +example('Card with a header action')(code)
+            :code
+                +mdc-card
+                    +mdc-card__header('Title')(withActions)
+                        +mdc-card__header__actions
+                            +mdc-card__icon('star')
 
                     +mdc-card__section()(secondary)
                         +mdc-typography('Visit ten places on our planet that are undergoing the biggest changes today.')(type='body2' noMargin)

@@ -18,8 +18,8 @@ block content
     div.mdc-top-app-bar--fixed-adjust
         +mdc-drawer.app-drawer
             +mdc-drawer__content
-                +mdc-list()(element='nav')
-                    +mdc-list-item('Home')(element='a' href='/' activated=id === 'home')
+                +mdc-list(element='nav')
+                    +mdc-list-item(element='a' href='/' primaryText='Home' activated=id === 'home')
                     +nav-item('avatar', 'Avatar')
                     +nav-item('badge', 'Badge')
                     +nav-item('banner', 'Banner')
@@ -32,6 +32,7 @@ block content
                     +nav-item('dialog', 'Dialog')
                     +nav-item('drawer', 'Drawer')
                     +nav-item('fab', 'FAB')
+                    +nav-item('form-field', 'Form Field')
                     +nav-item('icon-button', 'Icon Button')
                     +nav-item('image-list', 'Image List')
                     +nav-item('layout-grid', 'Layout Grid')

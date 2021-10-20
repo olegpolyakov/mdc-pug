@@ -11,21 +11,52 @@ block main
             :code
                 +mdc-avatar('P')
                 // or
-                // +mdc-avatar()(text='P')
+                // +mdc-avatar(text='P')
 
         +example('Icon')(code)
             :code
-                +mdc-avatar()(icon='star')
+                +mdc-avatar(icon='star')
 
         +example('Image')(code)
             :code
-                +mdc-avatar()(src='https://placeimg.com/128/128/people')
+                +mdc-avatar(image='https://placeimg.com/128/128/people')
+
+                // or
+                // +mdc-avatar(
+                //     image={
+                //         src: 'https://placeimg.com/128/128/people',
+                //         alt: ''
+                //     }
+                // )
 
         +example('Sizes')(code)
             :code
-                +mdc-avatar()(src='https://placeimg.com/128/128/people' size='small')
-                +mdc-avatar()(src='https://placeimg.com/128/128/people' size='medium')
-                +mdc-avatar()(src='https://placeimg.com/128/128/people' size='large')
+                +mdc-avatar(
+                    image='https://placeimg.com/128/128/people'
+                    size='small'
+                )
+                +mdc-avatar(
+                    image='https://placeimg.com/128/128/people'
+                    size='medium'
+                )
+                +mdc-avatar(
+                    image='https://placeimg.com/128/128/people'
+                    size='large'
+                )
+
+                // or
+                // +mdc-avatar(
+                //     image='https://placeimg.com/128/128/people'
+                //     small
+                // )
+                // +mdc-avatar(
+                //     image='https://placeimg.com/128/128/people'
+                //     medium
+                // )
+                // +mdc-avatar(
+                //     image='https://placeimg.com/128/128/people'
+                //     large
+                // )
 
     +section('Arguments')
         +arg-table([
@@ -36,6 +67,9 @@ block main
         +attr-table([
             ['text', 'string', 'The text content.'],
             ['icon', 'string', 'The name of the icon.'],
-            ['src', 'string', 'The source of the image.'],
-            ['size', 'string', 'The size of the avatar.']
+            ['image', 'string | object', 'The source of the image or an object with image attributes.'],
+            ['size', 'string', 'The size of the avatar. Valid values are `small`, `medium`, `large`.'],
+            ['small', 'boolean', 'Shorthand for `size=\'small\'`.'],
+            ['medium', 'boolean', 'Shorthand for `size=\'medium\'`.'],
+            ['large', 'boolean', 'Shorthand for `size=\'large\'`.']
         ])

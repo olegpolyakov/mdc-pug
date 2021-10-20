@@ -1,24 +1,20 @@
 extends /layouts/component-page
 
 prepend head
-    - ID = 'fab'
-    - TITLE = 'FAB'
-    - DESC = 'Floating action buttons represents the primary action in an application.'
+    - ID = 'form-field'
+    - TITLE = 'Form Field'
+    - DESC = ''
 
 block main
-    +section('Basic')
-        +mdc-fab('star')(ripple)
+    +section('Example')
+        +example('Basic form field')(code)
+            +mdc-form-field('Checkbox')
+                +mdc-checkbox
 
-    +section('Mini')
-        +mdc-fab('star')(mini ripple)
+        +example('Form field end-aligned')(code)
+            +mdc-form-field('Checkbox')(alignEnd)
+                +mdc-checkbox
 
-    +section('Icon with label')
-        +mdc-fab('add', 'Create')(ripple)
-
-    +section('Label with icon')
-        +mdc-fab()(extended ripple)
-            +mdc-fab__label('Create')
-            +mdc-fab__icon('add')
-
-    +section('Just label')
-        +mdc-fab(null, 'Create')(ripple)
+        +example('Form field with a native element')(code)
+            +mdc-form-field('Enter a date: ')(alignEnd)
+                input(type='datetime-local')

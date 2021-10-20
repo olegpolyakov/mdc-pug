@@ -6,21 +6,27 @@ prepend head
     - DESC = 'Lists present multiple line items vertically as a single continuous element.';
 
 block main
-    +section('Single-Line')
+    +section('One-line list')
         +mdc-list
             +mdc-list-item('Line item')
             +mdc-list-item('Line item')
             +mdc-list-item('Line item')
 
-    +section('Two-Line')
+    +section('Two-Line list')
         +mdc-list
             +mdc-list-item('Line item', 'Secondary text')
             +mdc-list-item('Line item', 'Secondary text')
             +mdc-list-item('Line item', 'Secondary text')
+
+    +section('Three-Line list')
+        +mdc-list
+            +mdc-list-item('Line item', 'Secondary text')(overline='Overline')
+            +mdc-list-item('Line item', 'Secondary text')(overline='Overline')
+            +mdc-list-item('Line item', 'Secondary text')(overline='Overline')
 
     +section('Icon List')
         +mdc-list
-            +mdc-list-item('Line item')(icon='wifi')
+            +mdc-list-item('Line item', 'Secondary')(icon='wifi')
             +mdc-list-item('Line item')(icon='bluetooth')
             +mdc-list-item('Line item')(icon='data_usage')
 

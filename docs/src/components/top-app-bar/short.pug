@@ -3,35 +3,24 @@ extends /layouts/base
 prepend head
     - ROOT = '/'
 
-append head
+append styles
     style.
-        #content {
+        main {
             padding: 1rem;
         }
 
-        p {
-            margin-top: 0;
-        }
-
 block body
-    +mdc-top-app-bar()(fixed)#header
+    +mdc-top-app-bar#header()(short)
         +mdc-top-app-bar__row
-            +mdc-top-app-bar__section
-                +mdc-top-app-bar__navigation-icon('menu')(onclick!='window.drawer.MDCDrawer && (window.drawer.MDCDrawer.open = !window.drawer.MDCDrawer.open)')
+            +mdc-top-app-bar__section(align='start')
+                +mdc-top-app-bar__navigation-icon('menu')
                 +mdc-top-app-bar__title('Title')
 
+            +mdc-top-app-bar__section(align='end')
+                +mdc-top-app-bar__action-icon('file_download')
+
     div.mdc-top-app-bar--fixed-adjust
-        +mdc-drawer()(dismissible)#drawer
-            +mdc-drawer__header('Mail', 'email@material.io')
-
-            +mdc-drawer__content
-                +mdc-list
-                    +mdc-list-item('Inbox')(activated)
-                    +mdc-list-item('Star')
-                    +mdc-list-item('Sent Email')
-                    +mdc-list-item('Drafts')
-
-        main#content.mdc-drawer-app-content
+        main
             p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
             p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

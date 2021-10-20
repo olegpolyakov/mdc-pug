@@ -4,10 +4,28 @@ prepend head
     - ID = 'tooltip'
     - TITLE = 'Tooltip'
     - DESC = 'Tooltips display informative text when users hover over, focus on, or tap an element.'
+    - DOCS_URL = 'https://github.com/material-components/material-components-web/tree/master/packages/mdc-tooltip'
+    - GUIDE_URL = 'https://material.io/components/tooltips'
 
 block main
-    +section
-        +mdc-icon-button('favorite')(aria-describedby='favorite-tooltip')
+    +section('Examples')
+        +example('Plain tooltip')
+            :markdown-it
+                To ensure proper positioning of the tooltip, it's important that this tooltip element is an immediate child of the `<body>`, rather than nested underneath the anchor element or other elements.
+
+                The `aria-describedby` attribute (which is given the `id` for the associated tooltip) designates an element as being the anchor element for a particular tooltip.
+
+                Other MDC components can be designated as anchor elements by adding this attribute.
+
+            +mdc-icon-button('favorite')(aria-describedby='favorite-tooltip')
+
+        +example('Rich tooltip')
+            +mdc-tooltip-wrapper
+                +mdc-icon-button('favorite')(
+                    data-tooltip-id='tt0' aria-haspopup='dialog' aria-expanded='false'
+                )
+
+                +mdc-rich-tooltip(id='tt0')
 
 append body
     +mdc-tooltip('Mark as favorite')(id='favorite-tooltip')

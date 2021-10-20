@@ -15,6 +15,9 @@ block main
             :code
                 +mdc-banner('There was a problem processing a transaction on your credit card.')
 
+                // or
+                // +mdc-banner(text='There was a problem processing a transaction on your credit card.')
+
         +example('Centered banner')(code)
             +mdc-button('Open')(outlined).dialog-button
 
@@ -37,14 +40,14 @@ block main
             +mdc-button('Open')(outlined).dialog-button
 
             :code
-                +mdc-banner('There was a problem processing a transaction on your credit card.')(icon='error_outline')
+                +mdc-banner('There was a problem processing a transaction on your credit card.')
                     +mdc-banner__action('Fix it')(primary)
 
         +example('Banner with two actions')(code)
             +mdc-button('Open')(outlined).dialog-button
 
             :code
-                +mdc-banner('There was a problem processing a transaction on your credit card.')(icon='error_outline')
+                +mdc-banner('There was a problem processing a transaction on your credit card.')
                     +mdc-banner__action('Learn more')(secondary)
                     +mdc-banner__action('Fix it')(primary)
 
@@ -56,12 +59,12 @@ block main
                     +mdc-banner__action('Learn more')(secondary)
                     +mdc-banner__action('Fix it')(primary)
 
-block scripts
+append scripts
     script.
         document.querySelectorAll('.dialog-button').forEach(button => {
             const banner = button.parentElement.querySelector('.mdc-banner').MDCBanner;
 
-            button.addEventListener('click', function() {
+            button?.addEventListener('click', function() {
                 if (banner.isOpen) {
                     banner.close();
                     this.textContent = 'Open';

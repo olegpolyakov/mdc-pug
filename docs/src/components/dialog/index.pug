@@ -7,12 +7,80 @@ prepend head
 
 block main
     +section
-        +mdc-button('Open Dialog')(onclick='dialog.MDCDialog.open()')
+        +example('Alert dialog')(code)
+            +mdc-button('Open Dialog')(onclick='alertDialog.MDCDialog.open()')
 
-        +mdc-dialog#dialog
-            +mdc-dialog__title('Get this party started?')
-            +mdc-dialog__content
-                +mdc-typography('Turn up the jams and have a good time.')
-            +mdc-dialog__actions
-                +mdc-dialog__button('Decline')(action='close')
-                +mdc-dialog__button('Accept')(unelevated default focused action='accept')
+            :code
+                +mdc-dialog#alertDialog(content='Discard draft?')
+                    +mdc-dialog__actions
+                        +mdc-dialog__button('Cancel')(action='cancel')
+                        +mdc-dialog__button('Discard')(unelevated default focused action='discard')
+
+        +example('Simple dialog')(code)
+            +mdc-button('Open Dialog')(onclick='simpleDialog.MDCDialog.open()')
+
+            :code
+                +mdc-dialog('Set backup account')#simpleDialog
+                    +mdc-list
+                        +mdc-list-item(
+                            avatar='AB'
+                            primaryText='user01@gmail.com'
+                        )
+                        +mdc-list-item(
+                            avatar='AB' primaryText='user02@gmail.com'
+                        )
+                        +mdc-list-item(
+                            avatar={ icon: 'add' } primaryText='Add account'
+                        )
+
+        +example('Confirmation dialog')(code)
+            +mdc-button('Open Dialog')(onclick='confirmationDialog.MDCDialog.open()')
+
+            :code
+                +mdc-dialog('Phone ringtone')#confirmationDialog
+                    +mdc-list
+                        +mdc-list-item
+                            +mdc-list-item__start
+                                +mdc-radio(name='ringtone' value='1')
+                            +mdc-list-item__content(primaryText='None')
+                        +mdc-list-item
+                            +mdc-list-item__start
+                                +mdc-radio(name='ringtone' value='2')
+                            +mdc-list-item__content(primaryText='Callisto')
+                        +mdc-list-item
+                            +mdc-list-item__start
+                                +mdc-radio(name='ringtone' value='3')
+                            +mdc-list-item__content(primaryText='Ganymede')
+                        +mdc-list-item
+                            +mdc-list-item__start
+                                +mdc-radio(name='ringtone' value='4')
+                            +mdc-list-item__content(primaryText='Luna')
+                        +mdc-list-item
+                            +mdc-list-item__start
+                                +mdc-radio(name='ringtone' value='5')
+                            +mdc-list-item__content(primaryText='Oberon')
+                        +mdc-list-item
+                            +mdc-list-item__start
+                                +mdc-radio(name='ringtone' value='6')
+                            +mdc-list-item__content(primaryText='Phobos')
+                    
+                    +mdc-dialog__actions
+                        +mdc-dialog__button('Cancel')(action='close')
+                        +mdc-dialog__button('OK')(action='accept')
+
+        +example('Full-screen dialog')(code)
+            +mdc-button('Open Dialog')(onclick='fullscreenDialog.MDCDialog.open()')
+
+            :code
+                +mdc-dialog('Full-Screen Dialog Title')(fullscreen)#fullscreenDialog
+                    +mdc-dialog__content
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Sed scelerisque metus dapibus, maximus massa pulvinar, commodo nunc.
+                        Quisque vitae luctus lectus, ut tempus ipsum. Sed suscipit gravida scelerisque.
+                        Aenean vulputate elementum est, quis consectetur orci consectetur ac.
+                        Quisque accumsan vel nisi id dapibus. Suspendisse nec urna eu massa ornare rutrum.
+                        Vivamus at nisi sit amet nulla pretium volutpat sit amet in justo. Donec mi metus, interdum ac tincidunt at, vehicula vitae nisl. Morbi fermentum dapibus massa,
+                        nec lobortis massa vestibulum eu.
+
+                    +mdc-dialog__actions
+                        +mdc-dialog__button('OK')(action='ok')

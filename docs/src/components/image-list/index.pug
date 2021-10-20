@@ -6,7 +6,47 @@ prepend head
     - DESC = 'Image lists display a collection of images in an organized grid.';
 
 block main
+    - const BASE_URL = 'https://material-components.github.io/material-components-web-catalog/static/media/photos'
+
     +section
-        +mdc-image-list()(withTextProtection)
-            for n in Array(15).fill(1).map((value, index) => value + index)
-                +mdc-image-list__item(`https://material-components.github.io/material-components-web-catalog/static/media/photos/3x2/${n}.jpg`, 'Text Label')
+        +example('Standard image list')(code)
+            :code
+                - const BASE_URL = 'https://material-components.github.io/material-components-web-catalog/static/media/photos'
+
+                +mdc-image-list.standard-image-list
+                    for n in Array(15).fill(1).map((value, index) => value + index)
+                        +mdc-image-list__item(
+                            image=`${BASE_URL}/3x2/${n}.jpg`
+                        )
+
+        +example('Standard image list with text protection')(code)
+            :code
+                - const BASE_URL = 'https://material-components.github.io/material-components-web-catalog/static/media/photos'
+
+                +mdc-image-list.standard-image-list()(withTextProtection)
+                    for n in Array(15).fill(1).map((value, index) => value + index)
+                        +mdc-image-list__item(
+                            image=`${BASE_URL}/3x2/${n}.jpg`
+                            label='Text Label'
+                        )
+
+        +example('Masonry image list')(code)
+            :code
+                - const BASE_URL = 'https://material-components.github.io/material-components-web-catalog/static/media/photos'
+
+                +mdc-image-list.masonry-image-list()(masonry)
+                    +mdc-image-list__item(`${BASE_URL}/3x2/16.jpg`)
+                    +mdc-image-list__item(`${BASE_URL}/2x3/1.jpg`)
+                    +mdc-image-list__item(`${BASE_URL}/3x2/1.jpg`)
+                    +mdc-image-list__item(`${BASE_URL}/2x3/2.jpg`)
+                    +mdc-image-list__item(`${BASE_URL}/2x3/3.jpg`)
+                    +mdc-image-list__item(`${BASE_URL}/3x2/2.jpg`)
+                    +mdc-image-list__item(`${BASE_URL}/2x3/4.jpg`)
+                    +mdc-image-list__item(`${BASE_URL}/3x2/3.jpg`)
+                    +mdc-image-list__item(`${BASE_URL}/2x3/5.jpg`)
+                    +mdc-image-list__item(`${BASE_URL}/3x2/4.jpg`)
+                    +mdc-image-list__item(`${BASE_URL}/2x3/6.jpg`)
+                    +mdc-image-list__item(`${BASE_URL}/3x2/5.jpg`)
+                    +mdc-image-list__item(`${BASE_URL}/2x3/7.jpg`)
+                    +mdc-image-list__item(`${BASE_URL}/3x2/6.jpg`)
+                    +mdc-image-list__item(`${BASE_URL}/3x2/7.jpg`)
