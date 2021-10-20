@@ -4,9 +4,7 @@
 
 ## Setup
 
-### Using NPM
-
-Install the library using npm:
+Install the library:
 
 ```sh
 npm i mdc-pug
