@@ -59,7 +59,7 @@ $mdc-badge-padding: 6px !default;
         }
     }
 
-    &.mdc-badge--no-background {
+    &.mdc-badge--transparent {
         &::after {
             color: $mdc-badge-color-inverse;
             background: $mdc-badge-background-inverse;
