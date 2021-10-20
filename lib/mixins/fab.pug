@@ -1,26 +1,21 @@
-mixin mdc-fab(icon, label)
-    #{attributes.element || 'button'}.mdc-fab(
+mixin mdc-fab(_icon)
+    - const { element = 'button', icon = _icon, label, trailingIcon, fixed, mini, extended = Boolean(label), ...rest } = attributes
+
+    #{element}.mdc-fab(
         class={
-            'mdc-fab--fixed': attributes.fixed,
-            'mdc-fab--mini': attributes.mini,
-            'mdc-fab--extended': label || attributes.extended
+            'mdc-fab--fixed': fixed,
+            'mdc-fab--mini': mini,
+            'mdc-fab--extended': extended
         }
-        data-mdc-auto-init=attributes.ripple && 'MDCRipple'
-    )&attributes(Object.assign({}, attributes, { element: undefined, fixed: undefined, mini: undefined, extended: undefined, ripple: undefined }))
+        data-mdc-auto-init='MDCRipple'
+    )&attributes(rest)
         div.mdc-fab__ripple
 
         if icon
-            +mdc-fab__icon(icon)
-        
+            +mdc-icon(icon).mdc-fab__icon
         if label
-            +mdc-fab__label(label)
-        
-        block
+            span.mdc-fab__label= label
+        if trailingIcon
+            +mdc-icon(trailingIcon).mdc-fab__icon
 
-mixin mdc-fab__icon(icon)
-    +mdc-icon(icon).mdc-fab__icon&attributes(attributes)
-        block
-
-mixin mdc-fab__label(label)
-    span.mdc-fab__label&attributes(attributes)= label
         block

@@ -1,24 +1,27 @@
-mixin mdc-snackbar(label)
-    div.mdc-snackbar(
+mixin mdc-snackbar(_text)
+    - const { element = 'div', text = _text, icon, action, open, stacked, leading, dismissible, ...rest } = attributes
+
+    #{element}.mdc-snackbar(
         class={
-            'mdc-snackbar--open': attributes.open,
-            'mdc-snackbar--stacked': attributes.stacked,
-            'mdc-snackbar--leading': attributes.leading
+            'mdc-snackbar--open': open,
+            'mdc-snackbar--stacked': stacked,
+            'mdc-snackbar--leading': leading
         }
         data-mdc-auto-init='MDCSnackbar'
-    )&attributes(Object.assign({}, attributes, { open: undefined, stacked: undefined, leading: undefined, dismissible: undefined, actionLabel: undefined }))
+    )&attributes(rest)
         div.mdc-snackbar__surface(role='status' aria-relevant='additions')
-            div.mdc-snackbar__label(aria-atomic='false')= label
+            if text
+                div.mdc-snackbar__label(aria-atomic='false')= text
 
-            if block || attributes.actionLabel || attributes.dismissible
+            if block || action || dismissible
                 div.mdc-snackbar__actions(aria-atomic='true')
                     block
 
-                    if attributes.actionLabel
-                        +mdc-snackbar__action(attributes.actionLabel)
+                    if action
+                        +mdc-snackbar__action(action)
 
-                    if attributes.dismissible
+                    if dismissible
                         +mdc-icon-button('close').mdc-snackbar__dismiss
 
-mixin mdc-snackbar__action(label)
-    +mdc-button(label).mdc-snackbar__action&attributes(attributes)
+mixin mdc-snackbar__action(...args)
+    +mdc-button(...args).mdc-snackbar__action&attributes(attributes)

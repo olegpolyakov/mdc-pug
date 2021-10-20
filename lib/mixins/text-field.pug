@@ -1,64 +1,76 @@
-mixin mdc-text-field(name, value)
-    label.mdc-text-field(
-        class=attributes.class
+include floating-label
+include icon
+include line-ripple
+include notched-outline
+
+mixin mdc-text-field
+    - const { element = 'label', class: cssClass, label, leadingIcon, trailingIcon, prefix, suffix, filled, outlined, textarea, disabled, focused, endAligned, persistentHelperText, validationMessage, helperText = persistentHelperText || validationMessage, counter, ...rest } = attributes
+
+    #{element}.mdc-text-field(
+        class=cssClass
         class={
-            'mdc-text-field--filled': attributes.filled,
-            'mdc-text-field--outlined': attributes.outlined,
-            'mdc-text-field--textarea': attributes.textarea,
-            'mdc-text-field--disabled': attributes.disabled,
-            'mdc-text-field--focused': attributes.focused,
-            'mdc-text-field--with-leading-icon': attributes.leadingIcon,
-            'mdc-text-field--with-trailing-icon': attributes.trailingIcon,
-            'mdc-text-field--no-label': !attributes.label,
+            'mdc-text-field--filled': filled,
+            'mdc-text-field--outlined': outlined,
+            'mdc-text-field--textarea': textarea,
+            'mdc-text-field--disabled': disabled,
+            'mdc-text-field--focused': focused,
             'mdc-text-field--label-floating': attributes.value,
-            'mdc-text-field--end-aligned': attributes.endAligned,
-            'mdc-text-field--with-internal-counter': attributes.withInternalCounter
+            'mdc-text-field--end-aligned': endAligned,
+            'mdc-text-field--no-label': !label,
+            'mdc-text-field--with-leading-icon': leadingIcon,
+            'mdc-text-field--with-trailing-icon': trailingIcon,
+            'mdc-text-field--with-internal-counter': counter === 'internal'
         }
         data-mdc-auto-init='MDCTextField'
     )
-        if attributes.outlined
+        if outlined
             +mdc-notched-outline
-                if attributes.label
-                    +mdc-floating-label(attributes.label)(floatAbove=Boolean(attributes.value))
+                if label
+                    +mdc-floating-label(label)(floatAbove=Boolean(attributes.value))
         else
             span.mdc-text-field__ripple
-            if attributes.label
-                +mdc-floating-label(attributes.label)(floatAbove=Boolean(attributes.value))
+            if label
+                +mdc-floating-label(label)(floatAbove=Boolean(attributes.value))
 
-        if attributes.leadingIcon
-            +mdc-icon(attributes.leadingIcon).mdc-text-field__icon.mdc-text-field__icon--leading
+        if leadingIcon
+            +mdc-icon(leadingIcon).mdc-text-field__icon.mdc-text-field__icon--leading
 
-        if attributes.prefix
-            span.mdc-text-field__affix.mdc-text-field__affix--prefix= attributes.prefix
+        if prefix
+            span.mdc-text-field__affix.mdc-text-field__affix--prefix= prefix
 
-        if attributes.textarea
+        if textarea
             span.mdc-text-field__resizer
-                textarea.mdc-text-field__input&attributes(Object.assign({}, attributes, { class: undefined, label: undefined, leadingIcon: undefined, trailingIcon: undefined, outlined: undefined, filled: undefined, textarea: undefined, focused: undefined, endAligned: undefined }))
+                textarea.mdc-text-field__input&attributes(rest)
 
-                if attributes.withInternalCounter && attributes.maxlength
+                if counter === 'internal'
                     span.mdc-text-field-character-counter=`0 / ${attributes.maxlength}`
         else
-            input.mdc-text-field__input&attributes(Object.assign({}, attributes, { class: undefined, label: undefined, leadingIcon: undefined, trailingIcon: undefined, outlined: undefined, filled: undefined, textarea: undefined, focused: undefined, endAligned: undefined }))
+            input.mdc-text-field__input&attributes(rest)
 
-        if attributes.suffix
-            span.mdc-text-field__affix.mdc-text-field__affix--suffix= attributes.suffix
+        if suffix
+            span.mdc-text-field__affix.mdc-text-field__affix--suffix= suffix
 
-        if attributes.trailingIcon
-            +mdc-icon(attributes.trailingIcon)(role='button' tabindex='0').mdc-text-field__icon.mdc-text-field__icon--trailing
+        if trailingIcon
+            +mdc-icon(trailingIcon)(role='button' tabindex='0').mdc-text-field__icon.mdc-text-field__icon--trailing
 
-        unless attributes.outlined
+        unless outlined
             +mdc-line-ripple
 
-mixin mdc-text-field-helper-line
-    div.mdc-text-field-helper-line
-        block
+    if helperText || persistentHelperText || validationMessage
+        +mdc-text-field-helper-text(helperText)(
+            persistent=Boolean(persistentHelperText)
+            validation=Boolean(validationMessage)
+        ) 
+
+    if counter === true
+        +mdc-text-field-character-counter
 
 mixin mdc-text-field-helper-text(text)
     div.mdc-text-field-helper-line
         div.mdc-text-field-helper-text(
             class={
-                'mdc-text-field-helper-text--persistent': attributes.persistent,
-                'mdc-text-field-helper-text--validation-msg': attributes.validation
+                'mdc-text-field-helper-text--persistent': persistent,
+                'mdc-text-field-helper-text--validation-msg': validation
             }
             aria-hidden='true'
         )&attributes(Object.assign({}, attributes, { persistent: undefined, validation: undefined }))

@@ -1,13 +1,13 @@
-mixin mdc-typography(content, type = 'body1')
-    #{attributes.element || 'p'}.mdc-typography(
-        class=`mdc-typography--${attributes.type || type}`
-        class={
-            [`mdc-theme--text-${attributes.color}-on-${attributes.theme || 'light'}`]: attributes.color,
-            [`mdc-typography--align-${attributes.align}`]: attributes.align,
-            [`mdc-typography--display-${attributes.display}`]: attributes.display,
-            'mdc-typography--no-margin': attributes.noMargin,
-            'mdc-typography--overflow-ellipsis': attributes.overflowEllipsis
-        }
-    )&attributes(Object.assign({}, attributes, { element: undefined, type: undefined, color: undefined, align: undefined, display: undefined, noMargin: undefined, overflowEllipsis: undefined }))
+mixin mdc-typography(_content)
+    - const { element = 'p', content = _content, type = 'body1', color, align, display, noMargin, overflowEllipsis, theme = 'light', ...rest } = attributes
+
+    #{element}.mdc-typography(class={
+        [`mdc-typography--${type}`]: type,
+        [`mdc-typography--align-${align}`]: align,
+        [`mdc-typography--display-${display}`]: display,
+        'mdc-typography--no-margin': noMargin,
+        'mdc-typography--overflow-ellipsis': overflowEllipsis,
+        [`mdc-theme--text-${color}-on-${theme}`]: color
+    })&attributes(rest)
         = content
         block

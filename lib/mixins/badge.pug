@@ -1,9 +1,11 @@
-mixin mdc-badge(value)
-    #{attributes.element || 'span'}.mdc-badge(
+mixin mdc-badge(_value)
+    - const { element = 'span', value = _value, inset, transparent, ...rest } = attributes
+
+    #{element}.mdc-badge(
         class={
-            'mdc-badge--inset': attributes.inset,
-            'mdc-badge--no-background': attributes.noBackground
+            'mdc-badge--inset': inset,
+            'mdc-badge--transparent': transparent
         }
         data-badge=value
-    )&attributes(Object.assign({}, attributes, { element: undefined, inset: undefined, noBackground: undefined }))
+    )&attributes(rest)
         block

@@ -1,26 +1,30 @@
 mixin mdc-menu-surface
+    - const { fixed, fullwidth, ...rest } = attributes
+
     div.mdc-menu-surface(
         class={
-            'mdc-menu-surface--fixed': attributes.fixed,
-            'mdc-menu-surface--fullwidth': attributes.fullwidth
+            'mdc-menu-surface--fixed': fixed,
+            'mdc-menu-surface--fullwidth': fullwidth
         }
         data-mdc-auto-init='MDCMenuSurface'
-    )&attributes(Object.assign({}, attributes, { fixed: undefined, fullwidth: undefined }))
+    )&attributes(rest)
         block
 
 mixin mdc-menu
+    - const { fixed, fullwidth, list, ...rest } = attributes
+
     div.mdc-menu.mdc-menu-surface(
         class={
-            'mdc-menu-surface--fixed': attributes.fixed,
-            'mdc-menu-surface--fullwidth': attributes.fullwidth
+            'mdc-menu-surface--fixed': fixed,
+            'mdc-menu-surface--fullwidth': fullwidth
         }
         data-mdc-auto-init='MDCMenu'
-    )&attributes(Object.assign({}, attributes, { fixed: undefined, fullwidth: undefined }))
-        +mdc-list()(role='menu' aria-hidden='true' aria-orientation='vertical' tabindex='-1')
+    )&attributes(rest)
+        +mdc-list()(role='menu' aria-hidden='true' aria-orientation='vertical' tabindex='-1')&attributes(list)
             block
 
-mixin mdc-menu-item(text)
-    +mdc-list-item(text)(
+mixin mdc-menu-item(...args)
+    +mdc-list-item(...args)(
         class={
             'mdc-menu-item--selected': attributes.selected
         }
@@ -33,7 +37,9 @@ mixin mdc-menu-anchor
         block
 
 mixin mdc-menu__selection-group
-    #{attributes.element || 'ul'}.mdc-menu__selection-group&attributes(Object.assign({}, attributes, { element: undefined }))
+    - const { element = 'ul', ...rest } = attributes
+
+    #{element}.mdc-menu__selection-group&attributes(rest)
         block
 
 mixin mdc-menu__selection-group-icon

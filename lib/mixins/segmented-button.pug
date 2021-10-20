@@ -1,20 +1,27 @@
-mixin mdc-segmented-button(label)
-    #{attributes.element || 'div'}.mdc-segmented-button(
+include icon
+
+mixin mdc-segmented-button
+    - const { element = 'div', singleSelect, ...rest } = attributes
+
+    #{element}.mdc-segmented-button(
         class={
-            'mdc-segmented-button--single-select': attributes.singleSelect
+            'mdc-segmented-button--single-select': singleSelect
         }
         data-mdc-auto-init='MDCSegmentedButton'
-    )&attributes(Object.assign({}, attributes, { element: undefined, singleSelect: undefined }))
+    )&attributes(rest)
         block
 
-mixin mdc-segmented-button__segment
-    #{attributes.element || 'button'}.mdc-segmented-button__segment(
-        class={
-            'mdc-segmented-button__segment--selected': attributes.selected
-        }
-    )&attributes(Object.assign({}, attributes, { element: undefined, selected: undefined }))
+mixin mdc-segmented-button__segment(content)
+    - const { element = 'button', selected, ...rest } = attributes
+
+    #{element}.mdc-segmented-button__segment(class={
+        'mdc-segmented-button__segment--selected': selected
+    })&attributes(rest)
         div.mdc-segmented-button__ripple
-        if attributes.icon
-            i.material-icons.mdc-segmented-button__icon= attributes.icon
-        if attributes.label
-            div.mdc-segmented-button__label= attributes.label
+
+        if icon
+            +mdc-icon(icon).mdc-segmented-button__icon
+        if label
+            div.mdc-segmented-button__label= label 
+
+        block

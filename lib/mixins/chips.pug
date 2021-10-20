@@ -1,89 +1,108 @@
+include avatar
+include icon
+
 mixin mdc-chip-set
-    div.mdc-evolution-chip-set(
+    - const { element = 'div', filter, input, overflow, multiselectable, ...rest } = attributes
+    - const listbox = filter || input
+
+    #{element}.mdc-evolution-chip-set(
         class={
-            'mdc-evolution-chip-set--overflow': attributes.overflow
+            'mdc-evolution-chip-set--overflow': overflow
         }
-        role=attributes.filter ? 'listbox' : 'grid'
-        aria-orientation=attributes.filter && 'horizontal'
-        aria-multiselectable=attributes.multiselectable
+        role=listbox ? 'listbox' : 'grid'
+        aria-orientation=listbox && 'horizontal'
+        aria-multiselectable=listbox && Boolean(multiselectable).toString()
         data-mdc-auto-init='MDCChipSet'
-    )&attributes(Object.assign({}, attributes, { overflow: undefined, filter: undefined, multiselectable: undefined }))
+    )&attributes(rest)
         span.mdc-evolution-chip-set__chips(role='presentation')
             block
 
-mixin mdc-chip(label)
-    #{attributes.element || 'span'}.mdc-evolution-chip(
+mixin mdc-chip(_label)
+    - const { element = 'span', label = _label, avatar, icon, primaryIcon = icon, trailingIcon, filter, input, selected, disabled, ...rest } = attributes
+
+    #{element}.mdc-evolution-chip(
         class={
-            'mdc-evolution-chip--selectable': attributes.filter,
-            'mdc-evolution-chip--selected': attributes.selected,
-            'mdc-evolution-chip--disabled': attributes.disabled,
-            'mdc-evolution-chip--filter': attributes.filter,
-            'mdc-evolution-chip--with-primary-graphic': attributes.leadingIcon || attributes.filter,
-            'mdc-evolution-chip--with-primary-icon': attributes.leadingIcon,
-            'mdc-evolution-chip--with-trailing-action': attributes.input,
-            'mdc-evolution-chip--with-avatar': attributes.avatar
+            'mdc-evolution-chip--selectable': filter,
+            'mdc-evolution-chip--selected': selected,
+            'mdc-evolution-chip--disabled': disabled,
+            'mdc-evolution-chip--filter': filter,
+            'mdc-evolution-chip--with-avatar': avatar,
+            'mdc-evolution-chip--with-primary-graphic': primaryIcon || avatar || filter,
+            'mdc-evolution-chip--with-primary-icon': primaryIcon,
+            'mdc-evolution-chip--with-trailing-action': trailingIcon || input
         }
         data-mdc-auto-init='MDCChip'
-    )&attributes(Object.assign({}, attributes, { element: undefined, leadingIcon: undefined, trailingIcon: undefined, selected: undefined, action: undefined, filter: undefined, input: undefined }))
-        if attributes.filter
-            +mdc-chip__action(label)(
+    )&attributes(rest)
+        if filter
+            +mdc-chip__action(
                 element='span'
+                label=label
+                avatar=avatar
+                primaryIcon=primaryIcon
+                trailingIcon=trailingIcon
+                disabled=disabled
                 primary
-                leadingIcon=attributes.leadingIcon
-                disabled=attributes.disabled
                 checkmark
             )
-                block
 
         else
             +mdc-chip__cell()(primary)
-                +mdc-chip__action(label)(
+                +mdc-chip__action(
+                    label=label
+                    avatar=avatar
+                    primaryIcon=primaryIcon
+                    disabled=disabled
                     primary
-                    leadingIcon=attributes.leadingIcon
-                    disabled=attributes.disabled
                 )
-                    block
 
-            if attributes.input
+            if input || trailingIcon
                 +mdc-chip__cell()(trailing)
-                    +mdc-chip__action()(
+                    +mdc-chip__action(
+                        trailingIcon=trailingIcon || 'close'
+                        disabled=disabled
                         trailing
-                        trailingIcon=attributes.trailingIcon
-                        disabled=attributes.disabled
                         deletable
                     )
-
-mixin mdc-chip__cell
-    span.mdc-evolution-chip__cell(
-        class={
-            'mdc-evolution-chip__cell--primary': attributes.primary,
-            'mdc-evolution-chip__cell--trailing': attributes.trailing
-        }
-        role='gridcell'
-    )&attributes(Object.assign({}, attributes, { primary: undefined, trailing: undefined }))
         block
 
-mixin mdc-chip__action(label)
-    #{attributes.element || 'button'}.mdc-evolution-chip__action(
+mixin mdc-chip__cell
+    - const { element = 'span', primary, trailing, ...rest } = attributes
+
+    #{element}.mdc-evolution-chip__cell(
+        class={
+            'mdc-evolution-chip__cell--primary': primary,
+            'mdc-evolution-chip__cell--trailing': trailing
+        }
+        role='gridcell'
+    )&attributes(rest)
+        block
+
+mixin mdc-chip__action(_label)
+    - const { element = 'button', primary, trailing, label = _label, avatar, primaryIcon, trailingIcon, checkmark, deletable, ...rest } = attributes
+
+    #{element}.mdc-evolution-chip__action(
         type='button'
         class={
-            'mdc-evolution-chip__action--primary': attributes.primary,
-            'mdc-evolution-chip__action--trailing': attributes.trailing
+            'mdc-evolution-chip__action--primary': primary,
+            'mdc-evolution-chip__action--trailing': trailing
         }
-        tabindex=attributes.primary ? "0" : "-1"
-        data-mdc-deletable=attributes.deletable && 'true'
-    )&attributes(Object.assign({}, attributes, { element: undefined, primary: undefined, trailing: undefined, leadingIcon: undefined, checkmark: undefined, trailingIcon: undefined, deletable: undefined }))
+        tabindex=primary ? "0" : "-1"
+        data-mdc-deletable=deletable && 'true'
+    )&attributes(rest)
         span.mdc-evolution-chip__ripple(class={
-            'mdc-evolution-chip__ripple--primary': attributes.primary,
-            'mdc-evolution-chip__ripple--trailing': attributes.trailing
+            'mdc-evolution-chip__ripple--primary': primary,
+            'mdc-evolution-chip__ripple--trailing': trailing
         })
 
-        if attributes.leadingIcon || attributes.checkmark
+        if avatar || primaryIcon || checkmark
             span.mdc-evolution-chip__graphic
-                if attributes.leadingIcon
-                    span.mdc-evolution-chip__icon.mdc-evolution-chip__icon--primary.material-icons= attributes.leadingIcon
+                if avatar
+                    +mdc-avatar()(small)&attributes(avatar)
 
-                if attributes.checkmark
+                else if primaryIcon
+                    +mdc-icon(primaryIcon)(element='span').mdc-evolution-chip__icon.mdc-evolution-chip__icon--primary
+
+                else if checkmark
                     span.mdc-evolution-chip__checkmark
                         svg.mdc-evolution-chip__checkmark-svg(viewBox="-2 -3 30 30")
                             path.mdc-evolution-chip__checkmark-path(fill="none" stroke="black" d="M1.73,12.91 8.1,19.28 22.79,4.59")
@@ -91,5 +110,5 @@ mixin mdc-chip__action(label)
         if label
             span.mdc-evolution-chip__text-label= label
 
-        if attributes.trailing
-            span.mdc-evolution-chip__icon.mdc-evolution-chip__icon--trailing.material-icons= attributes.trailingIcon || 'close'
+        if trailingIcon
+            +mdc-icon(trailingIcon).mdc-evolution-chip__icon.mdc-evolution-chip__icon--trailing

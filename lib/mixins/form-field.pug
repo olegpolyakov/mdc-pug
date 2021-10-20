@@ -1,12 +1,14 @@
 mixin mdc-form-field(label)
-    #{attributes.element || 'label'}.mdc-form-field(
+    - const { element = 'div', alignEnd, nowrap, for: _for, ...rest } = attributes
+
+    #{element}.mdc-form-field(
         class={
-            'mdc-form-field--align-end': attributes.alignEnd,
-            'mdc-form-field--nowrap': attributes.nowrap
+            'mdc-form-field--align-end': alignEnd,
+            'mdc-form-field--nowrap': nowrap
         }
         data-mdc-auto-init='MDCFormField'
-    )&attributes(Object.assign({}, attributes, { element: undefined, alignEnd: undefined, for: undefined }))
+    )&attributes(rest)
         block
 
         if label
-            span(for=attributes.for).mdc-form-field__label= label
+            label(for=_for)= label

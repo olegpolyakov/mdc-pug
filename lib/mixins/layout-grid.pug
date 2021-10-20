@@ -1,27 +1,27 @@
 mixin mdc-layout-grid
-    #{attributes.element || 'div'}.mdc-layout-grid(
-        class={
-            [`mdc-layout-grid--align-${align}`]: attributes.align,
-            'mdc-layout-grid--align-left': attributes.alignLeft,
-            'mdc-layout-grid--align-right': attributes.alignRight,
-            'mdc-layout-grid--fixed-column-width': attributes.fixedColumnWidth
-        }
-    )&attributes(Object.assign({}, attributes, { element: undefined, align: undefined, alignLeft: undefined, alignRight: undefined, fixedColumnWidth: undefined }))
+    - const { element = 'div', align, alignLeft, alignRight, fixedColumnWidth, ...rest } = attributes
+
+    #{element}.mdc-layout-grid(class={
+        'mdc-layout-grid--align-left': alignLeft,
+        'mdc-layout-grid--align-right': alignRight,
+        [`mdc-layout-grid--align-${align}`]: align,
+        'mdc-layout-grid--fixed-column-width': fixedColumnWidth
+    })&attributes(rest)
         div.mdc-layout-grid__inner
             block
 
-mixin mdc-layout-grid__cell(span=12)
-    #{attributes.element || 'div'}.mdc-layout-grid__cell(
-        class={
-            [`mdc-layout-grid__cell--span-${span}`]: span,
-            [`mdc-layout-grid__cell--span-${attributes.phone}-phone`]: attributes.phone,
-            [`mdc-layout-grid__cell--span-${attributes.tablet}-tablet`]: attributes.tablet,
-            [`mdc-layout-grid__cell--span-${attributes.desktop}-desktop`]: attributes.desktop,
-            [`mdc-layout-grid__cell--order-${attributes.order}`]: attributes.order,
-            [`mdc-layout-grid__cell--align-${attributes.align}`]: attributes.align
-        }
-    )&attributes(Object.assign({}, attributes, { element: undefined, grid: undefined, phone: undefined, tablet: undefined, desktop: undefined, order: undefined, align: undefined }))
-        if attributes.grid
+mixin mdc-layout-grid__cell(_span = 12)
+    - const { element = 'div', grid, span = _span, phone, tablet, desktop, align, order, ...rest } = attributes
+
+    #{element}.mdc-layout-grid__cell(class={
+        [`mdc-layout-grid__cell--span-${span}`]: span,
+        [`mdc-layout-grid__cell--span-${phone}-phone`]: phone,
+        [`mdc-layout-grid__cell--span-${tablet}-tablet`]: tablet,
+        [`mdc-layout-grid__cell--span-${desktop}-desktop`]: desktop,
+        [`mdc-layout-grid__cell--align-${align}`]: align,
+        [`mdc-layout-grid__cell--order-${order}`]: order
+    })&attributes(rest)
+        if grid
             div.mdc-layout-grid__inner
                 block
         else

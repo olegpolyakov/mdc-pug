@@ -1,2 +1,4 @@
 mixin mdc-divider
-    #{attributes.element || 'hr'}.mdc-divider&attributes(Object.assign({}, attributes, { element: undefined }))
+    - const { element = 'hr', ...rest } = attributes
+
+    #{element}.mdc-divider&attributes(rest)

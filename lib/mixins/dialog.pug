@@ -1,33 +1,64 @@
-mixin mdc-dialog
-    #{attributes.element || 'div'}.mdc-dialog(
+mixin mdc-dialog(_title, _content)
+    - const { element = 'div', title = _title, content = _content, open, stacked, fullscreen, ...rest } = attributes
+    
+    #{element}.mdc-dialog(
         class={
-            'mdc-dialog--open': attributes.open,
-            'mdc-dialog--stacked': attributes.stacked
+            'mdc-dialog--open': open,
+            'mdc-dialog--stacked': stacked,
+            'mdc-dialog--fullscreen': fullscreen
         }
         data-mdc-auto-init='MDCDialog'
-    )&attributes(Object.assign({}, attributes, { element: undefined, open: undefined, stacked: undefined }))
+    )&attributes(rest)
         div.mdc-dialog__container
             div.mdc-dialog__surface(role='alertdialog' aria-modal='true')
+                if title
+                    if fullscreen
+                        +mdc-dialog__header(title)
+                    else
+                        +mdc-dialog__title(title)
+
+                if content
+                    +mdc-dialog__content(content)
+
                 block
             
         div.mdc-dialog__scrim
 
-mixin mdc-dialog__title(title)
-    #{attributes.element || 'h2'}.mdc-dialog__title&attributes(Object.assign({}, attributes, { element: undefined }))= title
+mixin mdc-dialog__header(_title)
+    - const { element = 'div', title = _title, ...rest } = attributes
+
+    #{element}.mdc-dialog__header&attributes(rest)
+        +mdc-dialog__title(title)
+        
+        +mdc-icon-button('close')(data-mdc-dialog-action='close').mdc-dialog__close
+
         block
 
-mixin mdc-dialog__content
-    #{attributes.element || 'div'}.mdc-dialog__content&attributes(Object.assign({}, attributes, { element: undefined }))
+mixin mdc-dialog__title(content)
+    - const { element = 'h2', ...rest } = attributes
+
+    #{element}.mdc-dialog__title&attributes(rest)
+        =content
+        block
+
+mixin mdc-dialog__content(content)
+    - const { element = 'div', ...rest } = attributes
+
+    #{element}.mdc-dialog__content&attributes(rest)= content
         block
 
 mixin mdc-dialog__actions
-    #{attributes.element || 'div'}.mdc-dialog__actions&attributes(Object.assign({}, attributes, { element: undefined }))
+    - const { element = 'div', ...rest } = attributes
+
+    #{element}.mdc-dialog__actions&attributes(rest)
         block
 
 mixin mdc-dialog__button(label)
+    - const { action, default: _default, focus, ...rest } = attributes
+
     +mdc-button(label)(
-        data-mdc-dialog-action=attributes.action
-        data-mdc-dialog-button-default=attributes.default
-        data-mdc-dialog-initial-focus=attributes.focused
-    ).mdc-dialog__button&attributes(Object.assign({}, attributes, { action: undefined, default: undefined, focused }))
+        data-mdc-dialog-action=action
+        data-mdc-dialog-button-default=_default
+        data-mdc-dialog-initial-focus=focus
+    ).mdc-dialog__button&attributes(rest)
         block

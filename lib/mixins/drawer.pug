@@ -1,37 +1,51 @@
-mixin mdc-drawer
-    #{attributes.element || 'aside'}.mdc-drawer(
+mixin mdc-drawer(_title, _subtitle)
+    - const { element = 'aside', title = _title, subtitle = _subtitle, content, dismissible, modal, open, ...rest } = attributes
+
+    #{element}.mdc-drawer(
         class={
-            'mdc-drawer--dismissible': attributes.dismissible,
-            'mdc-drawer--modal': attributes.modal,
-            'mdc-drawer--open': attributes.open
+            'mdc-drawer--dismissible': dismissible,
+            'mdc-drawer--modal': modal,
+            'mdc-drawer--open': open
         }
-        data-mdc-auto-init=(attributes.dismissible || attributes.modal) && 'MDCDrawer'
-    )&attributes(Object.assign({}, attributes, { element: undefined, dismissible: undefined, modal: undefined, open: undefined }))
+        data-mdc-auto-init=(dismissible || modal) && 'MDCDrawer'
+    )&attributes(rest)
+        if title || subtitle
+            +mdc-drawer__header(title, subtitle)
+        if content
+            +mdc-drawer__content(content)
+
         block
     
-    if attributes.modal
+    if modal
         div.mdc-drawer-scrim
 
-mixin mdc-drawer__header(title, subtitle)
-    #{attributes.element || 'div'}.mdc-drawer__header&attributes(Object.assign({}, attributes, { element: undefined }))
-        block
-        
+mixin mdc-drawer__header(_title, _subtitle)
+    - const { element = 'div', title = _title, subtitle = _subtitle, ...rest } = attributes
+
+    #{element}.mdc-drawer__header&attributes(rest)
         if title
             +mdc-drawer__title(title)
-        
         if subtitle
             +mdc-drawer__subtitle(subtitle)
 
-mixin mdc-drawer__title(text)
-    #{attributes.element || 'h3'}.mdc-drawer__title&attributes(Object.assign({}, attributes, { element: undefined }))
-        = text
         block
 
-mixin mdc-drawer__subtitle(text)
-    #{attributes.element || 'h6'}.mdc-drawer__subtitle&attributes(Object.assign({}, attributes, { element: undefined }))
-        = text
+mixin mdc-drawer__title(content)
+    - const { element = 'h3', ...rest } = attributes
+
+    #{element}.mdc-drawer__title&attributes(rest)
+        = content
+        block
+
+mixin mdc-drawer__subtitle(content)
+    - const { element = 'h6', ...rest } = attributes
+
+    #{element}.mdc-drawer__subtitle&attributes(rest)
+        = content
         block
 
 mixin mdc-drawer__content
-    #{attributes.element || 'div'}.mdc-drawer__content&attributes(Object.assign({}, attributes, { element: undefined }))
+    - const { element = 'div', ...rest } = attributes
+
+    #{element}.mdc-drawer__content&attributes(rest)
         block

@@ -1,35 +1,31 @@
-mixin mdc-button(label)
-    #{attributes.element || 'button'}.mdc-button(
+include icon
+
+mixin mdc-button(_label)
+    - const { element = 'button', label = _label, icon, leadingIcon = icon, trailingIcon, outlined, unelevated, raised, touch, ...rest } = attributes
+
+    #{element}.mdc-button(
         class={
-            'mdc-button--raised': attributes.raised,
-            'mdc-button--unelevated': attributes.unelevated,
-            'mdc-button--outlined': attributes.outlined,
-            'mdc-button--icon-leading': attributes.icon || attributes.leadingIcon,
-            'mdc-button--icon-trailing': attributes.trailingIcon,
-            'mdc-button--touch': attributes.touch
+            'mdc-button--outlined': outlined,
+            'mdc-button--unelevated': unelevated,
+            'mdc-button--raised': raised,
+            'mdc-button--touch': touch,
+            'mdc-button--icon-leading': leadingIcon,
+            'mdc-button--icon-trailing': trailingIcon
         }
         data-mdc-auto-init='MDCRipple'
-    )&attributes(Object.assign({}, attributes, { element: undefined, icon: undefined, leadingIcon: undefined, trailingIcon: undefined, raised: undefined, unelevated: undefined, outlined: undefined, touch: undefined }))
+    )&attributes(rest)
         span.mdc-button__ripple
 
-        if attributes.touch
+        if touch
             span.mdc-button__touch
         
-        if attributes.icon || attributes.leadingIcon
-            +mdc-button__icon(attributes.icon || attributes.leadingIcon)(aria-hidden='true')
+        if leadingIcon
+            +mdc-icon(leadingIcon)(aria-hidden='true').mdc-button__icon
         
         if label
-            +mdc-button__label(label)
+            span.mdc-button__label= label
 
-        if attributes.trailingIcon
-            +mdc-button__icon(attributes.trailingIcon)(aria-hidden='true')
+        if trailingIcon
+            +mdc-icon(trailingIcon)(aria-hidden='true').mdc-button__icon
         
-        block
-
-mixin mdc-button__label(label)
-    span.mdc-button__label&attributes(attributes)= label
-        block
-
-mixin mdc-button__icon(icon)
-    +mdc-icon(icon).mdc-button__icon&attributes(attributes)
         block

@@ -1,19 +1,26 @@
+include checkbox
+include icon-button
+include linear-progress
+include select
+
 mixin mdc-data-table
-    div.mdc-data-table(
+    - const { element = 'div', stickyHeader, loading, pagination, ...rest } = attributes
+
+    #{element}.mdc-data-table(
         class={
-            'mdc-data-table--sticky-header': attributes.stickyHeader
+            'mdc-data-table--sticky-header': stickyHeader
         }
         data-mdc-auto-init='MDCDataTable'
     )
         div.mdc-data-table__table-container
-            table.mdc-data-table__table&attributes(Object.assign({}, attributes, { stickyHeader: undefined, progress: undefined, pagination: undefined }))
+            table.mdc-data-table__table&attributes(rest)
                 block
         
-        if attributes.progress
+        if loading
             +mdc-data-table__progress-indicator
 
-        if attributes.pagination
-            +mdc-data-table__pagination&attributes(attributes.pagination)
+        if pagination
+            +mdc-data-table__pagination&attributes(pagination)
 
 mixin mdc-data-table__header
     thead.mdc-data-table__header&attributes(attributes)
@@ -24,24 +31,28 @@ mixin mdc-data-table__header-row
         block
 
 mixin mdc-data-table__header-cell(content)
+    - const { numeric, checkbox, withSort, ...rest } = attributes
+
     td.mdc-data-table__header-cell(
         class={
-            'mdc-data-table__header-cell--numeric': attributes.numeric,
-            'mdc-data-table__header-cell--checkbox': attributes.checkbox,
-            'mdc-data-table__header-cell--with-sort': attributes.withSort
+            'mdc-data-table__header-cell--numeric': numeric,
+            'mdc-data-table__header-cell--checkbox': checkbox,
+            'mdc-data-table__header-cell--with-sort': withSort
         }
         role='columnheader'
         scope='col'
-    )&attributes(Object.assign({}, attributes, { numeric: undefined, checkbox: undefined, withSort: undefined }))
-        if attributes.withSort
+    )&attributes(rest)
+        if withSort
             div.mdc-data-table__header-cell-wrapper
                 div.mdc-data-table__header-cell-label
                     =content
                     block
 
-                button.mdc-icon-button.material-icons.mdc-data-table__sort-icon-button arrow_upward
+                +mdc-icon-button('arrow_upward').mdc-data-table__sort-icon-button
 
                 div.mdc-data-table__sort-status-label(aria-hidden='true')
+        else if checkbox
+            +mdc-data-table__header-row-checkbox&attributes(checkbox)
         else
             =content
             block
@@ -51,46 +62,54 @@ mixin mdc-data-table__content
         block
 
 mixin mdc-data-table__row
-    tr.mdc-data-table__row(
-        class={
-            'mdc-data-table__row--selected': attributes.selected
-        }
-    )&attributes(Object.assign({}, attributes, { selected: undefined }))
+    - const { selected, ...rest } = attributes
+
+    tr.mdc-data-table__row(class={
+        'mdc-data-table__row--selected': selected
+    })&attributes(rest)
         block
 
 mixin mdc-data-table__cell(content)
-    #{attributes.element || 'td'}.mdc-data-table__cell(
-        class={
-            'mdc-data-table__cell--numeric': attributes.numeric,
-            'mdc-data-table__cell--checkbox': attributes.checkbox,
-        }
-    )&attributes(Object.assign({}, attributes, { element: undefined, numeric: undefined, checkbox: undefined }))
+    - const { element = 'td', numeric = typeof content === 'number', checkbox, ...rest } = attributes
+
+    #{element}.mdc-data-table__cell(class={
+        'mdc-data-table__cell--numeric': numeric,
+        'mdc-data-table__cell--checkbox': checkbox
+    })&attributes(rest)
+        if checkbox
+            +mdc-data-table__row-checkbox&attributes(checkbox)
         =content
         block
 
-mixin mdc-data-table__header-row-checkbox(name)
-    +mdc-checkbox(name).mdc-data-table__header-row-checkbox&attributes(attributes)
+mixin mdc-data-table__header-row-checkbox
+    +mdc-checkbox.mdc-data-table__header-row-checkbox&attributes(attributes)
 
-mixin mdc-data-table__row-checkbox(name)
-    +mdc-checkbox(name).mdc-data-table__row-checkbox&attributes(attributes)
+mixin mdc-data-table__row-checkbox
+    +mdc-checkbox.mdc-data-table__row-checkbox&attributes(attributes)
 
 mixin mdc-data-table__progress-indicator
     div.mdc-data-table__progress-indicator
         div.mdc-data-table__scrim
-            +mdc-linear-progress()(indeterminate).mdc-data-table__linear-progress
+        +mdc-linear-progress()(indeterminate).mdc-data-table__linear-progress
 
 mixin mdc-data-table__pagination
+    - const { rowsPerPage, rowsPerPageLabel = 'Rows per page', numberOfPages } = attributes
+
     div.mdc-data-table__pagination
         div.mdc-data-table__pagination-trailing
             div.mdc-data-table__pagination-rows-per-page
-                div.mdc-data-table__pagination-rows-per-page-label= attributes.rowsPerPageLabel || 'Rows per page'
+                div.mdc-data-table__pagination-rows-per-page-label= rowsPerPageLabel
 
                 +mdc-select()(outlined).mdc-data-table__pagination-rows-per-page-select
                     for num in [10, 25, 50, 100]
-                        +mdc-select-option(num, num)(selected = num === attributes.rowsPerPage)
+                        +mdc-select-option(
+                            value=num
+                            primaryText=num
+                            selected=(num === rowsPerPage)
+                        )
 
             div.mdc-data-table__pagination-navigation
-                div.mdc-data-table__pagination-total= `1‑${attributes.rowsPerPage} of ${attributes.numberOfPages}`
+                div.mdc-data-table__pagination-total= `1‑${rowsPerPage} of ${numberOfPages}`
 
                 +mdc-icon-button('first_page')(data-first-page='true' disabled).mdc-data-table__pagination-button
                 +mdc-icon-button('chevron_left')(data-prev-page='true' disabled).mdc-data-table__pagination-button

@@ -1,16 +1,18 @@
 mixin mdc-checkbox
-    div.mdc-checkbox(
-        class=attributes.class
+    - const { element = 'div', class: cssClass, selected, disabled, indeterminate, ...rest } = attributes
+
+    #{element}.mdc-checkbox(
+        class=cssClass
         class={
-            'mdc-checkbox--selected': attributes.selected,
-            'mdc-checkbox--disabled': attributes.disabled
+            'mdc-checkbox--selected': selected,
+            'mdc-checkbox--disabled': disabled
         }
         data-mdc-auto-init='MDCCheckbox'
     )
         input.mdc-checkbox__native-control(
             type='checkbox'
-            data-indeterminate=attributes.indeterminate && 'true'
-        )&attributes(Object.assign({}, attributes, { class: undefined, selected: undefined, indeterminate: undefined }))
+            data-indeterminate=indeterminate && 'true'
+        )&attributes(rest)
 
         div.mdc-checkbox__background
             svg.mdc-checkbox__checkmark(viewBox='0 0 24 24')

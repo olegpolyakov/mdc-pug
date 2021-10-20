@@ -1,7 +1,6 @@
-mixin mdc-circular-progress(progress = 0)
-    - progress = progress > 1 ? (progress / 100) : Number(progress);
+mixin mdc-circular-progress(_value = 0)
+    - const { element = 'div', value = Number(_value), indeterminate, closed, colorful, size = 'medium', small, medium, large, ...rest } = attributes
     - let props;
-    - const size = attributes.size || 'medium';
 
     case size
         when 'small'
@@ -12,25 +11,27 @@ mixin mdc-circular-progress(progress = 0)
         
         when 'large'
             - props = { viewBox: 48, radius: 18, strokeWidth: 4, gapPatchStrokeWidth: 3.2, strokeDasharray: 113.097, indeterminateStrokeDashoffset: 56.549 }
-    
+
+    - const progress = value > 1 ? (value / 100) : value;
     - const { viewBox, radius, strokeWidth, gapPatchStrokeWidth, strokeDasharray, indeterminateStrokeDashoffset } = props;
     - const cx = viewBox / 2, cy = viewBox / 2;
     - const strokeDashoffset = (2 * Math.PI * radius) * (1 - progress);
-    - const layers = attributes.colorful ? [1, 2, 3, 4] : [0];
+    - const layers = colorful ? [1, 2, 3, 4] : [0];
     
-    div.mdc-circular-progress(
+    #{element}.mdc-circular-progress(
         class={
-            'mdc-circular-progress--large': size === 'large',
-            'mdc-circular-progress--medium': size === 'medium',
-            'mdc-circular-progress--small': size === 'small',
-            'mdc-circular-progress--indeterminate': attributes.indeterminate,
-            'mdc-circular-progress--closed': attributes.closed
+            'mdc-circular-progress--indeterminate': indeterminate,
+            'mdc-circular-progress--closed': closed,
+            'mdc-circular-progress--small': small,
+            'mdc-circular-progress--medium': medium,
+            'mdc-circular-progress--large': large,
+            [`mdc-circular-progress--${size}`]: size
         }
         role='progressbar'
         aria-valuemin='0'
         aria-valuemax='1'
         data-mdc-auto-init='MDCCircularProgress'
-    )&attributes(Object.assign({}, attributes, { size: undefined, indeterminate: undefined, closed: undefined, colorful: undefined }))
+    )&attributes(rest)
         div.mdc-circular-progress__determinate-container
             svg.mdc-circular-progress__determinate-circle-graphic(
                 viewBox=`0 0 ${viewBox} ${viewBox}`

@@ -1,120 +1,150 @@
+include button
+include icon-button
+
 mixin mdc-card
-    #{attributes.element || 'div'}.mdc-card(
-        class={
-            'mdc-card--outlined': attributes.outlined
-        }
-    )&attributes(Object.assign({}, attributes, { element: undefined, outlined: undefined }))
+    - const { element = 'div', outlined, ...rest } = attributes
+
+    #{element}.mdc-card(class={
+        'mdc-card--outlined': outlined
+    })&attributes(rest)
         block
 
 mixin mdc-card__primary-action
-    #{attributes.element || 'div'}.mdc-card__primary-action(
+    - const { element = 'div', ...rest } = attributes
+
+    #{element}.mdc-card__primary-action(
         tabindex='0'
-        data-mdc-auto-init=attributes.ripple && 'MDCRipple'
-    )&attributes(Object.assign({}, attributes, { element: undefined, ripple: undefined }))
+        data-mdc-auto-init='MDCRipple'
+    )&attributes(rest)
         block
 
         div.mdc-card__ripple
 
-mixin mdc-card__header(title, subtitle, overline)
-    - title = title || attributes.title
-    - subtitle = subtitle || attributes.subtitle
-    - overline = overline || attributes.overline
-    
-    #{attributes.element || 'div'}.mdc-card__header(
-        class={
-            'mdc-card__header--with-actions': attributes.withActions
-        }
-    )&attributes(Object.assign({}, attributes, { element: undefined, title: undefined, subtitle: undefined, overline: undefined, withActions: undefined }))
+mixin mdc-card__header(_title, _subtitle, _overline)
+    - const { element = 'div', title = _title, subtitle = _subtitle, overline = _overline, icon, image, avatar, withActions, ...rest } = attributes
+
+    #{element}.mdc-card__header(class={
+        'mdc-card__header--with-actions': withActions
+    })&attributes(rest)
+        if icon || image || avatar
+            +mdc-card__header__graphic(
+                icon=icon
+                image=image
+                avatar=avatar
+            )
+
         if title || subtitle || overline
-            +mdc-card__header__content(title, subtitle, overline)&attributes(attributes)
+            +mdc-card__header__content(
+                title=title
+                subtitle=subtitle
+                overline=overline
+            )
         
         block
 
-mixin mdc-card__header__content(title, subtitle, overline)
-    - title = title || attributes.title
-    - subtitle = subtitle || attributes.subtitle
-    - overline = overline || attributes.overline
+mixin mdc-card__header__graphic
+    - const { element = 'div', icon, image, avatar, ...rest } = attributes
 
-    div.mdc-card__header__content&attributes(attributes)
+    #{element}.mdc-card__header__graphic&attributes(rest)
+        if icon
+            +mdc-icon(icon)
+        if image
+            +image(image)
+        if avatar
+            +mdc-avatar&attributes(avatar)
+        block
+
+mixin mdc-card__header__content(_title, _subtitle, _overline)
+    - const { element = 'div', title = _title, subtitle = _subtitle, overline = _overline, ...rest } = attributes
+
+    #{element}.mdc-card__header__content&attributes(rest)
         if overline
             +mdc-card__overline(overline)
 
         if title
             +mdc-card__title(title)
-        
+
         if subtitle
             +mdc-card__subtitle(subtitle)
-
-        block
-
-mixin mdc-card__header__graphic
-    div.mdc-card__header__graphic&attributes(attributes)
+        
         block
 
 mixin mdc-card__header__actions
-    div.mdc-card__header__actions&attributes(attributes)
+    - const { element = 'div', ...rest } = attributes
+    #{element}.mdc-card__header__actions&attributes(rest)
         block
     
 mixin mdc-card__overline(text)
-    #{attributes.element || 'span'}.mdc-card__overline&attributes(Object.assign({}, attributes, { element: undefined }))
-        = text
+    - const { element = 'span', ...rest } = attributes
+
+    #{element}.mdc-card__overline&attributes(rest)=text
         block
 
 mixin mdc-card__title(text)
-    #{attributes.element || 'h2'}.mdc-card__title&attributes(Object.assign({}, attributes, { element: undefined }))
-        = text
+    - const { element = 'h2', ...rest } = attributes
+
+    #{element}.mdc-card__title&attributes(rest)=text
         block
 
 mixin mdc-card__subtitle(text)
-    #{attributes.element || 'h3'}.mdc-card__subtitle&attributes(Object.assign({}, attributes, { element: undefined }))
-        = text
+    - const { element = 'h3', ...rest } = attributes
+
+    #{element}.mdc-card__subtitle&attributes(rest)=text
         block
 
 mixin mdc-card__section
-    #{attributes.element || 'div'}.mdc-card__section(
-        class={
-            'mdc-card__section--primary': attributes.primary,
-            'mdc-card__section--secondary': attributes.secondary
-        }
-    )&attributes(Object.assign({}, attributes, { element: undefined, primary: undefined, secondary: undefined }))
+    - const { element = 'div', primary, secondary, ...rest } = attributes
+
+    #{element}.mdc-card__section(class={
+        'mdc-card__section--primary': primary,
+        'mdc-card__section--secondary': secondary
+    })&attributes(rest)
         block
 
-mixin mdc-card__media(src)
-    div.mdc-card__media(
+mixin mdc-card__media(_url)
+    - const { element = 'div', url = _url, square, wide, ...rest } = attributes
+
+    #{element}.mdc-card__media(
         class={
-            'mdc-card__media--square': attributes.square,
-            'mdc-card__media--16-9': attributes.wide
+            'mdc-card__media--square': square,
+            'mdc-card__media--16-9': wide
         }
-        style=src && `background-image: url(${src})`
-    )&attributes(Object.assign({}, attributes, { square: undefined, wide: undefined }))
+        style=url && `background-image: url(${url})`
+    )&attributes(rest)
         if block
             div.mdc-card__media-content
                 block
 
 mixin mdc-card__content
-    div.mdc-card__content&attributes(attributes)
+    - const { element = 'div', fullBleed, ...rest } = attributes
+
+    #{element}.mdc-card__content&attributes(attributes)
         block
 
 mixin mdc-card__actions
-    #{attributes.element || 'div'}.mdc-card__actions(
-        class={
-            'mdc-card__actions--full-bleed': attributes.fullBleed
-        }
-    )&attributes(Object.assign({}, attributes, { element: undefined, fullBleed: undefined }))
+    - const { element = 'div', fullBleed, ...rest } = attributes
+
+    #{element}.mdc-card__actions(class={
+        'mdc-card__actions--full-bleed': fullBleed
+    })&attributes(rest)
         block
 
 mixin mdc-card__action-buttons
-    div.mdc-card__action-buttons&attributes(attributes)
+    - const { element = 'div', ...rest } = attributes
+
+    #{element}.mdc-card__action-buttons&attributes(rest)
         block
 
 mixin mdc-card__action-icons
-    div.mdc-card__action-icons&attributes(attributes)
+    - const { element = 'div', ...rest } = attributes
+
+    #{element}.mdc-card__action-icons&attributes(rest)
         block
 
 mixin mdc-card__button(label)
     +mdc-button(label).mdc-card__action.mdc-card__action--button&attributes(attributes)
         block
 
-mixin mdc-card__icon(icon)
-    +mdc-icon-button(icon).mdc-card__action.mdc-card__action--icon&attributes(attributes)
+mixin mdc-card__icon(onIcon, offIcon)
+    +mdc-icon-button(onIcon, offIcon).mdc-card__action.mdc-card__action--icon&attributes(attributes)
         block

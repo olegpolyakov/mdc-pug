@@ -1,11 +1,11 @@
 mixin mdc-layout
-    #{attributes.element || 'div'}.mdc-layout(
-        class={
-            'mdc-layout--row': attributes.row,
-            'mdc-layout--column': attributes.column,
-            [`mdc-layout--direction--${attributes.direction}`]: attributes.direction,
-            [`mdc-layout--justify-${attributes.justify}`]: attributes.justify,
-            [`mdc-layout--align-${attributes.align}`]: attributes.align
-        }
-    )&attributes(Object.assign({}, attributes, { element: undefined, row: undefined, column: undefined, direction: undefined, justify: undefined, align: undefined }))
+    - const { element = 'div', row, column, direction, justify, align, ...rest } = attributes
+
+    #{element}.mdc-layout(class={
+        'mdc-layout--row': row,
+        'mdc-layout--column': column,
+        [`mdc-layout--direction--${direction}`]: direction,
+        [`mdc-layout--justify-${justify}`]: justify,
+        [`mdc-layout--align-${align}`]: align
+    })&attributes(rest)
         block

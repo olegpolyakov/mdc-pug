@@ -1,7 +1,45 @@
-mixin mdc-tooltip(text)
-    div.mdc-tooltip(
+mixin mdc-tooltip(_text)
+    - const { element = 'div', text = _text, ...rest } = attributes
+
+    #{element}.mdc-tooltip(
         role='tooltip'
         aria-hidden='true'
         data-mdc-auto-init='MDCTooltip'
-    )&attributes(attributes)
+    )&attributes(rest)
         div.mdc-tooltip__surface= text
+
+mixin mdc-rich-tooltip(_title, _content)
+    - const { title = _title, content = _content, link, persistent } = attributes
+
+    div.mdc-tooltip.mdc-tooltip--rich(
+        role='dialog'
+        aria-hidden='true'
+        tabindex=persistent && '-1'
+        data-mdc-tooltip-persistent=persistent && 'true'
+        data-mdc-auto-init='MDCTooltip'
+    )
+        div.mdc-tooltip__surface.mdc-tooltip__surface-animation
+            if title
+                h2.mdc-tooltip__title= title
+
+            if content
+                p.mdc-tooltip__content= content
+
+                    if link
+                        +mdc-tooltip__link(link)
+
+            if block
+                div.mdc-tooltip--rich-actions
+                    block
+
+
+mixin mdc-tooltip-wrapper
+    div.mdc-tooltip-wrapper--rich&attributes(attributes)
+        block
+
+mixin mdc-tooltip__link(content)
+    a.mdc-tooltip__content-link&attributes(attributes)= content
+        block
+
+mixin mdc-tooltip__action(label)
+    +mdc-button(label)(aria-label='action').mdc-tooltip__action

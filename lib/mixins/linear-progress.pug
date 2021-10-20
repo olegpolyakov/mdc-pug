@@ -1,11 +1,12 @@
-mixin mdc-linear-progress(progress, buffer = 100)
-    - const value = progress > 1 ? (progress / 100) : Number(progress);
+mixin mdc-linear-progress(_progress = 0, _buffer = 100)
+    - const { progress = Number(_progress), buffer = Number(_buffer), indeterminate, reversed, closed } = attributes
+    - const value = progress > 1 ? (progress / 100) : progress;
 
     div.mdc-linear-progress(
         class={
-            'mdc-linear-progress--indeterminate': attributes.indeterminate,
-            'mdc-linear-progress--reversed': attributes.reversed,
-            'mdc-linear-progress--closed': attributes.closed
+            'mdc-linear-progress--indeterminate': indeterminate,
+            'mdc-linear-progress--reversed': reversed,
+            'mdc-linear-progress--closed': closed
         }
         role='progressbar'
         aria-valuemin='0'

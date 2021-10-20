@@ -1,12 +1,14 @@
 mixin mdc-radio
+    - const { class: _class, ...rest } = attributes
+
     div.mdc-radio(
-        class=attributes.class
+        class=_class
         class={
             'mdc-radio--disabled': attributes.disabled
         }
         data-mdc-auto-init='MDCRadio'
     )
-        input.mdc-radio__native-control(type='radio')&attributes(Object.assign({}, attributes, { class: undefined }))
+        input.mdc-radio__native-control(type='radio')&attributes(rest)
 
         div.mdc-radio__background
             div.mdc-radio__outer-circle

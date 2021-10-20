@@ -1,44 +1,55 @@
-mixin mdc-banner(text)
-    - text = text || attributes.text
+include icon
 
-    div.mdc-banner(
+mixin mdc-banner(_text)
+    - const { element = 'div', text = _text, icon, open, centered, fixed, mobileStacked, ...rest } = attributes
+
+    #{element}.mdc-banner(
         class={
-            'mdc-banner--open': attributes.open,
-            'mdc-banner--centered': attributes.centered,
-            'mdc-banner--mobile-stacked': attributes.mobileStacked
+            'mdc-banner--open': open,
+            'mdc-banner--centered': centered,
+            'mdc-banner--mobile-stacked': mobileStacked
         }
-        style=attributes.open && `height: ${attributes.icon ? 72 : 52}px`
+        style=open && `height: ${icon ? 72 : 52}px`
         role='banner'
         data-mdc-auto-init='MDCBanner'
-    )&attributes(Object.assign({}, attributes, { text: undefined, icon: undefined, open: undefined, centered: undefined, fixed: undefined, mobileStacked: undefined }))
+    )&attributes(rest)
         if !text
             block
-        else if attributes.fixed
+        else if fixed
             div.mdc-banner__fixed
-                +mdc-banner__content(text)&attributes(attributes)
+                +mdc-banner__content(text=text icon=icon)
                     if block
                         +mdc-banner__actions
                             block
         else
-            +mdc-banner__content(text)&attributes(attributes)
+            +mdc-banner__content(text=text icon=icon)
                 if block
                     +mdc-banner__actions
                         block
 
-mixin mdc-banner__content(text)
-    div.mdc-banner__content(role='alertdialog' aria-live='assertive')
+mixin mdc-banner__content(_text)
+    - const { element = 'div', text = _text, icon, ...rest } = attributes
+
+    #{element}.mdc-banner__content(role='alertdialog' aria-live='assertive')&attributes(rest)
         div.mdc-banner__graphic-text-wrapper
-            if attributes.icon
+            if icon
                 div.mdc-banner__graphic(role='img' alt='')
-                    i.mdc-banner__icon.material-icons= attributes.icon
+                    +mdc-icon(icon).mdc-banner__icon
         
-            div.mdc-banner__text= text || attributes.text
+            div.mdc-banner__text= text
 
         block
 
 mixin mdc-banner__actions
-    div.mdc-banner__actions&attributes(attributes)
+    - const { element = 'div', ...rest } = attributes
+
+    #{element}.mdc-banner__actions&attributes(rest)
         block
 
 mixin mdc-banner__action(label)
-    +mdc-button(label)(class={'mdc-banner__primary-action': attributes.primary, 'mdc-banner__secondary-action': attributes.secondary})&attributes(Object.assign({}, attributes, { primary: undefined, secondary: undefined }))
+    - const { primary, secondary, ...rest } = attributes
+
+    +mdc-button(label)(class={
+        'mdc-banner__primary-action': primary,
+        'mdc-banner__secondary-action': secondary
+    })&attributes(rest)

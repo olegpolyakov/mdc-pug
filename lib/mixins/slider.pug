@@ -1,40 +1,56 @@
 mixin mdc-slider(value, value2)
+    - const { name, min, max, step = 0, label, discrete, tickMarks, disabled, ...rest } = attributes
+
     div.mdc-slider(
          class={
-            'mdc-slider--discrete': attributes.discrete,
-            'mdc-slider--tick-marks': attributes.tickMarks,
-            'mdc-slider--disabled': attributes.disabled
+            'mdc-slider--discrete': discrete,
+            'mdc-slider--tick-marks': tickMarks,
+            'mdc-slider--disabled': disabled
         }
-        data-step=attributes.step || '0'
+        data-step=step
         data-mdc-auto-init='MDCSlider'
-    )&attributes(Object.assign({}, attributes, { min: undefined, max: undefined, step: undefined, label: undefined, discrete: undefined, tickMarks: undefined, disabled: undefined }))
+    )
+        input.mdc-slider__input(
+            type='range'
+            name=value2 ? `${name}Start` : name
+            value=value
+            min=min
+            max=value2 || max
+        )&attributes(rest)
+
+        if value2
+            input.mdc-slider__input(
+                type='range'
+                name=`${name}End`
+                value=value2
+                min=value
+                max=max
+            )&attributes(rest)
+
         div.mdc-slider__track
             div.mdc-slider__track--inactive
             div.mdc-slider__track--active
                 div.mdc-slider__track--active_fill
 
-            if attributes.tickMarks
+            if tickMarks
                 div.mdc-slider__tick-marks
-                    for tickValue in Array.from(new Array((attributes.max || 100) / attributes.step + 1))
-                        div(class={'mdc-slider__tick-mark--active': tickValue <= value, 'mdc-slider__tick-mark--inactive': tickValue > value})
+                    for tickValue in Array.from(new Array((max || 100) / step + 1))
+                        div(class={
+                            'mdc-slider__tick-mark--active': tickValue <= value,
+                            'mdc-slider__tick-mark--inactive': tickValue > value
+                        })
 
-        +mdc-slider__thumb(value)&attributes(attributes)
+        +mdc-slider__thumb(value)(valueIndicator=discrete)
 
         if value2
-            +mdc-slider__thumb(value2)&attributes(attributes)
+            +mdc-slider__thumb(value2)(valueIndicator=discrete)
 
 mixin mdc-slider__thumb(value = 0)
-    div.mdc-slider__thumb(
-        role='slider'
-        tabindex=attributes.disabled ? '-1' : '0'
-        aria-label=attributes.label
-        aria-valuemin=attributes.min || '0'
-        aria-valuemax=attributes.max || '100'
-        aria-valuenow=value
-        aria-disabled=attributes.disabled && 'true'
-    )
-        if attributes.discrete
-            div.mdc-slider__value-indicator-container
+    - const { valueIndicator } = attributes
+
+    div.mdc-slider__thumb
+        if valueIndicator
+            div.mdc-slider__value-indicator-container(aria-hidden='true')
                 div.mdc-slider__value-indicator
                     div.mdc-slider__value-indicator-text= value
 

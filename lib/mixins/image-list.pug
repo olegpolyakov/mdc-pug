@@ -1,27 +1,32 @@
 mixin mdc-image-list
-    #{attributes.element || 'ul'}.mdc-image-list(
-        class={
-            'mdc-image-list--masonry': attributes.masonry,
-            'mdc-image-list--with-text-protection': attributes.withTextProtection
-        }
-    )&attributes(Object.assign({}, attributes, { element: undefined, masonry: undefined, withTextProtection: undefined }))
-            block
+    - const { element = 'ul', masonry, withTextProtection, ...rest } = attributes
 
-mixin mdc-image-list__item(src, label)
-    #{attributes.element || 'li'}.mdc-image-list__item&attributes(Object.assign({}, attributes, { element: undefined }))
-        if src
-            +mdc-image-list__image(src)
-            
+    #{element}.mdc-image-list(class={
+        'mdc-image-list--masonry': masonry,
+        'mdc-image-list--with-text-protection': withTextProtection
+    })&attributes(rest)
+        block
+
+mixin mdc-image-list__item(_image)
+    - const { element = 'li', image = _image, label, aspectContainer, ...rest } = attributes
+    
+    #{element}.mdc-image-list__item&attributes(rest)
+        if image
+            if aspectContainer
+                +mdc-image-list__image-aspect-container
+                    +mdc-image-list__image(image)
+            else
+                +mdc-image-list__image(image)
         if label
             +mdc-image-list__label(label)
 
-mixin mdc-image-list__image-aspect-container
-    div.mdc-image-list__image-aspect-container&attributes(attributes)
-        block
-
-mixin mdc-image-list__image(src)
-    img.mdc-image-list__image(src=src)&attributes(attributes)
+mixin mdc-image-list__image(image)
+    +image(image).mdc-image-list__image&attributes(attributes)
 
 mixin mdc-image-list__label(label)
     div.mdc-image-list__supporting
         span.mdc-image-list__label&attributes(attributes)= label
+
+mixin mdc-image-list__image-aspect-container
+    div.mdc-image-list__image-aspect-container&attributes(attributes)
+        block

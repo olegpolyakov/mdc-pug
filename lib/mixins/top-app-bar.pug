@@ -1,36 +1,62 @@
-mixin mdc-top-app-bar
-    #{attributes.element || 'header'}.mdc-top-app-bar(
+include button
+include icon-button
+
+mixin mdc-top-app-bar(content)
+    - const { element = 'header', title, navigationIcon, fixed, prominent, dense, short, shortCollapsed, ...rest } = attributes
+
+    #{element}.mdc-top-app-bar(
         class={
-            'mdc-top-app-bar--fixed': attributes.fixed,
-            'mdc-top-app-bar--prominent': attributes.prominent,
-            'mdc-top-app-bar--dense': attributes.dense,
-            'mdc-top-app-bar--short': attributes.short,
-            'mdc-top-app-bar--short-collapsed': attributes.shortCollapsed
+            'mdc-top-app-bar--fixed': fixed,
+            'mdc-top-app-bar--prominent': prominent,
+            'mdc-top-app-bar--dense': dense,
+            'mdc-top-app-bar--short': short,
+            'mdc-top-app-bar--short-collapsed': shortCollapsed
         }
         data-mdc-auto-init='MDCTopAppBar'
-    )&attributes(Object.assign({}, attributes, { element: undefined, fixed: undefined, prominent: undefined, dense: undefined, short: undefined, shortCollapsed: undefined }))
-        block
+    )&attributes(rest)
+        if title || navigationIcon
+            +mdc-top-app-bar__row
+                +mdc-top-app-bar__section()(alignStart)
+                    if navigationIcon
+                        +mdc-top-app-bar__navigation-icon(navigationIcon)
+                    if title
+                        +mdc-top-app-bar__title(title)
+                
+                block
+        else
+            block
 
 mixin mdc-top-app-bar__row
-    div.mdc-top-app-bar__row&attributes(attributes)
+    - const { element = 'div', ...rest } = attributes
+
+    #{element}.mdc-top-app-bar__row&attributes(rest)
         block
 
 mixin mdc-top-app-bar__section
-    #{attributes.element || 'section'}.mdc-top-app-bar__section(
-        class={
-            [`mdc-top-app-bar__section--align-${attributes.align}`]: attributes.align
-        }
-    )&attributes(Object.assign({}, attributes, { element: undefined, align: undefined }))
+    - const { element = 'section', align, alignStart, alignCenter, alignEnd, ...rest } = attributes
+
+    #{element}.mdc-top-app-bar__section(class={
+        'mdc-top-app-bar__section--align-start': alignStart,
+        'mdc-top-app-bar__section--align-center': alignCenter,
+        'mdc-top-app-bar__section--align-end': alignEnd,
+        [`mdc-top-app-bar__section--align-${align}`]: align
+    })&attributes(rest)
         block
 
-mixin mdc-top-app-bar__title(title)
-    #{attributes.element || 'span'}.mdc-top-app-bar__title&attributes(attributes)= title
+mixin mdc-top-app-bar__title(_title)
+    - const { element = 'span', title = _title, ...rest } = attributes
+
+    #{element}.mdc-top-app-bar__title&attributes(rest)= title
         block
 
 mixin mdc-top-app-bar__navigation-icon(icon = 'menu')
     +mdc-icon-button(icon).mdc-top-app-bar__navigation-icon&attributes(attributes)
         block
 
-mixin mdc-top-app-bar__action-item(icon)
+mixin mdc-top-app-bar__action-icon(icon)
     +mdc-icon-button(icon).mdc-top-app-bar__action-item&attributes(attributes)
+        block
+
+mixin mdc-top-app-bar__action-button(label)
+    +mdc-button(label).mdc-top-app-bar__action-item&attributes(attributes)
         block

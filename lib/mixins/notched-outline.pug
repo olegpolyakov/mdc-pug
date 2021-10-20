@@ -1,9 +1,7 @@
 mixin mdc-notched-outline
-    span.mdc-notched-outline(
-        class={
-            'mdc-notched-outline--no-label': !block
-        }
-    )&attributes(attributes)
+    span.mdc-notched-outline(class={
+        'mdc-notched-outline--no-label': !block
+    })&attributes(attributes)
         span.mdc-notched-outline__leading
 
         if block

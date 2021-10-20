@@ -1,16 +1,20 @@
-mixin mdc-avatar(text)
-    - text = text || attributes.text
+include icon
+include image
 
-    span.mdc-avatar(
-        class={
-            [`mdc-avatar--${attributes.size}`]: attributes.size
-        }
-    )&attributes(Object.assign({}, attributes, { text: attributes.text, icon: undefined, src: undefined, size: undefined }))
-        if attributes.src
-            img.mdc-avatar__image(src=attributes.src)
-        else if attributes.icon
-            i.material-icons.mdc-icon.mdc-avatar__icon= attributes.icon
-        else if text
+mixin mdc-avatar(_text)
+    - const { element = 'span', text = _text, icon, image, size, small, medium, large, ...rest } = attributes
+
+    #{element}.mdc-avatar(class={
+        'mdc-avatar--small': small,
+        'mdc-avatar--medium': medium,
+        'mdc-avatar--large': large,
+        [`mdc-avatar--${size}`]: size
+    })&attributes(rest)
+        if text
             span.mdc-avatar__text= text
-        
+        else if icon
+            +mdc-icon(icon).mdc-avatar__icon
+        else if image
+            +image(image).mdc-avatar__image
+
         block

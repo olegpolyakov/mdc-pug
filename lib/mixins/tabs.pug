@@ -1,64 +1,62 @@
+include icon
+
 mixin mdc-tab-bar
-    #{attributes.element || 'div'}.mdc-tab-bar(
-        data-mdc-auto-init='MDCTabBar' 
-    )&attributes(Object.assign({}, attributes, { element: undefined, align: undefined }))
-        +mdc-tab-scroller()(align=attributes.align)
+    - const { element = 'div', align, ...rest } = attributes
+
+    #{element}.mdc-tab-bar(
+        data-mdc-auto-init='MDCTabBar'
+    )&attributes(rest)
+        +mdc-tab-scroller()(align=align)
             block
 
 mixin mdc-tab-scroller
-    div.mdc-tab-scroller(
-        class={
-            [`mdc-tab-scroller--align-${attributes.align}`]: attributes.align
-        }
-    )&attributes(Object.assign({}, attributes, { align: undefined }))
+    - const { align, ...rest } = attributes
+
+    div.mdc-tab-scroller(class={
+        [`mdc-tab-scroller--align-${align}`]: align
+    })&attributes(rest)
         div.mdc-tab-scroller__scroll-area
             div.mdc-tab-scroller__scroll-content
                 block
 
-mixin mdc-tab-indicator
-    span.mdc-tab-indicator(
-        class={
-            'mdc-tab-indicator--active': attributes.active,
-            'mdc-tab-indicator--fade': attributes.fade
-        }
-    )&attributes(Object.assign({}, attributes, { icon: undefined, active: undefined, fade: undefined }))
-        if attributes.icon
-            +mdc-icon(attributes.icon)(aria-hidden='true').mdc-tab-indicator__content.mdc-tab-indicator__content--icon
+mixin mdc-tab-indicator(_icon)
+    - const { icon = _icon, active, fade, ...rest } = attributes
+
+    span.mdc-tab-indicator(class={
+        'mdc-tab-indicator--active': active,
+        'mdc-tab-indicator--fade': fade
+    })&attributes(rest)
+        if icon
+            +mdc-icon(icon)(aria-hidden='true').mdc-tab-indicator__content.mdc-tab-indicator__content--icon
         else
             span.mdc-tab-indicator__content.mdc-tab-indicator__content--underline
 
-mixin mdc-tab(text)
-    #{attributes.element || 'button'}.mdc-tab(
+mixin mdc-tab(content)
+    - const { element = 'button', text, icon, active, stacked, minWidth, fade, indicatorIcon, indicatorMinWidth, ...rest } = attributes
+
+    #{element}.mdc-tab(
         class={
-            'mdc-tab--active': attributes.active,
-            'mdc-tab--stacked': attributes.stacked,
-            'mdc-tab--min-width': attributes.minWidth
+            'mdc-tab--active': active,
+            'mdc-tab--stacked': stacked,
+            'mdc-tab--min-width': minWidth
         }
         role='tab'
-        aria-selected=(attributes.active ? 'true' : 'false')
-        tabindex=(attributes.active ? undefined : '-1')
-    )&attributes(Object.assign({}, attributes, { element: undefined, icon: undefined, active: undefined, stacked: undefined, minWidth: undefined, fade: undefined, indicatorIcon: undefined, indicatorMinWidth: undefined }))
+        aria-selected=(active ? 'true' : 'false')
+        tabindex=(active ? undefined : '-1')
+    )&attributes(rest)
         span.mdc-tab__content
-            if attributes.icon
-                +mdc-icon(attributes.icon)(aria-hidden='true').mdc-tab__icon
-
+            if icon
+                +mdc-icon(icon)(aria-hidden='true').mdc-tab__icon
+            
             if text
                 span.mdc-tab__text-label= text
-
-            if attributes.indicatorMinWidth
-                +mdc-tab-indicator()(
-                    icon=attributes.indicatorIcon
-                    active=attributes.active
-                    fade=attributes.fade
-                )
+                    
+            if indicatorMinWidth
+                +mdc-tab-indicator(indicatorIcon)(active=active fade=fade)
 
             block
 
-        unless attributes.indicatorMinWidth
-            +mdc-tab-indicator()(
-                icon=attributes.indicatorIcon
-                active=attributes.active
-                fade=attributes.fade
-            )
+        unless indicatorMinWidth
+            +mdc-tab-indicator(indicatorIcon)(active=active fade=fade)
 
         span.mdc-tab__ripple

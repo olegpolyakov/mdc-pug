@@ -1,0 +1,6 @@
+mixin image(arg)
+    case typeof arg
+        when 'string'
+            img(src=arg)&attributes(attributes)
+        when 'object'
+            img&attributes(Object.assign(arg, attributes))

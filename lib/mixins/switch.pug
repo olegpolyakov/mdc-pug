@@ -1,14 +1,16 @@
 mixin mdc-switch
+    - const { selected, ...rest } = attributes
+
     button.mdc-switch(
         type='button'
         class={
-            'mdc-switch--selected': attributes.selected,
-            'mdc-switch--unselected': !attributes.selected
+            'mdc-switch--selected': selected,
+            'mdc-switch--unselected': !selected
         }
         role='switch'
-        aria-checked=attributes.selected ? 'true' : 'false'
+        aria-checked=selected ? 'true' : 'false'
         data-mdc-auto-init='MDCSwitch'
-    )&attributes(Object.assign({}, attributes, { selected: undefined }))
+    )&attributes(rest)
         div.mdc-switch__track
 
         div.mdc-switch__handle-track

@@ -1,9 +1,11 @@
 mixin mdc-ripple(name, value)
-    #{attributes.element || 'div'}.mdc-ripple-surface(
+    - const { element = 'div', primary, accent, ...rest } = attributes
+
+    #{element}.mdc-ripple-surface(
         class={
-            'mdc-ripple-surface--primary': attributes.primary,
-            'mdc-ripple-surface--accent': attributes.accent
+            'mdc-ripple-surface--primary': primary,
+            'mdc-ripple-surface--accent': accent
         }
         data-mdc-auto-init='MDCRipple'
-    )&attributes(Object.assign({}, attributes, { element: undefined, primary: undefined, accent: undefined }))
+    )&attributes(rest)
         block
