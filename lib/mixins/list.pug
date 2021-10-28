@@ -58,14 +58,14 @@ mixin mdc-list-item(_primaryText, _secondaryText)
                 primaryText=primaryText
                 secondaryText=secondaryText
             )
-
-        block
         
         if trailingMeta
             +mdc-list-item__end= meta
         else if trailingIcon
             +mdc-list-item__end
                 +mdc-icon(trailingIcon)
+
+        block
 
 mixin mdc-list-item__start(content)
     - const { element = 'span', ...rest } = attributes
