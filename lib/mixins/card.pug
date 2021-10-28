@@ -51,7 +51,11 @@ mixin mdc-card__header__graphic
         if image
             +image(image)
         if avatar
-            +mdc-avatar&attributes(avatar)
+            case typeof avatar
+                when 'string'
+                    +mdc-avatar(avatar)
+                when 'object'
+                    +mdc-avatar&attributes(avatar)
         block
 
 mixin mdc-card__header__content(_title, _subtitle, _overline)
