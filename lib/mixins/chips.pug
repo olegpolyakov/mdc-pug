@@ -97,7 +97,11 @@ mixin mdc-chip__action(_label)
         if avatar || primaryIcon || checkmark
             span.mdc-evolution-chip__graphic
                 if avatar
-                    +mdc-avatar()(small)&attributes(avatar)
+                    case typeof avatar
+                        when 'string'
+                            +mdc-avatar(avatar)(small)
+                        when 'object'
+                            +mdc-avatar()(small)&attributes(avatar)
 
                 else if primaryIcon
                     +mdc-icon(primaryIcon)(element='span').mdc-evolution-chip__icon.mdc-evolution-chip__icon--primary
