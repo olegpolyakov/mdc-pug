@@ -22,6 +22,10 @@ $icon-light-inactive-color: rgba(255, 255, 255, 0.3);
         font-size: 48px;
     }
 
+    &.mdc-icon--64 {
+        font-size: 64px;
+    }
+
     &.mdc-icon--dark {
         color: $icon-dark-color;
     }
