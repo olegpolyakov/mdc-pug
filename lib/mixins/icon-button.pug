@@ -1,5 +1,5 @@
 mixin mdc-icon-button(_onIcon, _offIcon)
-    - const { button = 'element', onIcon = _onIcon, offIcon = _offIcon, on, ...rest } = attributes
+    - const { element = 'button', onIcon = _onIcon, offIcon = _offIcon, image, onImage = image, offImage, on, ...rest } = attributes
 
     #{element}.mdc-icon-button(
         class={
@@ -11,17 +11,23 @@ mixin mdc-icon-button(_onIcon, _offIcon)
     )&attributes(rest)
         span.mdc-icon-button__ripple
         
-        unless offIcon
-            =onIcon
-        else
+        if onImage
+            +mdc-icon-button__icon(image=onImage on)
+            +mdc-icon-button__icon(image=offImage)
+        else if offIcon
             +mdc-icon-button__icon(onIcon)(on)
             +mdc-icon-button__icon(offIcon)
+        else
+            =onIcon
         block
 
 mixin mdc-icon-button__icon(icon)
-    - const { on, ...rest } = attributes
+    - const { element, image, on, ...rest } = attributes
+    - const className = { 'mdc-icon-button__icon--on': on }
 
-    +mdc-icon(icon)(class={
-        'mdc-icon-button__icon--on': on
-    }).mdc-icon-button__icon&attributes(rest)
-        block
+    if element
+        #{element}.mdc-icon-button__icon(class=className)&attributes(rest)
+    else if image
+        +image(image)(class=className).mdc-icon-button__icon
+    else
+        +mdc-icon(icon)(class=className).mdc-icon-button__icon&attributes(rest)
