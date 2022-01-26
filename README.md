@@ -90,3 +90,13 @@ or only the compon you need:
 @use 'path-to-node_modules/mdc-pug/lib/styles/button';
 @use 'path-to-node_modules/mdc-pug/lib/styles/typography';
 ```
+
+### Docs
+
+The documentation pages can be served from the package repo:
+
+1. Clone `https://github.com/olegpolyakov/mdc-pug.git`
+1. `cd mdc-pug`
+1. `npm install`
+1. `npm run docs`
+1. Browse to http://localhost:8080
