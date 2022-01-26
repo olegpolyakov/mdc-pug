@@ -42,6 +42,10 @@
     "name": "Oleg Polyakov",
     "email": "olegpolyakov@outlook.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olegpolyakov/mdc-pug.git"
+  },
   "license": "MIT",
   "keywords": [
     "mdc",
