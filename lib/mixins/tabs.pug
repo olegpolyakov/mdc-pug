@@ -32,7 +32,7 @@ mixin mdc-tab-indicator(_icon)
             span.mdc-tab-indicator__content.mdc-tab-indicator__content--underline
 
 mixin mdc-tab(_text)
-    - const { element = 'button', text = _text, icon, active, stacked, minWidth, fade, indicatorIcon, indicatorMinWidth, ...rest } = attributes
+    - const { element = 'button', text = _text, icon, active, fade, minWidth, minWidthIndicator, indicatorIcon, stacked, ...rest } = attributes
 
     #{element}.mdc-tab(
         class={
@@ -51,12 +51,12 @@ mixin mdc-tab(_text)
             if text
                 span.mdc-tab__text-label= text
                     
-            if indicatorMinWidth
+            if minWidthIndicator
                 +mdc-tab-indicator(indicatorIcon)(active=active fade=fade)
 
             block
 
-        unless indicatorMinWidth
+        unless minWidthIndicator
             +mdc-tab-indicator(indicatorIcon)(active=active fade=fade)
 
         span.mdc-tab__ripple
